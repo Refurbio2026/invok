@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import { Logo } from "./Logo";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -10,9 +10,7 @@ const links = [
   { href: "#pre-skoly", label: "Pre školy" },
   { href: "#ako-to-funguje", label: "Ako to funguje" },
   { href: "#novinky", label: "Novinky" },
-  { href: "#registracia", label: "Proces registrácie" },
-  { href: "#kontakt", label: "Kontaktný formulár" },
-  { href: "#kontaktne-udaje", label: "Kontaktné údaje" },
+  { href: "#kontakt", label: "Kontakt" },
 ];
 
 export function Header() {
@@ -29,30 +27,38 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 transition-all",
-        scrolled ? "bg-background/85 backdrop-blur-md border-b border-border" : "bg-background/60 backdrop-blur"
+        "sticky top-0 z-50 transition-all bg-background",
+        scrolled ? "border-b border-border shadow-soft" : ""
       )}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
         <a href="#top" aria-label="INVOK"><Logo /></a>
 
-        <nav className="hidden xl:flex items-center gap-6">
+        <nav className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
           {links.map((l) => (
-            <a key={l.href} href={l.href} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+            <a
+              key={l.href}
+              href={l.href}
+              className="text-[15px] font-medium text-foreground/80 hover:text-primary transition-colors"
+            >
               {l.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden md:flex items-center gap-2">
-          <Button variant="ghost" size="sm">Prihlásenie</Button>
-          <Button asChild size="sm" className="bg-gradient-badge text-white hover:opacity-90 shadow-soft">
-            <a href="#registracia">Registrovať školu</a>
+        <div className="hidden md:flex items-center gap-3">
+          <a href="#prihlasenie" className="text-[15px] font-medium text-foreground/80 hover:text-primary transition-colors">
+            Prihlásenie
+          </a>
+          <Button asChild className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-soft px-5">
+            <a href="#registracia" className="inline-flex items-center gap-2">
+              Registrovať školu <ArrowRight className="h-4 w-4" />
+            </a>
           </Button>
         </div>
 
         <button
-          className="xl:hidden md:hidden p-2 rounded-lg hover:bg-muted"
+          className="lg:hidden md:hidden p-2 rounded-lg hover:bg-muted"
           onClick={() => setOpen((v) => !v)}
           aria-label="Menu"
         >
@@ -61,8 +67,8 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="xl:hidden border-t border-border bg-background">
-          <nav className="px-4 py-4 flex flex-col gap-1 max-h-[70vh] overflow-y-auto">
+        <div className="lg:hidden border-t border-border bg-background">
+          <nav className="px-4 py-4 flex flex-col gap-1">
             {links.map((l) => (
               <a
                 key={l.href}
@@ -75,7 +81,7 @@ export function Header() {
             ))}
             <div className="flex gap-2 mt-3 pt-3 border-t border-border">
               <Button variant="ghost" size="sm" className="flex-1">Prihlásenie</Button>
-              <Button asChild size="sm" className="flex-1 bg-gradient-badge text-white">
+              <Button asChild size="sm" className="flex-1 rounded-full bg-primary text-primary-foreground">
                 <a href="#registracia" onClick={() => setOpen(false)}>Registrovať školu</a>
               </Button>
             </div>
