@@ -16,7 +16,8 @@ import {
   Brain, Eye, Rocket, Laptop, MessageSquare, Users, GraduationCap,
   Sparkles, BarChart3, HeartHandshake, BookOpen, Award, ArrowRight,
   CheckCircle2, XCircle, Mail, Phone, MapPin, Search, PlayCircle, MapPinned,
-  Calendar, School, Trophy, Lightbulb,
+  Calendar, School, Trophy, Lightbulb, ClipboardList, FileSearch, MessagesSquare,
+  Accessibility, ShieldCheck, Repeat, Target,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -47,8 +48,11 @@ function Page() {
         <ModulesSection />
         <WhatSchoolDoesntNeedSection />
         <ValueSection />
+        <ProjectLogicSection />
         <HowItWorksSection />
         <HarmonogramSection />
+        <ImpactMethodologySection />
+        <TrustBadgesSection />
         <SampleTestsSection />
         <PlatformSection />
         <VideotekaSection />
