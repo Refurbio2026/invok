@@ -85,6 +85,9 @@ function Hero() {
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
               Trojročný program pre žiakov 8. a 9. ročníka rozvíja kritické myslenie, finančnú gramotnosť, komunikáciu, tímovú spoluprácu a ďalšie kompetencie potrebné pre 21. storočie.
             </p>
+            <p className="mt-4 text-base font-bold text-primary tracking-tight">
+              Praktické. Zmysluplné. Spolu.
+            </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg" className="bg-gradient-badge text-white hover:opacity-90 shadow-glow">
                 <a href="#registracia">Stať sa partnerskou školou <ArrowRight className="ml-1.5 h-4 w-4" /></a>
