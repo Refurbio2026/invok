@@ -77,14 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "INVOK" },
+      { name: "description", content: "INVOK Launchpad is a modern, responsive website for a national educational program for Slovak primary schools." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "INVOK" },
+      { property: "og:description", content: "INVOK Launchpad is a modern, responsive website for a national educational program for Slovak primary schools." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "INVOK" },
+      { name: "twitter:description", content: "INVOK Launchpad is a modern, responsive website for a national educational program for Slovak primary schools." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/fd4b99e5-ef21-4812-80cf-5db7632865b8/id-preview-7020f9d6--a008a004-b968-441c-826d-c98b1c3caa80.lovable.app-1780322815927.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/fd4b99e5-ef21-4812-80cf-5db7632865b8/id-preview-7020f9d6--a008a004-b968-441c-826d-c98b1c3caa80.lovable.app-1780322815927.png" },
     ],
     links: [
       {
