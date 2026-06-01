@@ -82,9 +82,9 @@
   --input: oklch(0.92 0.012 250);
   --ring: oklch(0.5 0.14 268);
 
-  --gradient-hero: linear-gradient(135deg, oklch(0.36 0.14 268) 0%, oklch(0.5 0.13 230) 50%, oklch(0.68 0.12 190) 100%);
-  --gradient-badge: linear-gradient(135deg, oklch(0.36 0.14 268), oklch(0.68 0.12 190));
-  --gradient-subtle: linear-gradient(180deg, oklch(1 0 0), oklch(0.97 0.008 250));
+  --gradient-hero: linear-gradient(135deg, oklch(0.32 0.14 265) 0%, oklch(0.42 0.16 255) 50%, oklch(0.52 0.16 245) 100%);
+  --gradient-badge: linear-gradient(135deg, oklch(0.42 0.16 258), oklch(0.55 0.17 248));
+  --gradient-subtle: linear-gradient(180deg, oklch(0.985 0.012 250), oklch(0.95 0.025 250));
 }
 
 .dark {
