@@ -15,7 +15,8 @@ import {
 import {
   Brain, Eye, Rocket, Laptop, MessageSquare, Users, GraduationCap,
   Sparkles, BarChart3, HeartHandshake, BookOpen, Award, ArrowRight,
-  CheckCircle2, Mail, Phone, MapPin, Search, PlayCircle, MapPinned,
+  CheckCircle2, XCircle, Mail, Phone, MapPin, Search, PlayCircle, MapPinned,
+  Calendar, School, Trophy, Lightbulb,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -40,11 +41,14 @@ function Page() {
       <main>
         <Hero />
         <WhySchools />
+        <ValueBoxesSection />
         <NumbersSection />
         <CompetenciesSection />
         <ModulesSection />
+        <WhatSchoolDoesntNeedSection />
         <ValueSection />
         <HowItWorksSection />
+        <HarmonogramSection />
         <SampleTestsSection />
         <PlatformSection />
         <VideotekaSection />
