@@ -682,3 +682,132 @@ function ContactItem({ I, label, v }: { I: typeof Mail; label: string; v: string
     </div>
   );
 }
+
+/* ---------------- VALUE BOXES (inspired by infographic) ---------------- */
+function ValueBoxesSection() {
+  const cols = [
+    {
+      t: "Čo získa škola?",
+      tone: "bg-teal/10 border-teal/30",
+      head: "text-teal",
+      items: [
+        "moderné online moduly a materiály",
+        "metodickú podporu pre učiteľov",
+        "workshopy a projektové výzvy pre žiakov",
+        "digitálnu vzdelávaciu platformu",
+        "podporu inkluzívneho vzdelávania",
+        "meranie pokroku a dopadu",
+      ],
+    },
+    {
+      t: "Ako to funguje?",
+      tone: "bg-amber/10 border-amber/40",
+      head: "text-amber-foreground",
+      items: [
+        "Analýza potrieb školy",
+        "Online vzdelávacie moduly",
+        "Workshopy a projekty",
+        "Meranie dopadu",
+        "Zlepšovanie podľa spätnej väzby",
+      ],
+    },
+    {
+      t: "Pre žiakov to znamená:",
+      tone: "bg-primary/10 border-primary/30",
+      head: "text-primary",
+      items: [
+        "zaujímavé témy a aktivity",
+        "práca v tímoch",
+        "riešenie reálnych problémov",
+        "rozvoj zručností pre budúcnosť",
+        "sebarealizáciu a nové príležitosti",
+      ],
+    },
+  ];
+  const stats = [
+    { I: Calendar, n: "3 roky", l: "podpory" },
+    { I: School, n: "min. 10 škôl", l: "po celom Slovensku" },
+    { I: Users, n: "10 workshopov", l: "v každom ročníku" },
+    { I: Trophy, n: "6 projektových", l: "výziev" },
+  ];
+  return (
+    <Section eyebrow="Prehľad programu" title="Spoločne tvoríme školy budúcnosti">
+      <div className="grid gap-6 lg:grid-cols-4">
+        {cols.map((c) => (
+          <div key={c.t} className={`rounded-3xl border-2 p-6 ${c.tone}`}>
+            <h3 className={`text-lg font-extrabold uppercase tracking-wide mb-4 ${c.head}`}>{c.t}</h3>
+            <ul className="space-y-2.5">
+              {c.items.map((i) => (
+                <li key={i} className="flex items-start gap-2.5 text-sm text-foreground">
+                  <CheckCircle2 className="h-4 w-4 text-teal mt-0.5 shrink-0" /> {i}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+        <div className="rounded-3xl bg-primary text-primary-foreground p-6 shadow-glow">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-white/70 mb-5">INVOK v číslach</h3>
+          <div className="space-y-5">
+            {stats.map((s) => (
+              <div key={s.n} className="flex items-start gap-3">
+                <div className="h-10 w-10 rounded-xl bg-white/10 grid place-items-center shrink-0">
+                  <s.I className="h-5 w-5" />
+                </div>
+                <div>
+                  <div className="font-extrabold text-lg leading-tight">{s.n}</div>
+                  <div className="text-xs text-white/75 uppercase tracking-wide">{s.l}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+/* ---------------- WHAT SCHOOL DOESN'T NEED ---------------- */
+function WhatSchoolDoesntNeedSection() {
+  const items = [
+    "tvoriť obsah",
+    "pripravovať metodiky",
+    "organizovať program",
+    "financovať projekt",
+    "zvyšovať administratívnu záťaž",
+  ];
+  return (
+    <Section alt eyebrow="Bez záťaže pre školu" title="Čo škola NEMUSÍ?" subtitle="O všetko podstatné sa postaráme my. Vy sa môžete sústrediť na žiakov.">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        {items.map((t) => (
+          <div key={t} className="rounded-2xl bg-card border-2 border-destructive/20 p-5 shadow-soft flex items-start gap-3">
+            <XCircle className="h-5 w-5 text-destructive mt-0.5 shrink-0" />
+            <span className="font-semibold text-foreground text-sm">{t}</span>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+/* ---------------- HARMONOGRAM ---------------- */
+function HarmonogramSection() {
+  const years = [
+    { y: "ROK 1", t: "Pilot programu", d: "10 partnerských škôl, testovanie modulov, prvé workshopy a zber spätnej väzby." },
+    { y: "ROK 2", t: "Rozšírenie", d: "Vylepšenie programu na základe pilotu, zapojenie ďalších 10 škôl a nových projektových výziev." },
+    { y: "ROK 3", t: "Škálovanie a udržateľnosť", d: "Konsolidácia programu, certifikácia, metodické príručky a príprava na dlhodobé fungovanie." },
+  ];
+  return (
+    <Section eyebrow="Harmonogram" title="Tri roky systematickej zmeny">
+      <div className="grid gap-6 md:grid-cols-3">
+        {years.map((y, i) => (
+          <div key={y.y} className="relative rounded-3xl bg-gradient-to-br from-primary to-primary/70 text-primary-foreground p-8 shadow-card overflow-hidden">
+            <div className="absolute -top-6 -right-6 text-[120px] font-extrabold text-white/10 leading-none">{i + 1}</div>
+            <span className="inline-block text-xs font-bold uppercase tracking-wider bg-white/15 px-3 py-1.5 rounded-full">{y.y}</span>
+            <h3 className="mt-4 text-2xl font-extrabold">{y.t}</h3>
+            <p className="mt-3 text-sm text-white/85 leading-relaxed">{y.d}</p>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
