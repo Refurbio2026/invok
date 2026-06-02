@@ -5,18 +5,16 @@ import { Logo } from "./Logo";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-type NavLink =
-  | { to: string; label: string; href?: never }
-  | { href: string; label: string; to?: never };
+type NavLink = { href: string; label: string };
 
 const links: NavLink[] = [
-  { href: "#o-programe", label: "O programe" },
-  { href: "#moduly", label: "Moduly" },
-  { href: "#pre-skoly", label: "Pre školy" },
-  { href: "#ako-to-funguje", label: "Ako to funguje" },
-  { to: "/testy", label: "Testovanie" },
-  { to: "/novinky", label: "Novinky" },
-  { href: "#kontakt", label: "Kontakt" },
+  { href: "/#o-programe", label: "O programe" },
+  { href: "/#moduly", label: "Moduly" },
+  { href: "/#pre-skoly", label: "Pre školy" },
+  { href: "/#ako-to-funguje", label: "Ako to funguje" },
+  { href: "/testy", label: "Testovanie" },
+  { href: "/novinky", label: "Novinky" },
+  { href: "/#kontakt", label: "Kontakt" },
 ];
 
 function NavItem({
@@ -32,13 +30,6 @@ function NavItem({
     ? "px-3 py-2.5 rounded-lg text-sm font-medium text-foreground hover:bg-muted block"
     : "text-sm font-medium text-foreground/80 hover:text-primary transition-colors";
 
-  if ("to" in link && link.to) {
-    return (
-      <Link to={link.to} className={base} onClick={onClick}>
-        {link.label}
-      </Link>
-    );
-  }
   return (
     <a href={link.href} className={base} onClick={onClick}>
       {link.label}
@@ -65,19 +56,19 @@ export function Header() {
       )}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        <a href="#top" aria-label="INVOK">
+        <Link to="/" aria-label="INVOK">
           <Logo />
-        </a>
+        </Link>
 
         <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
           {links.map((l) => (
-            <NavItem key={l.to ?? l.href} link={l} />
+            <NavItem key={l.href} link={l} />
           ))}
         </nav>
 
         <div className="hidden lg:flex items-center gap-3 shrink-0">
           <a
-            href="#prihlasenie"
+            href="/prihlasenie"
             className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
           >
             Prihlásenie
@@ -86,7 +77,7 @@ export function Header() {
             asChild
             className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-soft px-5"
           >
-            <a href="#registracia" className="inline-flex items-center gap-2">
+            <a href="/registracia-skoly" className="inline-flex items-center gap-2">
               Registrovať školu <ArrowRight className="h-4 w-4" />
             </a>
           </Button>
@@ -97,11 +88,7 @@ export function Header() {
           onClick={() => setOpen((v) => !v)}
           aria-label="Menu"
         >
-          {open ? (
-            <X className="h-6 w-6" />
-          ) : (
-            <Menu className="h-6 w-6" />
-          )}
+          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
@@ -110,22 +97,24 @@ export function Header() {
           <nav className="px-4 py-4 flex flex-col gap-1">
             {links.map((l) => (
               <NavItem
-                key={l.to ?? l.href}
+                key={l.href}
                 link={l}
                 mobile
                 onClick={() => setOpen(false)}
               />
             ))}
             <div className="flex gap-2 mt-3 pt-3 border-t border-border">
-              <Button variant="ghost" size="sm" className="flex-1">
-                Prihlásenie
+              <Button asChild variant="ghost" size="sm" className="flex-1">
+                <a href="/prihlasenie" onClick={() => setOpen(false)}>
+                  Prihlásenie
+                </a>
               </Button>
               <Button
                 asChild
                 size="sm"
                 className="flex-1 rounded-full bg-primary text-primary-foreground"
               >
-                <a href="#registracia" onClick={() => setOpen(false)}>
+                <a href="/registracia-skoly" onClick={() => setOpen(false)}>
                   Registrovať školu
                 </a>
               </Button>

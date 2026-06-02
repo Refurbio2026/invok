@@ -2,23 +2,46 @@ import { Link } from "@tanstack/react-router";
 import { Logo } from "./Logo";
 import { Mail, Phone, MapPin } from "lucide-react";
 
+type FooterItem = { label: string; href: string };
+
+const aboutItems: FooterItem[] = [
+  { label: "O programe", href: "/#o-programe" },
+  { label: "Moduly", href: "/#moduly" },
+  { label: "Pre školy", href: "/#pre-skoly" },
+  { label: "Ako to funguje", href: "/#ako-to-funguje" },
+  { label: "Kontakt", href: "/#kontakt" },
+];
+
+const usefulItems: FooterItem[] = [
+  { label: "Novinky a články", href: "/novinky" },
+  { label: "Testovanie kompetencií", href: "/testy" },
+  { label: "Prihlásenie", href: "/prihlasenie" },
+  { label: "Registrovať školu", href: "/registracia-skoly" },
+];
+
+const legalItems: FooterItem[] = [
+  { label: "Ochrana osobných údajov", href: "/#kontakt" },
+  { label: "GDPR", href: "/#kontakt" },
+  { label: "Podmienky používania", href: "/#kontakt" },
+  { label: "Vyhlásenie o prístupnosti", href: "/#kontakt" },
+];
+
 export function Footer() {
   return (
     <footer className="bg-foreground text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-1">
-            <Logo variant="light" />
+            <Link to="/" aria-label="INVOK">
+              <Logo variant="light" />
+            </Link>
             <p className="mt-5 text-sm text-white/70 leading-relaxed">
               Inovatívny program rozvoja kompetencií žiakov pre 21. storočie. Národná vzdelávacia iniciatíva pre základné školy na Slovensku.
             </p>
           </div>
-          <FooterCol title="O projekte" items={["O programe", "Moduly", "Pre školy", "Pre učiteľov", "Pre žiakov"]} />
-          <FooterCol title="Užitočné" items={["Časté otázky", "Partneri projektu", "Kontakt"]}>
-            <li><Link to="/novinky" className="hover:text-white transition-colors">Novinky a články</Link></li>
-            <li><Link to="/testy" className="hover:text-white transition-colors">Testovanie kompetencií</Link></li>
-          </FooterCol>
-          <FooterCol title="Právne" items={["Ochrana osobných údajov", "GDPR", "Podmienky používania", "Vyhlásenie o prístupnosti"]} />
+          <FooterCol title="O projekte" items={aboutItems} />
+          <FooterCol title="Užitočné" items={usefulItems} />
+          <FooterCol title="Právne" items={legalItems} />
         </div>
 
         <div className="mt-12 pt-8 border-t border-white/10 grid gap-4 md:grid-cols-3 text-sm text-white/60">
@@ -36,15 +59,18 @@ export function Footer() {
   );
 }
 
-function FooterCol({ title, items, children }: { title: string; items: string[]; children?: React.ReactNode }) {
+function FooterCol({ title, items }: { title: string; items: FooterItem[] }) {
   return (
     <div>
       <h4 className="text-sm font-semibold text-white mb-4">{title}</h4>
       <ul className="space-y-2.5 text-sm text-white/70">
         {items.map((i) => (
-          <li key={i}><a href="#" className="hover:text-white transition-colors">{i}</a></li>
+          <li key={i.label}>
+            <a href={i.href} className="hover:text-white transition-colors">
+              {i.label}
+            </a>
+          </li>
         ))}
-        {children}
       </ul>
     </div>
   );
