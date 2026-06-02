@@ -59,6 +59,7 @@ function Page() {
         <StudentGainsSection />
         <ProjectLogicSection />
         <HowItWorksSection />
+        <CompetencyMeasurementSection />
         <TimeCommitmentSection />
         <HarmonogramSection />
         <ImpactMethodologySection />
