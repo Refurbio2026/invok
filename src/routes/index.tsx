@@ -22,7 +22,7 @@ import {
   Brain, Eye, Rocket, Laptop, MessageSquare, Users, GraduationCap,
   Sparkles, BarChart3, HeartHandshake, BookOpen, Award, ArrowRight,
   CheckCircle2, XCircle, Mail, Phone, MapPin, Search, PlayCircle, MapPinned,
-  Calendar, School, Trophy,
+  Calendar, School, Trophy, ClipboardCheck,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -59,6 +59,7 @@ function Page() {
         <StudentGainsSection />
         <ProjectLogicSection />
         <HowItWorksSection />
+        <CompetencyMeasurementSection />
         <TimeCommitmentSection />
         <HarmonogramSection />
         <ImpactMethodologySection />
@@ -357,6 +358,38 @@ function HowItWorksSection() {
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{s.d}</p>
           </div>
         ))}
+      </div>
+    </Section>
+  );
+}
+
+/* ---------------- COMPETENCY MEASUREMENT ---------------- */
+function CompetencyMeasurementSection() {
+  const steps = [
+    { n: "1", t: "Vstupné testovanie", d: "Žiak absolvuje kompetenčný dotazník pred začiatkom programu.", I: ClipboardCheck },
+    { n: "2", t: "Program INVOK", d: "Žiak prechádza jednotlivými modulmi a aktivitami.", I: BookOpen },
+    { n: "3", t: "Výstupné vyhodnotenie", d: "Systém porovná výsledky a vyhodnotí pokrok.", I: BarChart3 },
+  ];
+  return (
+    <Section eyebrow="Meranie kompetencií" title="Ako meriame rozvoj kompetencií žiakov">
+      <div className="grid gap-6 md:grid-cols-3">
+        {steps.map((s) => (
+          <div key={s.n} className="rounded-3xl bg-card border border-border p-7 shadow-soft hover:shadow-card transition">
+            <div className="h-12 w-12 rounded-2xl bg-gradient-badge grid place-items-center mb-5 shadow-soft">
+              <s.I className="h-6 w-6 text-white" />
+            </div>
+            <div className="text-xs font-bold uppercase tracking-wider text-teal mb-2">Krok {s.n}</div>
+            <h3 className="text-xl font-bold text-foreground">{s.t}</h3>
+            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{s.d}</p>
+          </div>
+        ))}
+      </div>
+      <div className="mt-10 text-center">
+        <Button asChild size="lg" className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-soft">
+          <Link to="/testy" className="inline-flex items-center gap-2">
+            Preskúmať systém testovania <ArrowRight className="h-4 w-4" />
+          </Link>
+        </Button>
       </div>
     </Section>
   );
