@@ -5,6 +5,11 @@ import { Header } from "@/components/invok/Header";
 import { Footer } from "@/components/invok/Footer";
 import { Section } from "@/components/invok/Section";
 import { ImpactMethodologySection, ProjectLogicSection, TrustBadgesSection } from "@/components/invok/TrustSections";
+import {
+  SchoolGainsSection, StudentGainsSection, SchoolDashboardSection, ReportPreviewSection,
+  TimeCommitmentSection, TeamSection, TestimonialsSection, SchoolsLocationMapSection,
+  FundingSection, ComparisonSection, SampleModuleSection,
+} from "@/components/invok/CredibilitySections";
 import { RegistrationForm } from "@/components/invok/RegistrationForm";
 import { ContactForm } from "@/components/invok/ContactForm";
 import { ReadinessTest } from "@/components/invok/ReadinessTest";
@@ -45,20 +50,31 @@ function Page() {
         <ValueBoxesSection />
         <NumbersSection />
         <CompetenciesSection />
+        <ComparisonSection />
         <ModulesSection />
+        <SampleModuleSection />
         <WhatSchoolDoesntNeedSection />
         <ValueSection />
+        <SchoolGainsSection />
+        <StudentGainsSection />
         <ProjectLogicSection />
         <HowItWorksSection />
+        <TimeCommitmentSection />
         <HarmonogramSection />
         <ImpactMethodologySection />
+        <SchoolDashboardSection />
+        <ReportPreviewSection />
         <TrustBadgesSection />
         <SampleTestsSection />
         <PlatformSection />
         <VideotekaSection />
         <SchoolsMapSection />
+        <SchoolsLocationMapSection />
         <CaseStudiesSection />
+        <TestimonialsSection />
         <ImpactSection />
+        <TeamSection />
+        <FundingSection />
         <NewsSection />
         <ReadinessSection />
         <RegistrationSection />
