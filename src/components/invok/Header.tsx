@@ -45,6 +45,12 @@ export function Header() {
               {l.label}
             </a>
           ))}
+          <Link
+            to="/testy"
+            className="text-[15px] font-medium text-foreground/80 hover:text-primary transition-colors"
+          >
+            Testovanie kompetencií
+          </Link>
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
