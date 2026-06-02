@@ -35,7 +35,7 @@ export function Footer() {
   );
 }
 
-function FooterCol({ title, items }: { title: string; items: string[] }) {
+function FooterCol({ title, items, children }: { title: string; items: string[]; children?: React.ReactNode }) {
   return (
     <div>
       <h4 className="text-sm font-semibold text-white mb-4">{title}</h4>
@@ -43,6 +43,7 @@ function FooterCol({ title, items }: { title: string; items: string[] }) {
         {items.map((i) => (
           <li key={i}><a href="#" className="hover:text-white transition-colors">{i}</a></li>
         ))}
+        {children}
       </ul>
     </div>
   );
