@@ -113,7 +113,7 @@ function ArticleDetail() {
             </p>
 
             <div className="prose prose-neutral max-w-none space-y-5 text-foreground/90 leading-relaxed">
-              {article.content.map((p, i) => (
+              {article.content.map((p: string, i: number) => (
                 <p key={i}>{p}</p>
               ))}
             </div>
