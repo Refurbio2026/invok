@@ -86,6 +86,13 @@ export function Header() {
                 {l.label}
               </a>
             ))}
+            <Link
+              to="/testy"
+              onClick={() => setOpen(false)}
+              className="px-3 py-2.5 rounded-lg text-sm font-medium text-foreground hover:bg-muted"
+            >
+              Testovanie kompetencií
+            </Link>
             <div className="flex gap-2 mt-3 pt-3 border-t border-border">
               <Button variant="ghost" size="sm" className="flex-1">Prihlásenie</Button>
               <Button asChild size="sm" className="flex-1 rounded-full bg-primary text-primary-foreground">
