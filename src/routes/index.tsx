@@ -22,7 +22,7 @@ import {
   Brain, Eye, Rocket, Laptop, MessageSquare, Users, GraduationCap,
   Sparkles, BarChart3, HeartHandshake, BookOpen, Award, ArrowRight,
   CheckCircle2, XCircle, Mail, Phone, MapPin, Search, PlayCircle, MapPinned,
-  Calendar, School, Trophy,
+  Calendar, School, Trophy, ClipboardCheck,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
