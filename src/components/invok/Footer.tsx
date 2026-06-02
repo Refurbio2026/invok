@@ -9,7 +9,7 @@ const aboutItems: FooterItem[] = [
   { label: "Moduly", href: "/#moduly" },
   { label: "Pre školy", href: "/#pre-skoly" },
   { label: "Ako to funguje", href: "/#ako-to-funguje" },
-  { label: "Kontakt", href: "/#kontakt" },
+  { label: "Kontakt", href: "/kontakt" },
 ];
 
 const usefulItems: FooterItem[] = [
@@ -20,10 +20,10 @@ const usefulItems: FooterItem[] = [
 ];
 
 const legalItems: FooterItem[] = [
-  { label: "Ochrana osobných údajov", href: "/#kontakt" },
-  { label: "GDPR", href: "/#kontakt" },
-  { label: "Podmienky používania", href: "/#kontakt" },
-  { label: "Vyhlásenie o prístupnosti", href: "/#kontakt" },
+  { label: "Ochrana osobných údajov", href: "/kontakt" },
+  { label: "GDPR", href: "/kontakt" },
+  { label: "Podmienky používania", href: "/kontakt" },
+  { label: "Vyhlásenie o prístupnosti", href: "/kontakt" },
 ];
 
 export function Footer() {

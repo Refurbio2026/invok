@@ -11,7 +11,7 @@ import {
   FundingSection, ComparisonSection, SampleModuleSection,
 } from "@/components/invok/CredibilitySections";
 import { RegistrationForm } from "@/components/invok/RegistrationForm";
-import { ContactForm } from "@/components/invok/ContactForm";
+
 import { ReadinessTest } from "@/components/invok/ReadinessTest";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -698,41 +698,28 @@ function PartnersSection() {
   );
 }
 
-/* ---------------- CONTACT ---------------- */
+/* ---------------- CONTACT (CTA only — full page at /kontakt) ---------------- */
 function ContactSection() {
   return (
-    <Section id="kontakt" eyebrow="Kontakt" title="Spojte sa s tímom INVOK" subtitle="Sme tu pre školy, učiteľov, žiakov i rodičov. Napíšte nám, zavolajte alebo prídite osobne.">
-      <div className="grid gap-8 lg:grid-cols-5">
-        <div className="lg:col-span-3">
-          <ContactForm />
-        </div>
-        <div id="kontaktne-udaje" className="lg:col-span-2 rounded-3xl bg-gradient-hero text-white p-8 shadow-card">
-          <h3 className="text-2xl font-bold">Kontaktné údaje</h3>
-          <p className="mt-2 text-white/80 text-sm">Tím INVOK · Národná vzdelávacia iniciatíva</p>
-          <div className="mt-8 space-y-5">
-            <ContactItem I={Mail} label="E-mail" v="info@invok.sk" />
-            <ContactItem I={Phone} label="Telefón" v="+421 900 000 000" />
-            <ContactItem I={MapPin} label="Adresa" v="Hlavná 1, 811 01 Bratislava" />
+    <Section id="kontakt" eyebrow="Kontakt" title="Spojte sa s tímom INVOK" subtitle="Plnú kontaktnú stránku s formulárom, partnerstvami a FAQ nájdete na samostatnej stránke.">
+      <div className="rounded-3xl bg-gradient-hero text-white p-8 md:p-12 shadow-card flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <div>
+          <h3 className="text-2xl md:text-3xl font-bold">Máte záujem o predstavenie programu?</h3>
+          <p className="mt-2 text-white/85 max-w-xl">Napíšte nám, zavolajte, alebo vyplňte krátky formulár pre školy na kontaktnej stránke.</p>
+          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/90">
+            <a href="mailto:info@invok.sk" className="inline-flex items-center gap-2 hover:underline"><Mail className="h-4 w-4" />info@invok.sk</a>
+            <a href="tel:+421900000000" className="inline-flex items-center gap-2 hover:underline"><Phone className="h-4 w-4" />+421 900 000 000</a>
+            <span className="inline-flex items-center gap-2"><MapPin className="h-4 w-4" />Hlavná 1, Bratislava</span>
           </div>
         </div>
+        <Button asChild size="lg" className="rounded-full bg-white text-foreground hover:bg-white/90 shrink-0">
+          <a href="/kontakt">Prejsť na kontakt</a>
+        </Button>
       </div>
     </Section>
   );
 }
 
-function ContactItem({ I, label, v }: { I: typeof Mail; label: string; v: string }) {
-  return (
-    <div className="flex items-start gap-4">
-      <div className="h-11 w-11 rounded-2xl bg-white/15 grid place-items-center shrink-0">
-        <I className="h-5 w-5" />
-      </div>
-      <div>
-        <div className="text-xs uppercase tracking-wider text-white/70 font-semibold">{label}</div>
-        <div className="font-semibold mt-0.5">{v}</div>
-      </div>
-    </div>
-  );
-}
 
 /* ---------------- VALUE BOXES (inspired by infographic) ---------------- */
 function ValueBoxesSection() {
