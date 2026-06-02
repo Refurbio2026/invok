@@ -14,7 +14,7 @@ const links: NavLink[] = [
   { href: "/#ako-to-funguje", label: "Ako to funguje" },
   { href: "/testy", label: "Testovanie" },
   { href: "/novinky", label: "Novinky" },
-  { href: "/#kontakt", label: "Kontakt-old-removed" },
+  { href: "/kontakt", label: "Kontakt" },
 ];
 
 function NavItem({
