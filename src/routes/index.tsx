@@ -347,22 +347,20 @@ function HowItWorksSection() {
 }
 
 /* ---------------- SAMPLE TESTS ---------------- */
+import { Link } from "@tanstack/react-router";
+import { TEST_LIST } from "@/data/tests";
+
 function SampleTestsSection() {
-  const tests = [
-    { t: "Kritické myslenie", d: "Práca s informáciami, argumentácia a rozhodovanie." },
-    { t: "Komunikačné zručnosti", d: "Situácie z bežného života a medziľudskej komunikácie." },
-    { t: "Finančná gramotnosť", d: "Praktické rozhodovanie o financiách a rozpočte." },
-    { t: "Tímová spolupráca", d: "Riešenie úloh v skupine a projektová práca." },
-    { t: "Sebapoznanie", d: "Objavovanie silných stránok a osobného potenciálu." },
-  ];
   return (
     <Section eyebrow="Ukážkové testy" title="Otestujte si kompetencie v praxi">
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {tests.map((t) => (
-          <div key={t.t} className="rounded-3xl bg-card border border-border p-7 shadow-soft flex flex-col">
-            <h3 className="text-lg font-bold text-foreground">{t.t}</h3>
-            <p className="mt-2 text-sm text-muted-foreground flex-1">{t.d}</p>
-            <Button variant="outline" className="mt-5 self-start">Vyskúšať test</Button>
+        {TEST_LIST.map((t) => (
+          <div key={t.slug} className="rounded-3xl bg-card border border-border p-7 shadow-soft flex flex-col">
+            <h3 className="text-lg font-bold text-foreground">{t.title}</h3>
+            <p className="mt-2 text-sm text-muted-foreground flex-1">{t.description}</p>
+            <Button asChild variant="outline" className="mt-5 self-start">
+              <Link to="/testy/$slug" params={{ slug: t.slug }}>Vyskúšať test</Link>
+            </Button>
           </div>
         ))}
       </div>
