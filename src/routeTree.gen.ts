@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TestyIndexRouteImport } from './routes/testy.index'
 import { Route as NovinkyIndexRouteImport } from './routes/novinky.index'
@@ -18,6 +19,11 @@ import { Route as TestySlugRouteImport } from './routes/testy.$slug'
 import { Route as NovinkySlugRouteImport } from './routes/novinky.$slug'
 import { Route as ModulUkazkaRouteImport } from './routes/modul.ukazka'
 
+const KontaktRoute = KontaktRouteImport.update({
+  id: '/kontakt',
+  path: '/kontakt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -61,6 +67,7 @@ const ModulUkazkaRoute = ModulUkazkaRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/kontakt': typeof KontaktRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
   '/novinky/$slug': typeof NovinkySlugRoute
   '/testy/$slug': typeof TestySlugRoute
@@ -71,6 +78,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/kontakt': typeof KontaktRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
   '/novinky/$slug': typeof NovinkySlugRoute
   '/testy/$slug': typeof TestySlugRoute
@@ -82,6 +90,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/kontakt': typeof KontaktRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
   '/novinky/$slug': typeof NovinkySlugRoute
   '/testy/$slug': typeof TestySlugRoute
@@ -94,6 +103,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/kontakt'
     | '/modul/ukazka'
     | '/novinky/$slug'
     | '/testy/$slug'
@@ -104,6 +114,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/kontakt'
     | '/modul/ukazka'
     | '/novinky/$slug'
     | '/testy/$slug'
@@ -114,6 +125,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/kontakt'
     | '/modul/ukazka'
     | '/novinky/$slug'
     | '/testy/$slug'
@@ -125,6 +137,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  KontaktRoute: typeof KontaktRoute
   ModulUkazkaRoute: typeof ModulUkazkaRoute
   NovinkySlugRoute: typeof NovinkySlugRoute
   TestySlugRoute: typeof TestySlugRoute
@@ -136,6 +149,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/kontakt': {
+      id: '/kontakt'
+      path: '/kontakt'
+      fullPath: '/kontakt'
+      preLoaderRoute: typeof KontaktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -197,6 +217,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  KontaktRoute: KontaktRoute,
   ModulUkazkaRoute: ModulUkazkaRoute,
   NovinkySlugRoute: NovinkySlugRoute,
   TestySlugRoute: TestySlugRoute,
@@ -208,3 +229,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
