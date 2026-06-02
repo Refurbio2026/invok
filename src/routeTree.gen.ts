@@ -10,12 +10,30 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TestyIndexRouteImport } from './routes/testy.index'
+import { Route as TestyVystupnyTestRouteImport } from './routes/testy.vystupny-test'
+import { Route as TestyVstupnyTestRouteImport } from './routes/testy.vstupny-test'
 import { Route as TestySlugRouteImport } from './routes/testy.$slug'
 import { Route as ModulUkazkaRouteImport } from './routes/modul.ukazka'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TestyIndexRoute = TestyIndexRouteImport.update({
+  id: '/testy/',
+  path: '/testy/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TestyVystupnyTestRoute = TestyVystupnyTestRouteImport.update({
+  id: '/testy/vystupny-test',
+  path: '/testy/vystupny-test',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TestyVstupnyTestRoute = TestyVstupnyTestRouteImport.update({
+  id: '/testy/vstupny-test',
+  path: '/testy/vstupny-test',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TestySlugRoute = TestySlugRouteImport.update({
@@ -33,30 +51,61 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
   '/testy/$slug': typeof TestySlugRoute
+  '/testy/vstupny-test': typeof TestyVstupnyTestRoute
+  '/testy/vystupny-test': typeof TestyVystupnyTestRoute
+  '/testy/': typeof TestyIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
   '/testy/$slug': typeof TestySlugRoute
+  '/testy/vstupny-test': typeof TestyVstupnyTestRoute
+  '/testy/vystupny-test': typeof TestyVystupnyTestRoute
+  '/testy': typeof TestyIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
   '/testy/$slug': typeof TestySlugRoute
+  '/testy/vstupny-test': typeof TestyVstupnyTestRoute
+  '/testy/vystupny-test': typeof TestyVystupnyTestRoute
+  '/testy/': typeof TestyIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/modul/ukazka' | '/testy/$slug'
+  fullPaths:
+    | '/'
+    | '/modul/ukazka'
+    | '/testy/$slug'
+    | '/testy/vstupny-test'
+    | '/testy/vystupny-test'
+    | '/testy/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/modul/ukazka' | '/testy/$slug'
-  id: '__root__' | '/' | '/modul/ukazka' | '/testy/$slug'
+  to:
+    | '/'
+    | '/modul/ukazka'
+    | '/testy/$slug'
+    | '/testy/vstupny-test'
+    | '/testy/vystupny-test'
+    | '/testy'
+  id:
+    | '__root__'
+    | '/'
+    | '/modul/ukazka'
+    | '/testy/$slug'
+    | '/testy/vstupny-test'
+    | '/testy/vystupny-test'
+    | '/testy/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ModulUkazkaRoute: typeof ModulUkazkaRoute
   TestySlugRoute: typeof TestySlugRoute
+  TestyVstupnyTestRoute: typeof TestyVstupnyTestRoute
+  TestyVystupnyTestRoute: typeof TestyVystupnyTestRoute
+  TestyIndexRoute: typeof TestyIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -66,6 +115,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/testy/': {
+      id: '/testy/'
+      path: '/testy'
+      fullPath: '/testy/'
+      preLoaderRoute: typeof TestyIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/testy/vystupny-test': {
+      id: '/testy/vystupny-test'
+      path: '/testy/vystupny-test'
+      fullPath: '/testy/vystupny-test'
+      preLoaderRoute: typeof TestyVystupnyTestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/testy/vstupny-test': {
+      id: '/testy/vstupny-test'
+      path: '/testy/vstupny-test'
+      fullPath: '/testy/vstupny-test'
+      preLoaderRoute: typeof TestyVstupnyTestRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/testy/$slug': {
@@ -89,6 +159,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ModulUkazkaRoute: ModulUkazkaRoute,
   TestySlugRoute: TestySlugRoute,
+  TestyVstupnyTestRoute: TestyVstupnyTestRoute,
+  TestyVystupnyTestRoute: TestyVystupnyTestRoute,
+  TestyIndexRoute: TestyIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
