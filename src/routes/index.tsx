@@ -11,7 +11,7 @@ import {
   FundingSection, ComparisonSection, SampleModuleSection,
 } from "@/components/invok/CredibilitySections";
 import { RegistrationForm } from "@/components/invok/RegistrationForm";
-import { ContactForm } from "@/components/invok/ContactForm";
+
 import { ReadinessTest } from "@/components/invok/ReadinessTest";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
