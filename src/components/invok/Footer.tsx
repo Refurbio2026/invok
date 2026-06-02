@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { Logo } from "./Logo";
 import { Mail, Phone, MapPin } from "lucide-react";
 
@@ -13,7 +14,9 @@ export function Footer() {
             </p>
           </div>
           <FooterCol title="O projekte" items={["O programe", "Moduly", "Pre školy", "Pre učiteľov", "Pre žiakov"]} />
-          <FooterCol title="Užitočné" items={["Novinky a články", "Časté otázky", "Partneri projektu", "Kontakt"]} />
+          <FooterCol title="Užitočné" items={["Novinky a články", "Časté otázky", "Partneri projektu", "Kontakt"]}>
+            <li><Link to="/testy" className="hover:text-white transition-colors">Testovanie kompetencií</Link></li>
+          </FooterCol>
           <FooterCol title="Právne" items={["Ochrana osobných údajov", "GDPR", "Podmienky používania", "Vyhlásenie o prístupnosti"]} />
         </div>
 
