@@ -132,7 +132,12 @@ function TestyPage() {
   const setStatus = async (
     id: string,
     status: "draft" | "published" | "archived",
+    questionsCount: number,
   ) => {
+    if (status === "published" && questionsCount === 0) {
+      toast.error("Test nemá žiadne otázky — najskôr ich pridajte v detaile.");
+      return;
+    }
     try {
       await update({ data: { id, status } });
       toast.success(
