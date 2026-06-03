@@ -39,19 +39,29 @@ export const listStudents = createServerFn({ method: "POST" })
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     let q = supabaseAdmin
       .from("students")
-      .select(
-        "id,school_id,class_id,code,first_name,last_name,grade,pin,status,created_at,classes(name),schools(name)",
-      )
+      .select("id,school_id,class_id,code,first_name,last_name,grade,pin,status,created_at")
       .order("created_at", { ascending: false })
       .limit(500);
     if (data.schoolId) q = q.eq("school_id", data.schoolId);
     if (data.classId) q = q.eq("class_id", data.classId);
     const { data: rows, error } = await q;
     if (error) throw new Error(error.message);
+    const schoolIds = Array.from(new Set((rows ?? []).map((r: any) => r.school_id).filter(Boolean)));
+    const classIds = Array.from(new Set((rows ?? []).map((r: any) => r.class_id).filter(Boolean)));
+    const [schoolsRes, classesRes] = await Promise.all([
+      schoolIds.length
+        ? supabaseAdmin.from("schools").select("id,name").in("id", schoolIds)
+        : Promise.resolve({ data: [] as any[] }),
+      classIds.length
+        ? supabaseAdmin.from("classes").select("id,name").in("id", classIds)
+        : Promise.resolve({ data: [] as any[] }),
+    ]);
+    const schoolMap = Object.fromEntries((schoolsRes.data ?? []).map((s: any) => [s.id, s.name]));
+    const classMap = Object.fromEntries((classesRes.data ?? []).map((c: any) => [c.id, c.name]));
     return (rows ?? []).map((r: any) => ({
       ...r,
-      class_name: r.classes?.name ?? null,
-      school_name: r.schools?.name ?? null,
+      class_name: classMap[r.class_id] ?? null,
+      school_name: schoolMap[r.school_id] ?? null,
     }));
   });
 
