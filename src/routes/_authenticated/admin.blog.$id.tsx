@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
@@ -379,7 +379,12 @@ function BlogEditor() {
   );
 }
 
-// ============ Rich text editor (HTML-based, simple toolbar) ============
+// ============= WYSIWYG editor (TipTap) =============
+
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import LinkExt from "@tiptap/extension-link";
+import ImageExt from "@tiptap/extension-image";
 
 function RichEditor({
   value,
@@ -388,43 +393,53 @@ function RichEditor({
   value: string;
   onChange: (v: string) => void;
 }) {
-  const ref = useRef<HTMLTextAreaElement>(null);
+  const editor = useEditor({
+    extensions: [
+      StarterKit.configure({ heading: { levels: [1, 2, 3] } }),
+      LinkExt.configure({
+        openOnClick: false,
+        HTMLAttributes: { rel: "noreferrer", target: "_blank" },
+      }),
+      ImageExt.configure({ inline: false, allowBase64: false }),
+    ],
+    content: value || "",
+    editorProps: {
+      attributes: {
+        class:
+          "prose prose-neutral max-w-none min-h-[420px] p-4 focus:outline-none",
+      },
+    },
+    onUpdate: ({ editor }) => onChange(editor.getHTML()),
+  });
 
-  const wrap = (before: string, after: string = before) => {
-    const el = ref.current;
-    if (!el) return;
-    const start = el.selectionStart;
-    const end = el.selectionEnd;
-    const selected = value.slice(start, end) || "text";
-    const next =
-      value.slice(0, start) + before + selected + after + value.slice(end);
-    onChange(next);
-    requestAnimationFrame(() => {
-      el.focus();
-      el.selectionStart = start + before.length;
-      el.selectionEnd = start + before.length + selected.length;
-    });
-  };
-
-  const insertBlock = (tpl: string) => {
-    const el = ref.current;
-    if (!el) return;
-    const start = el.selectionStart;
-    const next = value.slice(0, start) + tpl + value.slice(start);
-    onChange(next);
-    requestAnimationFrame(() => {
-      el.focus();
-      el.selectionStart = el.selectionEnd = start + tpl.length;
-    });
-  };
+  // Sync external value (e.g. after fetch) into editor without breaking cursor.
+  useEffect(() => {
+    if (!editor) return;
+    const current = editor.getHTML();
+    const next = value || "";
+    if (next !== current) {
+      editor.commands.setContent(next, { emitUpdate: false });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value, editor]);
 
   const linkAction = () => {
-    const url = prompt("URL odkazu (https://…)");
-    if (!url) return;
-    wrap(`<a href="${url}" target="_blank" rel="noreferrer">`, "</a>");
+    if (!editor) return;
+    const prev = editor.getAttributes("link").href as string | undefined;
+    const url = prompt("URL odkazu (https://…)", prev || "https://");
+    if (url === null) return;
+    if (url === "") {
+      editor.chain().focus().extendMarkRange("link").unsetLink().run();
+      return;
+    }
+    editor
+      .chain()
+      .focus()
+      .extendMarkRange("link")
+      .setLink({ href: url })
+      .run();
   };
 
-  const [pickerOpen, setPickerOpen] = useState(false);
   const [pendingImg, setPendingImg] = useState<PickedImage | null>(null);
   const [imgAlt, setImgAlt] = useState("");
   const [imgCaption, setImgCaption] = useState("");
@@ -440,72 +455,100 @@ function RichEditor({
   };
 
   const insertConfiguredImage = () => {
-    if (!pendingImg) return;
+    if (!pendingImg || !editor) return;
     const sizeClass = {
       small: "max-w-xs",
       medium: "max-w-md",
       large: "max-w-2xl",
       full: "w-full",
     }[imgSize];
-    const altAttr = (imgAlt || "").replace(/"/g, "&quot;");
+    const altAttr = escapeHtml(imgAlt || "");
     const captionHtml = imgCaption
       ? `<figcaption>${escapeHtml(imgCaption)}</figcaption>`
       : "";
-    const html = `\n<figure class="article-figure ${sizeClass}">\n  <img src="${pendingImg.url}" alt="${altAttr}" loading="lazy" />\n  ${captionHtml}\n</figure>\n`;
-    insertBlock(html);
+    const html = `<figure class="article-figure ${sizeClass}"><img src="${pendingImg.url}" alt="${altAttr}" loading="lazy" />${captionHtml}</figure><p></p>`;
+    editor.chain().focus().insertContent(html).run();
     setPendingImg(null);
     setImgAlt("");
     setImgCaption("");
   };
 
+  const isActive = (name: string, attrs?: Record<string, any>) =>
+    !!editor && editor.isActive(name, attrs as any);
+
   return (
     <div className="border border-border rounded-lg overflow-hidden bg-card">
       <div className="flex flex-wrap gap-1 p-2 border-b border-border bg-muted/40">
-        <ToolBtn onClick={() => wrap("<h1>", "</h1>")} title="Nadpis H1">
+        <ToolBtn
+          active={isActive("heading", { level: 1 })}
+          onClick={() =>
+            editor?.chain().focus().toggleHeading({ level: 1 }).run()
+          }
+          title="Nadpis H1"
+        >
           <Heading1 className="h-4 w-4" />
         </ToolBtn>
-        <ToolBtn onClick={() => wrap("<h2>", "</h2>")} title="Nadpis H2">
+        <ToolBtn
+          active={isActive("heading", { level: 2 })}
+          onClick={() =>
+            editor?.chain().focus().toggleHeading({ level: 2 }).run()
+          }
+          title="Nadpis H2"
+        >
           <Heading2 className="h-4 w-4" />
         </ToolBtn>
-        <ToolBtn onClick={() => wrap("<h3>", "</h3>")} title="Nadpis H3">
+        <ToolBtn
+          active={isActive("heading", { level: 3 })}
+          onClick={() =>
+            editor?.chain().focus().toggleHeading({ level: 3 }).run()
+          }
+          title="Nadpis H3"
+        >
           <Heading3 className="h-4 w-4" />
         </ToolBtn>
-        <ToolBtn onClick={() => insertBlock("\n<p>Odsek…</p>\n")} title="Odsek">
+        <ToolBtn
+          active={isActive("paragraph")}
+          onClick={() => editor?.chain().focus().setParagraph().run()}
+          title="Odsek"
+        >
           <Type className="h-4 w-4" />
         </ToolBtn>
         <span className="w-px bg-border mx-1" />
-        <ToolBtn onClick={() => wrap("<strong>", "</strong>")} title="Tučné">
+        <ToolBtn
+          active={isActive("bold")}
+          onClick={() => editor?.chain().focus().toggleBold().run()}
+          title="Tučné"
+        >
           <Bold className="h-4 w-4" />
         </ToolBtn>
-        <ToolBtn onClick={() => wrap("<em>", "</em>")} title="Kurzíva">
+        <ToolBtn
+          active={isActive("italic")}
+          onClick={() => editor?.chain().focus().toggleItalic().run()}
+          title="Kurzíva"
+        >
           <Italic className="h-4 w-4" />
         </ToolBtn>
-        <ToolBtn onClick={linkAction} title="Odkaz">
+        <ToolBtn active={isActive("link")} onClick={linkAction} title="Odkaz">
           <LinkIcon className="h-4 w-4" />
         </ToolBtn>
         <span className="w-px bg-border mx-1" />
         <ToolBtn
-          onClick={() =>
-            insertBlock(
-              "\n<ul>\n  <li>Položka 1</li>\n  <li>Položka 2</li>\n</ul>\n",
-            )
-          }
+          active={isActive("bulletList")}
+          onClick={() => editor?.chain().focus().toggleBulletList().run()}
           title="Zoznam"
         >
           <List className="h-4 w-4" />
         </ToolBtn>
         <ToolBtn
-          onClick={() =>
-            insertBlock(
-              "\n<ol>\n  <li>Krok 1</li>\n  <li>Krok 2</li>\n</ol>\n",
-            )
-          }
+          active={isActive("orderedList")}
+          onClick={() => editor?.chain().focus().toggleOrderedList().run()}
           title="Číslovaný zoznam"
         >
           <ListOrdered className="h-4 w-4" />
         </ToolBtn>
         <ToolBtn
-          onClick={() => wrap("<blockquote>", "</blockquote>")}
+          active={isActive("blockquote")}
+          onClick={() => editor?.chain().focus().toggleBlockquote().run()}
           title="Citácia"
         >
           <Quote className="h-4 w-4" />
@@ -524,13 +567,8 @@ function RichEditor({
           }
         />
       </div>
-      <Textarea
-        ref={ref}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder="Napíšte obsah článku v HTML. Použite tlačidlá hore na vloženie nadpisov, zoznamov, citácií a obrázkov."
-        className="min-h-[420px] border-0 rounded-none font-mono text-sm focus-visible:ring-0"
-      />
+
+      <EditorContent editor={editor} />
 
       <Dialog
         open={!!pendingImg}
@@ -608,17 +646,22 @@ function ToolBtn({
   onClick,
   title,
   children,
+  active,
 }: {
   onClick: () => void;
   title: string;
   children: React.ReactNode;
+  active?: boolean;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
       title={title}
-      className="h-8 w-8 inline-flex items-center justify-center rounded hover:bg-muted text-foreground"
+      className={
+        "h-8 w-8 inline-flex items-center justify-center rounded text-foreground " +
+        (active ? "bg-muted" : "hover:bg-muted")
+      }
     >
       {children}
     </button>
