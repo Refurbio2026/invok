@@ -245,10 +245,15 @@ function TestDetailPage() {
       </div>
 
       <div className="space-y-4">
-        {q.data.questions.map((qst: Question) => (
+        {q.data.questions.map((qst: any) => (
           <QuestionCard
             key={qst.id}
-            question={qst}
+            question={{
+              ...qst,
+              options: Array.isArray(qst.options) ? qst.options : [],
+              correct_keys: qst.correct_keys ?? [],
+              competency: qst.competency ?? null,
+            } as Question}
             onSave={onUpdateQuestion}
             onDelete={() => onDeleteQuestion(qst.id)}
           />
