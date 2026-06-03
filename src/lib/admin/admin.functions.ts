@@ -22,7 +22,7 @@ export const getMyRoles = createServerFn({ method: "GET" })
     }
 
     const userId = userData.user.id;
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from("user_roles")
       .select("role, school_id")
       .eq("user_id", userId);
