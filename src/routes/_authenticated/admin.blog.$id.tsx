@@ -646,17 +646,22 @@ function ToolBtn({
   onClick,
   title,
   children,
+  active,
 }: {
   onClick: () => void;
   title: string;
   children: React.ReactNode;
+  active?: boolean;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
       title={title}
-      className="h-8 w-8 inline-flex items-center justify-center rounded hover:bg-muted text-foreground"
+      className={
+        "h-8 w-8 inline-flex items-center justify-center rounded text-foreground " +
+        (active ? "bg-muted" : "hover:bg-muted")
+      }
     >
       {children}
     </button>
