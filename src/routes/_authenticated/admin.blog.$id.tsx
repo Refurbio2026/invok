@@ -424,11 +424,38 @@ function RichEditor({
     wrap(`<a href="${url}" target="_blank" rel="noreferrer">`, "</a>");
   };
 
-  const imgAction = () => {
-    const url = prompt("URL obrázka (https://…)");
-    if (!url) return;
-    const alt = prompt("Alt text (popis obrázka)", "") || "";
-    insertBlock(`\n<img src="${url}" alt="${alt}" />\n`);
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const [pendingImg, setPendingImg] = useState<PickedImage | null>(null);
+  const [imgAlt, setImgAlt] = useState("");
+  const [imgCaption, setImgCaption] = useState("");
+  const [imgSize, setImgSize] = useState<"small" | "medium" | "large" | "full">(
+    "large",
+  );
+
+  const onPickImage = (img: PickedImage) => {
+    setPendingImg(img);
+    setImgAlt(img.alt || "");
+    setImgCaption(img.caption || "");
+    setImgSize("large");
+  };
+
+  const insertConfiguredImage = () => {
+    if (!pendingImg) return;
+    const sizeClass = {
+      small: "max-w-xs",
+      medium: "max-w-md",
+      large: "max-w-2xl",
+      full: "w-full",
+    }[imgSize];
+    const altAttr = (imgAlt || "").replace(/"/g, "&quot;");
+    const captionHtml = imgCaption
+      ? `<figcaption>${escapeHtml(imgCaption)}</figcaption>`
+      : "";
+    const html = `\n<figure class="article-figure ${sizeClass}">\n  <img src="${pendingImg.url}" alt="${altAttr}" loading="lazy" />\n  ${captionHtml}\n</figure>\n`;
+    insertBlock(html);
+    setPendingImg(null);
+    setImgAlt("");
+    setImgCaption("");
   };
 
   return (
