@@ -60,6 +60,7 @@ import {
   saveQuestion,
   deleteQuestion,
   reorderQuestions,
+  duplicateQuestion,
   duplicateTest,
   listModules,
   COMPETENCY_AREAS,
