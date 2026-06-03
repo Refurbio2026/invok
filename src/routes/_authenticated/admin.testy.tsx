@@ -11,6 +11,7 @@ import {
   Eye,
   CheckCircle2,
   Archive,
+  ListChecks,
 } from "lucide-react";
 import { AdminLayout } from "@/components/invok/admin/AdminLayout";
 import { supabase } from "@/integrations/supabase/client";
@@ -420,7 +421,17 @@ function TestyPage() {
                       {new Date(t.created_at).toLocaleDateString("sk-SK")}
                     </td>
                     <td className="px-4 py-3 text-right">
-                      <div className="inline-flex gap-1">
+                      <div className="inline-flex gap-1 items-center">
+                        <Link
+                          to="/admin/testy/$id"
+                          params={{ id: t.id }}
+                          hash="questions"
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-primary/10 text-primary hover:bg-primary/20"
+                          title="Spravovať otázky"
+                        >
+                          <ListChecks className="h-3.5 w-3.5" />
+                          Spravovať otázky
+                        </Link>
                         <Link
                           to="/admin/testy/$id"
                           params={{ id: t.id }}

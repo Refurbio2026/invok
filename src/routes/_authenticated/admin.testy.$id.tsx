@@ -224,7 +224,7 @@ function TestDetailPage() {
         </div>
       )}
 
-      <Tabs defaultValue="detail" className="w-full">
+      <Tabs defaultValue={typeof window !== "undefined" && window.location.hash === "#questions" ? "questions" : "detail"} className="w-full">
         <TabsList className="mb-4">
           <TabsTrigger value="detail">Detail</TabsTrigger>
           <TabsTrigger value="questions">
