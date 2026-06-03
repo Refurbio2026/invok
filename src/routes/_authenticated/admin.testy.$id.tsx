@@ -698,11 +698,13 @@ function QuestionCard({
   question,
   onSave,
   onDelete,
+  onDuplicate,
   dragHandle,
 }: {
   question: Question;
   onSave: (q: Question) => void;
   onDelete: () => void;
+  onDuplicate?: () => void;
   dragHandle?: React.ReactNode;
 }) {
   const [draft, setDraft] = useState<Question>(question);
@@ -748,17 +750,32 @@ function QuestionCard({
         <span className="h-7 w-7 rounded-full bg-primary text-primary-foreground text-xs font-semibold flex items-center justify-center shrink-0 mt-1">
           {draft.position}
         </span>
-        <div className="flex-1">
+        <div className="flex-1 space-y-2">
           <Textarea
             value={draft.question_text}
             onChange={(e) => setDraft({ ...draft, question_text: e.target.value })}
             rows={2}
+            placeholder="Text otázky"
+          />
+          <Input
+            value={draft.question_description ?? ""}
+            onChange={(e) =>
+              setDraft({ ...draft, question_description: e.target.value })
+            }
+            placeholder="Doplnkový popis (voliteľné)"
+            className="text-sm"
           />
         </div>
-        <Button variant="ghost" size="icon" onClick={onDelete}>
+        {onDuplicate && (
+          <Button variant="ghost" size="icon" onClick={onDuplicate} title="Duplikovať">
+            <Copy className="h-4 w-4" />
+          </Button>
+        )}
+        <Button variant="ghost" size="icon" onClick={onDelete} title="Zmazať">
           <Trash2 className="h-4 w-4 text-destructive" />
         </Button>
       </div>
+
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div>
