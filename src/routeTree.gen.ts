@@ -29,8 +29,12 @@ import { Route as NovinkySlugRouteImport } from './routes/novinky.$slug'
 import { Route as ModulUkazkaRouteImport } from './routes/modul.ukazka'
 import { Route as AdminPrihlasenieRouteImport } from './routes/admin.prihlasenie'
 import { Route as AuthenticatedAdminZiadostiRouteImport } from './routes/_authenticated/admin.ziadosti'
+import { Route as AuthenticatedAdminZiaciRouteImport } from './routes/_authenticated/admin.ziaci'
+import { Route as AuthenticatedAdminTriedyRouteImport } from './routes/_authenticated/admin.triedy'
+import { Route as AuthenticatedAdminTestyRouteImport } from './routes/_authenticated/admin.testy'
 import { Route as AuthenticatedAdminSkolyRouteImport } from './routes/_authenticated/admin.skoly'
 import { Route as AuthenticatedAdminDashboardRouteImport } from './routes/_authenticated/admin.dashboard'
+import { Route as AuthenticatedAdminTestyIdRouteImport } from './routes/_authenticated/admin.testy.$id'
 
 const RegistraciaSkolyRoute = RegistraciaSkolyRouteImport.update({
   id: '/registracia-skoly',
@@ -132,6 +136,22 @@ const AuthenticatedAdminZiadostiRoute =
     path: '/admin/ziadosti',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAdminZiaciRoute = AuthenticatedAdminZiaciRouteImport.update({
+  id: '/admin/ziaci',
+  path: '/admin/ziaci',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminTriedyRoute =
+  AuthenticatedAdminTriedyRouteImport.update({
+    id: '/admin/triedy',
+    path: '/admin/triedy',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminTestyRoute = AuthenticatedAdminTestyRouteImport.update({
+  id: '/admin/testy',
+  path: '/admin/testy',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedAdminSkolyRoute = AuthenticatedAdminSkolyRouteImport.update({
   id: '/admin/skoly',
   path: '/admin/skoly',
@@ -142,6 +162,12 @@ const AuthenticatedAdminDashboardRoute =
     id: '/admin/dashboard',
     path: '/admin/dashboard',
     getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminTestyIdRoute =
+  AuthenticatedAdminTestyIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => AuthenticatedAdminTestyRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -165,7 +191,11 @@ export interface FileRoutesByFullPath {
   '/testy/': typeof TestyIndexRoute
   '/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
   '/admin/skoly': typeof AuthenticatedAdminSkolyRoute
+  '/admin/testy': typeof AuthenticatedAdminTestyRouteWithChildren
+  '/admin/triedy': typeof AuthenticatedAdminTriedyRoute
+  '/admin/ziaci': typeof AuthenticatedAdminZiaciRoute
   '/admin/ziadosti': typeof AuthenticatedAdminZiadostiRoute
+  '/admin/testy/$id': typeof AuthenticatedAdminTestyIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -188,7 +218,11 @@ export interface FileRoutesByTo {
   '/testy': typeof TestyIndexRoute
   '/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
   '/admin/skoly': typeof AuthenticatedAdminSkolyRoute
+  '/admin/testy': typeof AuthenticatedAdminTestyRouteWithChildren
+  '/admin/triedy': typeof AuthenticatedAdminTriedyRoute
+  '/admin/ziaci': typeof AuthenticatedAdminZiaciRoute
   '/admin/ziadosti': typeof AuthenticatedAdminZiadostiRoute
+  '/admin/testy/$id': typeof AuthenticatedAdminTestyIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -213,7 +247,11 @@ export interface FileRoutesById {
   '/testy/': typeof TestyIndexRoute
   '/_authenticated/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
   '/_authenticated/admin/skoly': typeof AuthenticatedAdminSkolyRoute
+  '/_authenticated/admin/testy': typeof AuthenticatedAdminTestyRouteWithChildren
+  '/_authenticated/admin/triedy': typeof AuthenticatedAdminTriedyRoute
+  '/_authenticated/admin/ziaci': typeof AuthenticatedAdminZiaciRoute
   '/_authenticated/admin/ziadosti': typeof AuthenticatedAdminZiadostiRoute
+  '/_authenticated/admin/testy/$id': typeof AuthenticatedAdminTestyIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -238,7 +276,11 @@ export interface FileRouteTypes {
     | '/testy/'
     | '/admin/dashboard'
     | '/admin/skoly'
+    | '/admin/testy'
+    | '/admin/triedy'
+    | '/admin/ziaci'
     | '/admin/ziadosti'
+    | '/admin/testy/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -261,7 +303,11 @@ export interface FileRouteTypes {
     | '/testy'
     | '/admin/dashboard'
     | '/admin/skoly'
+    | '/admin/testy'
+    | '/admin/triedy'
+    | '/admin/ziaci'
     | '/admin/ziadosti'
+    | '/admin/testy/$id'
   id:
     | '__root__'
     | '/'
@@ -285,7 +331,11 @@ export interface FileRouteTypes {
     | '/testy/'
     | '/_authenticated/admin/dashboard'
     | '/_authenticated/admin/skoly'
+    | '/_authenticated/admin/testy'
+    | '/_authenticated/admin/triedy'
+    | '/_authenticated/admin/ziaci'
     | '/_authenticated/admin/ziadosti'
+    | '/_authenticated/admin/testy/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -452,6 +502,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminZiadostiRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/ziaci': {
+      id: '/_authenticated/admin/ziaci'
+      path: '/admin/ziaci'
+      fullPath: '/admin/ziaci'
+      preLoaderRoute: typeof AuthenticatedAdminZiaciRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/triedy': {
+      id: '/_authenticated/admin/triedy'
+      path: '/admin/triedy'
+      fullPath: '/admin/triedy'
+      preLoaderRoute: typeof AuthenticatedAdminTriedyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/testy': {
+      id: '/_authenticated/admin/testy'
+      path: '/admin/testy'
+      fullPath: '/admin/testy'
+      preLoaderRoute: typeof AuthenticatedAdminTestyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/skoly': {
       id: '/_authenticated/admin/skoly'
       path: '/admin/skoly'
@@ -466,18 +537,45 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/testy/$id': {
+      id: '/_authenticated/admin/testy/$id'
+      path: '/$id'
+      fullPath: '/admin/testy/$id'
+      preLoaderRoute: typeof AuthenticatedAdminTestyIdRouteImport
+      parentRoute: typeof AuthenticatedAdminTestyRoute
+    }
   }
 }
+
+interface AuthenticatedAdminTestyRouteChildren {
+  AuthenticatedAdminTestyIdRoute: typeof AuthenticatedAdminTestyIdRoute
+}
+
+const AuthenticatedAdminTestyRouteChildren: AuthenticatedAdminTestyRouteChildren =
+  {
+    AuthenticatedAdminTestyIdRoute: AuthenticatedAdminTestyIdRoute,
+  }
+
+const AuthenticatedAdminTestyRouteWithChildren =
+  AuthenticatedAdminTestyRoute._addFileChildren(
+    AuthenticatedAdminTestyRouteChildren,
+  )
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminDashboardRoute: typeof AuthenticatedAdminDashboardRoute
   AuthenticatedAdminSkolyRoute: typeof AuthenticatedAdminSkolyRoute
+  AuthenticatedAdminTestyRoute: typeof AuthenticatedAdminTestyRouteWithChildren
+  AuthenticatedAdminTriedyRoute: typeof AuthenticatedAdminTriedyRoute
+  AuthenticatedAdminZiaciRoute: typeof AuthenticatedAdminZiaciRoute
   AuthenticatedAdminZiadostiRoute: typeof AuthenticatedAdminZiadostiRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminDashboardRoute: AuthenticatedAdminDashboardRoute,
   AuthenticatedAdminSkolyRoute: AuthenticatedAdminSkolyRoute,
+  AuthenticatedAdminTestyRoute: AuthenticatedAdminTestyRouteWithChildren,
+  AuthenticatedAdminTriedyRoute: AuthenticatedAdminTriedyRoute,
+  AuthenticatedAdminZiaciRoute: AuthenticatedAdminZiaciRoute,
   AuthenticatedAdminZiadostiRoute: AuthenticatedAdminZiadostiRoute,
 }
 

@@ -44,6 +44,42 @@ export type Database = {
         }
         Relationships: []
       }
+      classes: {
+        Row: {
+          created_at: string
+          grade: number | null
+          id: string
+          name: string
+          notes: string | null
+          school_id: string
+          school_year: string | null
+          teacher_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          grade?: number | null
+          id?: string
+          name: string
+          notes?: string | null
+          school_id: string
+          school_year?: string | null
+          teacher_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          grade?: number | null
+          id?: string
+          name?: string
+          notes?: string | null
+          school_id?: string
+          school_year?: string | null
+          teacher_id?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -243,6 +279,151 @@ export type Database = {
           updated_at?: string
           website?: string | null
           zip?: string | null
+        }
+        Relationships: []
+      }
+      students: {
+        Row: {
+          class_id: string
+          code: string
+          created_at: string
+          first_name: string | null
+          grade: number | null
+          id: string
+          last_name: string | null
+          pin: string | null
+          school_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          class_id: string
+          code: string
+          created_at?: string
+          first_name?: string | null
+          grade?: number | null
+          id?: string
+          last_name?: string | null
+          pin?: string | null
+          school_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          class_id?: string
+          code?: string
+          created_at?: string
+          first_name?: string | null
+          grade?: number | null
+          id?: string
+          last_name?: string | null
+          pin?: string | null
+          school_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "students_class_id_fkey"
+            columns: ["class_id"]
+            isOneToOne: false
+            referencedRelation: "classes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      test_questions: {
+        Row: {
+          competency: string | null
+          correct_keys: string[]
+          created_at: string
+          id: string
+          options: Json
+          points: number
+          position: number
+          question_text: string
+          question_type: string
+          test_id: string
+          updated_at: string
+        }
+        Insert: {
+          competency?: string | null
+          correct_keys?: string[]
+          created_at?: string
+          id?: string
+          options?: Json
+          points?: number
+          position: number
+          question_text: string
+          question_type?: string
+          test_id: string
+          updated_at?: string
+        }
+        Update: {
+          competency?: string | null
+          correct_keys?: string[]
+          created_at?: string
+          id?: string
+          options?: Json
+          points?: number
+          position?: number
+          question_text?: string
+          question_type?: string
+          test_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "test_questions_test_id_fkey"
+            columns: ["test_id"]
+            isOneToOne: false
+            referencedRelation: "tests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tests: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          description: string | null
+          duration_min: number | null
+          grade_from: number | null
+          grade_to: number | null
+          id: string
+          slug: string
+          status: string
+          title: string
+          type: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          duration_min?: number | null
+          grade_from?: number | null
+          grade_to?: number | null
+          id?: string
+          slug: string
+          status?: string
+          title: string
+          type?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          duration_min?: number | null
+          grade_from?: number | null
+          grade_to?: number | null
+          id?: string
+          slug?: string
+          status?: string
+          title?: string
+          type?: string
+          updated_at?: string
         }
         Relationships: []
       }
