@@ -641,6 +641,7 @@ function QuestionsTab({
                   question={qst}
                   onSave={onSave}
                   onDelete={() => onDelete(qst.id)}
+                  onDuplicate={() => onDuplicate(qst.id)}
                 />
               ))}
             </div>
