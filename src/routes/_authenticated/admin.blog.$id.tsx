@@ -510,9 +510,19 @@ function RichEditor({
         >
           <Quote className="h-4 w-4" />
         </ToolBtn>
-        <ToolBtn onClick={imgAction} title="Obrázok">
-          <ImageIcon className="h-4 w-4" />
-        </ToolBtn>
+        <ImagePickerDialog
+          title="Vložiť obrázok do článku"
+          onPick={onPickImage}
+          trigger={
+            <button
+              type="button"
+              title="Vložiť obrázok"
+              className="h-8 w-8 inline-flex items-center justify-center rounded hover:bg-muted text-foreground"
+            >
+              <ImageIcon className="h-4 w-4" />
+            </button>
+          }
+        />
       </div>
       <Textarea
         ref={ref}
