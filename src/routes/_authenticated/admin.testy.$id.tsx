@@ -414,6 +414,28 @@ function DetailTab({ test, testId }: { test: any; testId: string }) {
           placeholder="Zobrazia sa žiakovi pred začatím testu"
         />
       </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <Label>Text tlačidla „Začať"</Label>
+          <Input
+            value={state.start_button_text}
+            onChange={(e) => setState({ ...state, start_button_text: e.target.value })}
+            placeholder="Začať test"
+            className="mt-1.5"
+          />
+        </div>
+      </div>
+      <div>
+        <Label>Záverečný text (po dokončení testu)</Label>
+        <Textarea
+          rows={2}
+          value={state.completion_text}
+          onChange={(e) => setState({ ...state, completion_text: e.target.value })}
+          className="mt-1.5"
+          placeholder="Ďakujeme za vyplnenie testu!"
+        />
+      </div>
+
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
         <ToggleRow
