@@ -186,14 +186,45 @@ export const updateTest = createServerFn({ method: "POST" })
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { id, ...patch } = data as any;
 
-    // Pri publikovaní validuj že test má aspoň jednu otázku
+    // Pri publikovaní validuj test komplexne
     if (patch.status === "published") {
-      const { count } = await supabaseAdmin
+      const { data: testRow } = await supabaseAdmin
+        .from("tests")
+        .select("title")
+        .eq("id", id)
+        .single();
+      const finalTitle = (patch.title ?? testRow?.title ?? "").trim();
+      if (!finalTitle) {
+        throw new Error("Test musí mať názov.");
+      }
+      const { data: qs } = await supabaseAdmin
         .from("test_questions")
-        .select("id", { count: "exact", head: true })
+        .select("id,question_text,question_type,options,correct_keys,is_required")
         .eq("test_id", id);
-      if (!count || count === 0) {
+      if (!qs || qs.length === 0) {
         throw new Error("Test nemá žiadne otázky — najskôr ich pridajte.");
+      }
+      for (const q of qs as any[]) {
+        const idx = `Otázka #${(qs as any[]).indexOf(q) + 1}`;
+        if (q.is_required !== false && !String(q.question_text ?? "").trim()) {
+          throw new Error(`${idx}: chýba text otázky.`);
+        }
+        const opts = Array.isArray(q.options) ? q.options : [];
+        const correct = Array.isArray(q.correct_keys) ? q.correct_keys : [];
+        if (q.question_type === "single" || q.question_type === "multi") {
+          if (opts.length < 2) {
+            throw new Error(`${idx}: musí mať aspoň 2 odpovede.`);
+          }
+          if (q.question_type === "single" && correct.length !== 1) {
+            throw new Error(`${idx}: musí mať označenú práve jednu správnu odpoveď.`);
+          }
+          if (q.question_type === "multi" && correct.length < 1) {
+            throw new Error(`${idx}: musí mať označenú aspoň jednu správnu odpoveď.`);
+          }
+        }
+        if (q.question_type === "yes_no" && opts.length < 2) {
+          throw new Error(`${idx}: typ Áno/Nie musí mať dve možnosti.`);
+        }
       }
     }
     const { error } = await supabaseAdmin.from("tests").update(patch).eq("id", id);
