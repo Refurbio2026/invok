@@ -353,6 +353,34 @@ export const deleteQuestion = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
+export const duplicateQuestion = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((i) => z.object({ id: z.string().uuid() }).parse(i))
+  .handler(async ({ data, context }) => {
+    await assertAdminish(context.supabase, context.userId);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: src, error } = await supabaseAdmin
+      .from("test_questions")
+      .select("*")
+      .eq("id", data.id)
+      .single();
+    if (error) throw new Error(error.message);
+    const { id: _i, created_at: _c, updated_at: _u, ...rest } = src as any;
+    const { count } = await supabaseAdmin
+      .from("test_questions")
+      .select("id", { count: "exact", head: true })
+      .eq("test_id", src.test_id);
+    const { error: insErr } = await supabaseAdmin
+      .from("test_questions")
+      .insert({
+        ...rest,
+        position: (count ?? 0) + 1,
+        question_text: `${src.question_text} (kópia)`,
+      });
+    if (insErr) throw new Error(insErr.message);
+    return { ok: true };
+  });
+
 export const reorderQuestions = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((i) =>
