@@ -16,14 +16,18 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as TestyIndexRouteImport } from './routes/testy.index'
 import { Route as NovinkyIndexRouteImport } from './routes/novinky.index'
 import { Route as ZiakPrihlasenieRouteImport } from './routes/ziak.prihlasenie'
+import { Route as ZiakDashboardRouteImport } from './routes/ziak.dashboard'
 import { Route as UcitelPrihlasenieRouteImport } from './routes/ucitel.prihlasenie'
+import { Route as UcitelDashboardRouteImport } from './routes/ucitel.dashboard'
 import { Route as TestyVystupnyTestRouteImport } from './routes/testy.vystupny-test'
 import { Route as TestyVstupnyTestRouteImport } from './routes/testy.vstupny-test'
 import { Route as TestySlugRouteImport } from './routes/testy.$slug'
 import { Route as SkolaPrihlasenieRouteImport } from './routes/skola.prihlasenie'
+import { Route as SkolaDashboardRouteImport } from './routes/skola.dashboard'
 import { Route as NovinkySlugRouteImport } from './routes/novinky.$slug'
 import { Route as ModulUkazkaRouteImport } from './routes/modul.ukazka'
 import { Route as AdminPrihlasenieRouteImport } from './routes/admin.prihlasenie'
+import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 
 const RegistraciaSkolyRoute = RegistraciaSkolyRouteImport.update({
   id: '/registracia-skoly',
@@ -60,9 +64,19 @@ const ZiakPrihlasenieRoute = ZiakPrihlasenieRouteImport.update({
   path: '/ziak/prihlasenie',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ZiakDashboardRoute = ZiakDashboardRouteImport.update({
+  id: '/ziak/dashboard',
+  path: '/ziak/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const UcitelPrihlasenieRoute = UcitelPrihlasenieRouteImport.update({
   id: '/ucitel/prihlasenie',
   path: '/ucitel/prihlasenie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UcitelDashboardRoute = UcitelDashboardRouteImport.update({
+  id: '/ucitel/dashboard',
+  path: '/ucitel/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TestyVystupnyTestRoute = TestyVystupnyTestRouteImport.update({
@@ -85,6 +99,11 @@ const SkolaPrihlasenieRoute = SkolaPrihlasenieRouteImport.update({
   path: '/skola/prihlasenie',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SkolaDashboardRoute = SkolaDashboardRouteImport.update({
+  id: '/skola/dashboard',
+  path: '/skola/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NovinkySlugRoute = NovinkySlugRouteImport.update({
   id: '/novinky/$slug',
   path: '/novinky/$slug',
@@ -100,20 +119,29 @@ const AdminPrihlasenieRoute = AdminPrihlasenieRouteImport.update({
   path: '/admin/prihlasenie',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/admin/dashboard',
+  path: '/admin/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/kontakt': typeof KontaktRoute
   '/prihlasenie': typeof PrihlasenieRoute
   '/registracia-skoly': typeof RegistraciaSkolyRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/prihlasenie': typeof AdminPrihlasenieRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
   '/novinky/$slug': typeof NovinkySlugRoute
+  '/skola/dashboard': typeof SkolaDashboardRoute
   '/skola/prihlasenie': typeof SkolaPrihlasenieRoute
   '/testy/$slug': typeof TestySlugRoute
   '/testy/vstupny-test': typeof TestyVstupnyTestRoute
   '/testy/vystupny-test': typeof TestyVystupnyTestRoute
+  '/ucitel/dashboard': typeof UcitelDashboardRoute
   '/ucitel/prihlasenie': typeof UcitelPrihlasenieRoute
+  '/ziak/dashboard': typeof ZiakDashboardRoute
   '/ziak/prihlasenie': typeof ZiakPrihlasenieRoute
   '/novinky/': typeof NovinkyIndexRoute
   '/testy/': typeof TestyIndexRoute
@@ -123,14 +151,18 @@ export interface FileRoutesByTo {
   '/kontakt': typeof KontaktRoute
   '/prihlasenie': typeof PrihlasenieRoute
   '/registracia-skoly': typeof RegistraciaSkolyRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/prihlasenie': typeof AdminPrihlasenieRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
   '/novinky/$slug': typeof NovinkySlugRoute
+  '/skola/dashboard': typeof SkolaDashboardRoute
   '/skola/prihlasenie': typeof SkolaPrihlasenieRoute
   '/testy/$slug': typeof TestySlugRoute
   '/testy/vstupny-test': typeof TestyVstupnyTestRoute
   '/testy/vystupny-test': typeof TestyVystupnyTestRoute
+  '/ucitel/dashboard': typeof UcitelDashboardRoute
   '/ucitel/prihlasenie': typeof UcitelPrihlasenieRoute
+  '/ziak/dashboard': typeof ZiakDashboardRoute
   '/ziak/prihlasenie': typeof ZiakPrihlasenieRoute
   '/novinky': typeof NovinkyIndexRoute
   '/testy': typeof TestyIndexRoute
@@ -141,14 +173,18 @@ export interface FileRoutesById {
   '/kontakt': typeof KontaktRoute
   '/prihlasenie': typeof PrihlasenieRoute
   '/registracia-skoly': typeof RegistraciaSkolyRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/prihlasenie': typeof AdminPrihlasenieRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
   '/novinky/$slug': typeof NovinkySlugRoute
+  '/skola/dashboard': typeof SkolaDashboardRoute
   '/skola/prihlasenie': typeof SkolaPrihlasenieRoute
   '/testy/$slug': typeof TestySlugRoute
   '/testy/vstupny-test': typeof TestyVstupnyTestRoute
   '/testy/vystupny-test': typeof TestyVystupnyTestRoute
+  '/ucitel/dashboard': typeof UcitelDashboardRoute
   '/ucitel/prihlasenie': typeof UcitelPrihlasenieRoute
+  '/ziak/dashboard': typeof ZiakDashboardRoute
   '/ziak/prihlasenie': typeof ZiakPrihlasenieRoute
   '/novinky/': typeof NovinkyIndexRoute
   '/testy/': typeof TestyIndexRoute
@@ -160,14 +196,18 @@ export interface FileRouteTypes {
     | '/kontakt'
     | '/prihlasenie'
     | '/registracia-skoly'
+    | '/admin/dashboard'
     | '/admin/prihlasenie'
     | '/modul/ukazka'
     | '/novinky/$slug'
+    | '/skola/dashboard'
     | '/skola/prihlasenie'
     | '/testy/$slug'
     | '/testy/vstupny-test'
     | '/testy/vystupny-test'
+    | '/ucitel/dashboard'
     | '/ucitel/prihlasenie'
+    | '/ziak/dashboard'
     | '/ziak/prihlasenie'
     | '/novinky/'
     | '/testy/'
@@ -177,14 +217,18 @@ export interface FileRouteTypes {
     | '/kontakt'
     | '/prihlasenie'
     | '/registracia-skoly'
+    | '/admin/dashboard'
     | '/admin/prihlasenie'
     | '/modul/ukazka'
     | '/novinky/$slug'
+    | '/skola/dashboard'
     | '/skola/prihlasenie'
     | '/testy/$slug'
     | '/testy/vstupny-test'
     | '/testy/vystupny-test'
+    | '/ucitel/dashboard'
     | '/ucitel/prihlasenie'
+    | '/ziak/dashboard'
     | '/ziak/prihlasenie'
     | '/novinky'
     | '/testy'
@@ -194,14 +238,18 @@ export interface FileRouteTypes {
     | '/kontakt'
     | '/prihlasenie'
     | '/registracia-skoly'
+    | '/admin/dashboard'
     | '/admin/prihlasenie'
     | '/modul/ukazka'
     | '/novinky/$slug'
+    | '/skola/dashboard'
     | '/skola/prihlasenie'
     | '/testy/$slug'
     | '/testy/vstupny-test'
     | '/testy/vystupny-test'
+    | '/ucitel/dashboard'
     | '/ucitel/prihlasenie'
+    | '/ziak/dashboard'
     | '/ziak/prihlasenie'
     | '/novinky/'
     | '/testy/'
@@ -212,14 +260,18 @@ export interface RootRouteChildren {
   KontaktRoute: typeof KontaktRoute
   PrihlasenieRoute: typeof PrihlasenieRoute
   RegistraciaSkolyRoute: typeof RegistraciaSkolyRoute
+  AdminDashboardRoute: typeof AdminDashboardRoute
   AdminPrihlasenieRoute: typeof AdminPrihlasenieRoute
   ModulUkazkaRoute: typeof ModulUkazkaRoute
   NovinkySlugRoute: typeof NovinkySlugRoute
+  SkolaDashboardRoute: typeof SkolaDashboardRoute
   SkolaPrihlasenieRoute: typeof SkolaPrihlasenieRoute
   TestySlugRoute: typeof TestySlugRoute
   TestyVstupnyTestRoute: typeof TestyVstupnyTestRoute
   TestyVystupnyTestRoute: typeof TestyVystupnyTestRoute
+  UcitelDashboardRoute: typeof UcitelDashboardRoute
   UcitelPrihlasenieRoute: typeof UcitelPrihlasenieRoute
+  ZiakDashboardRoute: typeof ZiakDashboardRoute
   ZiakPrihlasenieRoute: typeof ZiakPrihlasenieRoute
   NovinkyIndexRoute: typeof NovinkyIndexRoute
   TestyIndexRoute: typeof TestyIndexRoute
@@ -276,11 +328,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ZiakPrihlasenieRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ziak/dashboard': {
+      id: '/ziak/dashboard'
+      path: '/ziak/dashboard'
+      fullPath: '/ziak/dashboard'
+      preLoaderRoute: typeof ZiakDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ucitel/prihlasenie': {
       id: '/ucitel/prihlasenie'
       path: '/ucitel/prihlasenie'
       fullPath: '/ucitel/prihlasenie'
       preLoaderRoute: typeof UcitelPrihlasenieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ucitel/dashboard': {
+      id: '/ucitel/dashboard'
+      path: '/ucitel/dashboard'
+      fullPath: '/ucitel/dashboard'
+      preLoaderRoute: typeof UcitelDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/testy/vystupny-test': {
@@ -311,6 +377,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SkolaPrihlasenieRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/skola/dashboard': {
+      id: '/skola/dashboard'
+      path: '/skola/dashboard'
+      fullPath: '/skola/dashboard'
+      preLoaderRoute: typeof SkolaDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/novinky/$slug': {
       id: '/novinky/$slug'
       path: '/novinky/$slug'
@@ -332,6 +405,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPrihlasenieRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/admin/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -340,14 +420,18 @@ const rootRouteChildren: RootRouteChildren = {
   KontaktRoute: KontaktRoute,
   PrihlasenieRoute: PrihlasenieRoute,
   RegistraciaSkolyRoute: RegistraciaSkolyRoute,
+  AdminDashboardRoute: AdminDashboardRoute,
   AdminPrihlasenieRoute: AdminPrihlasenieRoute,
   ModulUkazkaRoute: ModulUkazkaRoute,
   NovinkySlugRoute: NovinkySlugRoute,
+  SkolaDashboardRoute: SkolaDashboardRoute,
   SkolaPrihlasenieRoute: SkolaPrihlasenieRoute,
   TestySlugRoute: TestySlugRoute,
   TestyVstupnyTestRoute: TestyVstupnyTestRoute,
   TestyVystupnyTestRoute: TestyVystupnyTestRoute,
+  UcitelDashboardRoute: UcitelDashboardRoute,
   UcitelPrihlasenieRoute: UcitelPrihlasenieRoute,
+  ZiakDashboardRoute: ZiakDashboardRoute,
   ZiakPrihlasenieRoute: ZiakPrihlasenieRoute,
   NovinkyIndexRoute: NovinkyIndexRoute,
   TestyIndexRoute: TestyIndexRoute,
