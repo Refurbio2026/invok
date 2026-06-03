@@ -67,8 +67,66 @@ function VysledkyPage() {
       }),
   });
 
+  const rows = q.data ?? [];
+
+  const filterLabel = useMemo(() => {
+    const t = testId === ALL ? "Všetky testy" : filters.data?.tests.find((x: any) => x.id === testId)?.title ?? "";
+    const s = schoolId === ALL ? "Všetky školy" : filters.data?.schools.find((x: any) => x.id === schoolId)?.name ?? "";
+    return { t, s };
+  }, [testId, schoolId, filters.data]);
+
+  const exportRows = () =>
+    rows.map((r: any) => {
+      const pct = Number(r.max_score) > 0 ? Math.round((Number(r.score) / Number(r.max_score)) * 100) : null;
+      return {
+        ziak: r.student ? `${r.student.first_name ?? ""} ${r.student.last_name ?? ""}`.trim() || r.student.code : "",
+        kod: r.student?.code ?? "",
+        skola: r.school?.name ?? "",
+        trieda: r.class?.name ?? "",
+        test: r.test?.title ?? "",
+        zacate: fmtDate(r.started_at),
+        odovzdane: fmtDate(r.submitted_at),
+        score: r.status === "submitted" ? `${Number(r.score)} / ${Number(r.max_score)}` : "",
+        percent: pct != null && r.status === "submitted" ? `${pct}%` : "",
+        stav: r.status === "submitted" ? "Odovzdaný" : "Prebieha",
+      };
+    });
+
+  const handleExportCSV = () => {
+    const data = exportRows();
+    const headers = ["Žiak", "Kód", "Škola", "Trieda", "Test", "Začaté", "Odovzdané", "Skóre", "Úspešnosť", "Stav"];
+    const escape = (v: string) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+    const lines = [headers.map(escape).join(",")];
+    for (const r of data) {
+      lines.push([r.ziak, r.kod, r.skola, r.trieda, r.test, r.zacate, r.odovzdane, r.score, r.percent, r.stav].map(escape).join(","));
+    }
+    const blob = new Blob(["\uFEFF" + lines.join("\n")], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `vysledky-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleExportPDF = () => {
+    const data = exportRows();
+    const doc = new jsPDF({ orientation: "landscape" });
+    doc.setFontSize(14);
+    doc.text("Výsledky testov", 14, 14);
+    doc.setFontSize(9);
+    doc.text(`Test: ${filterLabel.t}   Škola: ${filterLabel.s}   Dátum: ${new Date().toLocaleString("sk-SK")}`, 14, 20);
+    autoTable(doc, {
+      startY: 26,
+      head: [["Žiak", "Kód", "Škola", "Trieda", "Test", "Začaté", "Odovzdané", "Skóre", "%", "Stav"]],
+      body: data.map((r) => [r.ziak, r.kod, r.skola, r.trieda, r.test, r.zacate, r.odovzdane, r.score, r.percent, r.stav]),
+      styles: { fontSize: 8 },
+      headStyles: { fillColor: [30, 41, 59] },
+    });
+    doc.save(`vysledky-${new Date().toISOString().slice(0, 10)}.pdf`);
+  };
+
   const stats = useMemo(() => {
-    const rows = q.data ?? [];
     const submitted = rows.filter((r: any) => r.status === "submitted");
     const inProgress = rows.length - submitted.length;
     const scored = submitted.filter((r: any) => Number(r.max_score) > 0);
