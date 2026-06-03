@@ -42,7 +42,7 @@ import {
   type BlogCategory,
 } from "@/lib/admin/blog.functions";
 
-export const Route = createFileRoute("/_authenticated/admin/blog")({
+export const Route = createFileRoute("/_authenticated/admin/blog/")({
   component: BlogAdminPage,
 });
 
