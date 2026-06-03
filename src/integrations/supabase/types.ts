@@ -80,6 +80,36 @@ export type Database = {
         }
         Relationships: []
       }
+      modules: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          slug: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          slug: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          slug?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -368,6 +398,62 @@ export type Database = {
         }
         Relationships: []
       }
+      test_assignments: {
+        Row: {
+          class_id: string | null
+          created_at: string
+          created_by: string | null
+          ends_at: string | null
+          grade: number | null
+          id: string
+          module_id: string | null
+          school_id: string | null
+          scope: string
+          starts_at: string | null
+          status: string
+          test_id: string
+          updated_at: string
+        }
+        Insert: {
+          class_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          ends_at?: string | null
+          grade?: number | null
+          id?: string
+          module_id?: string | null
+          school_id?: string | null
+          scope?: string
+          starts_at?: string | null
+          status?: string
+          test_id: string
+          updated_at?: string
+        }
+        Update: {
+          class_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          ends_at?: string | null
+          grade?: number | null
+          id?: string
+          module_id?: string | null
+          school_id?: string | null
+          scope?: string
+          starts_at?: string | null
+          status?: string
+          test_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "test_assignments_test_id_fkey"
+            columns: ["test_id"]
+            isOneToOne: false
+            referencedRelation: "tests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       test_attempts: {
         Row: {
           class_id: string | null
@@ -419,11 +505,16 @@ export type Database = {
           correct_keys: string[]
           created_at: string
           id: string
+          is_required: boolean
           options: Json
           points: number
           position: number
           question_text: string
           question_type: string
+          scale_labels: Json | null
+          scale_max: number | null
+          scale_min: number | null
+          scoring_mode: string | null
           test_id: string
           updated_at: string
         }
@@ -432,11 +523,16 @@ export type Database = {
           correct_keys?: string[]
           created_at?: string
           id?: string
+          is_required?: boolean
           options?: Json
           points?: number
           position: number
           question_text: string
           question_type?: string
+          scale_labels?: Json | null
+          scale_max?: number | null
+          scale_min?: number | null
+          scoring_mode?: string | null
           test_id: string
           updated_at?: string
         }
@@ -445,11 +541,16 @@ export type Database = {
           correct_keys?: string[]
           created_at?: string
           id?: string
+          is_required?: boolean
           options?: Json
           points?: number
           position?: number
           question_text?: string
           question_type?: string
+          scale_labels?: Json | null
+          scale_max?: number | null
+          scale_min?: number | null
+          scoring_mode?: string | null
           test_id?: string
           updated_at?: string
         }
@@ -463,15 +564,66 @@ export type Database = {
           },
         ]
       }
+      test_scoring_rules: {
+        Row: {
+          competency_area: string | null
+          created_at: string
+          description: string | null
+          id: string
+          label: string
+          max_percentage: number
+          min_percentage: number
+          test_id: string
+          updated_at: string
+        }
+        Insert: {
+          competency_area?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          label: string
+          max_percentage: number
+          min_percentage: number
+          test_id: string
+          updated_at?: string
+        }
+        Update: {
+          competency_area?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          label?: string
+          max_percentage?: number
+          min_percentage?: number
+          test_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "test_scoring_rules_test_id_fkey"
+            columns: ["test_id"]
+            isOneToOne: false
+            referencedRelation: "tests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tests: {
         Row: {
+          allow_retake: boolean
+          anonymous_allowed: boolean
           created_at: string
           created_by: string | null
           description: string | null
           duration_min: number | null
+          evaluate_by_competency: boolean
           grade_from: number | null
           grade_to: number | null
           id: string
+          instructions: string | null
+          module_id: string | null
+          save_to_school_report: boolean
+          show_result_to_student: boolean
           slug: string
           status: string
           title: string
@@ -479,13 +631,20 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          allow_retake?: boolean
+          anonymous_allowed?: boolean
           created_at?: string
           created_by?: string | null
           description?: string | null
           duration_min?: number | null
+          evaluate_by_competency?: boolean
           grade_from?: number | null
           grade_to?: number | null
           id?: string
+          instructions?: string | null
+          module_id?: string | null
+          save_to_school_report?: boolean
+          show_result_to_student?: boolean
           slug: string
           status?: string
           title: string
@@ -493,13 +652,20 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          allow_retake?: boolean
+          anonymous_allowed?: boolean
           created_at?: string
           created_by?: string | null
           description?: string | null
           duration_min?: number | null
+          evaluate_by_competency?: boolean
           grade_from?: number | null
           grade_to?: number | null
           id?: string
+          instructions?: string | null
+          module_id?: string | null
+          save_to_school_report?: boolean
+          show_result_to_student?: boolean
           slug?: string
           status?: string
           title?: string
