@@ -455,7 +455,7 @@ function TestyPage() {
                             size="icon"
                             className="h-7 w-7 text-emerald-600"
                             title="Publikovať"
-                            onClick={() => setStatus(t.id, "published")}
+                            onClick={() => setStatus(t.id, "published", t.questions_count ?? 0)}
                           >
                             <CheckCircle2 className="h-4 w-4" />
                           </Button>
@@ -465,7 +465,7 @@ function TestyPage() {
                             size="icon"
                             className="h-7 w-7 text-amber-600"
                             title="Archivovať"
-                            onClick={() => setStatus(t.id, "archived")}
+                            onClick={() => setStatus(t.id, "archived", t.questions_count ?? 0)}
                           >
                             <Archive className="h-4 w-4" />
                           </Button>
