@@ -35,6 +35,7 @@ import { Route as AuthenticatedAdminVysledkyRouteImport } from './routes/_authen
 import { Route as AuthenticatedAdminTriedyRouteImport } from './routes/_authenticated/admin.triedy'
 import { Route as AuthenticatedAdminTestyRouteImport } from './routes/_authenticated/admin.testy'
 import { Route as AuthenticatedAdminSkolyRouteImport } from './routes/_authenticated/admin.skoly'
+import { Route as AuthenticatedAdminReportyRouteImport } from './routes/_authenticated/admin.reporty'
 import { Route as AuthenticatedAdminPouzivateliaRouteImport } from './routes/_authenticated/admin.pouzivatelia'
 import { Route as AuthenticatedAdminDashboardRouteImport } from './routes/_authenticated/admin.dashboard'
 import { Route as AuthenticatedAdminTestyIdRouteImport } from './routes/_authenticated/admin.testy.$id'
@@ -171,6 +172,12 @@ const AuthenticatedAdminSkolyRoute = AuthenticatedAdminSkolyRouteImport.update({
   path: '/admin/skoly',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminReportyRoute =
+  AuthenticatedAdminReportyRouteImport.update({
+    id: '/admin/reporty',
+    path: '/admin/reporty',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminPouzivateliaRoute =
   AuthenticatedAdminPouzivateliaRouteImport.update({
     id: '/admin/pouzivatelia',
@@ -211,6 +218,7 @@ export interface FileRoutesByFullPath {
   '/testy/': typeof TestyIndexRoute
   '/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
   '/admin/pouzivatelia': typeof AuthenticatedAdminPouzivateliaRoute
+  '/admin/reporty': typeof AuthenticatedAdminReportyRoute
   '/admin/skoly': typeof AuthenticatedAdminSkolyRoute
   '/admin/testy': typeof AuthenticatedAdminTestyRouteWithChildren
   '/admin/triedy': typeof AuthenticatedAdminTriedyRoute
@@ -241,6 +249,7 @@ export interface FileRoutesByTo {
   '/testy': typeof TestyIndexRoute
   '/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
   '/admin/pouzivatelia': typeof AuthenticatedAdminPouzivateliaRoute
+  '/admin/reporty': typeof AuthenticatedAdminReportyRoute
   '/admin/skoly': typeof AuthenticatedAdminSkolyRoute
   '/admin/testy': typeof AuthenticatedAdminTestyRouteWithChildren
   '/admin/triedy': typeof AuthenticatedAdminTriedyRoute
@@ -273,6 +282,7 @@ export interface FileRoutesById {
   '/testy/': typeof TestyIndexRoute
   '/_authenticated/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
   '/_authenticated/admin/pouzivatelia': typeof AuthenticatedAdminPouzivateliaRoute
+  '/_authenticated/admin/reporty': typeof AuthenticatedAdminReportyRoute
   '/_authenticated/admin/skoly': typeof AuthenticatedAdminSkolyRoute
   '/_authenticated/admin/testy': typeof AuthenticatedAdminTestyRouteWithChildren
   '/_authenticated/admin/triedy': typeof AuthenticatedAdminTriedyRoute
@@ -305,6 +315,7 @@ export interface FileRouteTypes {
     | '/testy/'
     | '/admin/dashboard'
     | '/admin/pouzivatelia'
+    | '/admin/reporty'
     | '/admin/skoly'
     | '/admin/testy'
     | '/admin/triedy'
@@ -335,6 +346,7 @@ export interface FileRouteTypes {
     | '/testy'
     | '/admin/dashboard'
     | '/admin/pouzivatelia'
+    | '/admin/reporty'
     | '/admin/skoly'
     | '/admin/testy'
     | '/admin/triedy'
@@ -366,6 +378,7 @@ export interface FileRouteTypes {
     | '/testy/'
     | '/_authenticated/admin/dashboard'
     | '/_authenticated/admin/pouzivatelia'
+    | '/_authenticated/admin/reporty'
     | '/_authenticated/admin/skoly'
     | '/_authenticated/admin/testy'
     | '/_authenticated/admin/triedy'
@@ -583,6 +596,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminSkolyRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/reporty': {
+      id: '/_authenticated/admin/reporty'
+      path: '/admin/reporty'
+      fullPath: '/admin/reporty'
+      preLoaderRoute: typeof AuthenticatedAdminReportyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/pouzivatelia': {
       id: '/_authenticated/admin/pouzivatelia'
       path: '/admin/pouzivatelia'
@@ -624,6 +644,7 @@ const AuthenticatedAdminTestyRouteWithChildren =
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminDashboardRoute: typeof AuthenticatedAdminDashboardRoute
   AuthenticatedAdminPouzivateliaRoute: typeof AuthenticatedAdminPouzivateliaRoute
+  AuthenticatedAdminReportyRoute: typeof AuthenticatedAdminReportyRoute
   AuthenticatedAdminSkolyRoute: typeof AuthenticatedAdminSkolyRoute
   AuthenticatedAdminTestyRoute: typeof AuthenticatedAdminTestyRouteWithChildren
   AuthenticatedAdminTriedyRoute: typeof AuthenticatedAdminTriedyRoute
@@ -635,6 +656,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminDashboardRoute: AuthenticatedAdminDashboardRoute,
   AuthenticatedAdminPouzivateliaRoute: AuthenticatedAdminPouzivateliaRoute,
+  AuthenticatedAdminReportyRoute: AuthenticatedAdminReportyRoute,
   AuthenticatedAdminSkolyRoute: AuthenticatedAdminSkolyRoute,
   AuthenticatedAdminTestyRoute: AuthenticatedAdminTestyRouteWithChildren,
   AuthenticatedAdminTriedyRoute: AuthenticatedAdminTriedyRoute,
