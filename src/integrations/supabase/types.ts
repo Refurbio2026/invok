@@ -332,6 +332,87 @@ export type Database = {
           },
         ]
       }
+      test_answers: {
+        Row: {
+          answer_keys: string[]
+          answer_text: string | null
+          attempt_id: string
+          created_at: string
+          id: string
+          is_correct: boolean | null
+          points_awarded: number
+          question_id: string
+          updated_at: string
+        }
+        Insert: {
+          answer_keys?: string[]
+          answer_text?: string | null
+          attempt_id: string
+          created_at?: string
+          id?: string
+          is_correct?: boolean | null
+          points_awarded?: number
+          question_id: string
+          updated_at?: string
+        }
+        Update: {
+          answer_keys?: string[]
+          answer_text?: string | null
+          attempt_id?: string
+          created_at?: string
+          id?: string
+          is_correct?: boolean | null
+          points_awarded?: number
+          question_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      test_attempts: {
+        Row: {
+          class_id: string | null
+          created_at: string
+          id: string
+          max_score: number
+          school_id: string
+          score: number
+          started_at: string
+          status: string
+          student_id: string
+          submitted_at: string | null
+          test_id: string
+          updated_at: string
+        }
+        Insert: {
+          class_id?: string | null
+          created_at?: string
+          id?: string
+          max_score?: number
+          school_id: string
+          score?: number
+          started_at?: string
+          status?: string
+          student_id: string
+          submitted_at?: string | null
+          test_id: string
+          updated_at?: string
+        }
+        Update: {
+          class_id?: string | null
+          created_at?: string
+          id?: string
+          max_score?: number
+          school_id?: string
+          score?: number
+          started_at?: string
+          status?: string
+          student_id?: string
+          submitted_at?: string | null
+          test_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       test_questions: {
         Row: {
           competency: string | null
