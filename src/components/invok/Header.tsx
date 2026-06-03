@@ -30,8 +30,30 @@ function NavItem({
     ? "px-3 py-2.5 rounded-lg text-sm font-medium text-foreground hover:bg-muted block"
     : "text-sm font-medium text-foreground/80 hover:text-primary transition-colors";
 
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const hashIdx = link.href.indexOf("#");
+    if (hashIdx !== -1) {
+      const targetPath = link.href.slice(0, hashIdx) || "/";
+      const targetId = link.href.slice(hashIdx + 1);
+      const currentPath = window.location.pathname;
+      if (currentPath === targetPath || (targetPath === "/" && currentPath === "/")) {
+        e.preventDefault();
+        const el = document.getElementById(targetId);
+        if (el) {
+          const headerOffset = 80;
+          const top = el.getBoundingClientRect().top + window.scrollY - headerOffset;
+          window.scrollTo({ top, behavior: "auto" });
+          history.replaceState(null, "", `#${targetId}`);
+        }
+        onClick?.();
+        return;
+      }
+    }
+    onClick?.();
+  };
+
   return (
-    <a href={link.href} className={base} onClick={onClick}>
+    <a href={link.href} className={base} onClick={handleClick}>
       {link.label}
     </a>
   );
