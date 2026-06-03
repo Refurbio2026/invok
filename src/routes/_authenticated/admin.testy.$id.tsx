@@ -500,6 +500,7 @@ function QuestionsTab({
   const saveQ = useServerFn(saveQuestion);
   const removeQ = useServerFn(deleteQuestion);
   const reorder = useServerFn(reorderQuestions);
+  const dupQ = useServerFn(duplicateQuestion);
   const qc = useQueryClient();
 
   const [items, setItems] = useState<Question[]>(
