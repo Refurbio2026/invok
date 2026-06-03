@@ -143,10 +143,20 @@ function VysledkyPage() {
 
   return (
     <AdminLayout title="Výsledky" userEmail={email}>
-      <p className="text-sm text-muted-foreground mb-4">
-        Prehľad pokusov žiakov pre konkrétny test alebo školu vrátane skóre a
-        stavu odovzdania.
-      </p>
+      <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
+        <p className="text-sm text-muted-foreground">
+          Prehľad pokusov žiakov pre konkrétny test alebo školu vrátane skóre a
+          stavu odovzdania.
+        </p>
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm" onClick={handleExportCSV} disabled={rows.length === 0}>
+            <Download className="h-4 w-4 mr-1.5" /> Export CSV
+          </Button>
+          <Button variant="outline" size="sm" onClick={handleExportPDF} disabled={rows.length === 0}>
+            <FileText className="h-4 w-4 mr-1.5" /> Export PDF
+          </Button>
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
         <div>
