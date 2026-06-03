@@ -9,6 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RegistraciaSkolyRouteImport } from './routes/registracia-skoly'
+import { Route as PrihlasenieRouteImport } from './routes/prihlasenie'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TestyIndexRouteImport } from './routes/testy.index'
@@ -19,6 +21,16 @@ import { Route as TestySlugRouteImport } from './routes/testy.$slug'
 import { Route as NovinkySlugRouteImport } from './routes/novinky.$slug'
 import { Route as ModulUkazkaRouteImport } from './routes/modul.ukazka'
 
+const RegistraciaSkolyRoute = RegistraciaSkolyRouteImport.update({
+  id: '/registracia-skoly',
+  path: '/registracia-skoly',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrihlasenieRoute = PrihlasenieRouteImport.update({
+  id: '/prihlasenie',
+  path: '/prihlasenie',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const KontaktRoute = KontaktRouteImport.update({
   id: '/kontakt',
   path: '/kontakt',
@@ -68,6 +80,8 @@ const ModulUkazkaRoute = ModulUkazkaRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/kontakt': typeof KontaktRoute
+  '/prihlasenie': typeof PrihlasenieRoute
+  '/registracia-skoly': typeof RegistraciaSkolyRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
   '/novinky/$slug': typeof NovinkySlugRoute
   '/testy/$slug': typeof TestySlugRoute
@@ -79,6 +93,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/kontakt': typeof KontaktRoute
+  '/prihlasenie': typeof PrihlasenieRoute
+  '/registracia-skoly': typeof RegistraciaSkolyRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
   '/novinky/$slug': typeof NovinkySlugRoute
   '/testy/$slug': typeof TestySlugRoute
@@ -91,6 +107,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/kontakt': typeof KontaktRoute
+  '/prihlasenie': typeof PrihlasenieRoute
+  '/registracia-skoly': typeof RegistraciaSkolyRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
   '/novinky/$slug': typeof NovinkySlugRoute
   '/testy/$slug': typeof TestySlugRoute
@@ -104,6 +122,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/kontakt'
+    | '/prihlasenie'
+    | '/registracia-skoly'
     | '/modul/ukazka'
     | '/novinky/$slug'
     | '/testy/$slug'
@@ -115,6 +135,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/kontakt'
+    | '/prihlasenie'
+    | '/registracia-skoly'
     | '/modul/ukazka'
     | '/novinky/$slug'
     | '/testy/$slug'
@@ -126,6 +148,8 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/kontakt'
+    | '/prihlasenie'
+    | '/registracia-skoly'
     | '/modul/ukazka'
     | '/novinky/$slug'
     | '/testy/$slug'
@@ -138,6 +162,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   KontaktRoute: typeof KontaktRoute
+  PrihlasenieRoute: typeof PrihlasenieRoute
+  RegistraciaSkolyRoute: typeof RegistraciaSkolyRoute
   ModulUkazkaRoute: typeof ModulUkazkaRoute
   NovinkySlugRoute: typeof NovinkySlugRoute
   TestySlugRoute: typeof TestySlugRoute
@@ -149,6 +175,20 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/registracia-skoly': {
+      id: '/registracia-skoly'
+      path: '/registracia-skoly'
+      fullPath: '/registracia-skoly'
+      preLoaderRoute: typeof RegistraciaSkolyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prihlasenie': {
+      id: '/prihlasenie'
+      path: '/prihlasenie'
+      fullPath: '/prihlasenie'
+      preLoaderRoute: typeof PrihlasenieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/kontakt': {
       id: '/kontakt'
       path: '/kontakt'
@@ -218,6 +258,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   KontaktRoute: KontaktRoute,
+  PrihlasenieRoute: PrihlasenieRoute,
+  RegistraciaSkolyRoute: RegistraciaSkolyRoute,
   ModulUkazkaRoute: ModulUkazkaRoute,
   NovinkySlugRoute: NovinkySlugRoute,
   TestySlugRoute: TestySlugRoute,
@@ -229,3 +271,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
