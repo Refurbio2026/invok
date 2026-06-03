@@ -1,11 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { Search, Calendar, ArrowRight } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { Search, Calendar, ArrowRight, Loader2 } from "lucide-react";
 import { Header } from "@/components/invok/Header";
 import { Footer } from "@/components/invok/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ARTICLES, CATEGORIES, formatDate, type Article } from "@/data/articles";
+import {
+  fetchPublicPosts,
+  fetchPublicCategories,
+  type BlogPost,
+} from "@/lib/admin/blog.functions";
 
 export const Route = createFileRoute("/novinky/")({
   head: () => ({
@@ -27,27 +32,49 @@ export const Route = createFileRoute("/novinky/")({
   component: NovinkyPage,
 });
 
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString("sk-SK", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
 function NovinkyPage() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<string>("Všetky");
 
+  const posts = useQuery({
+    queryKey: ["public-blog", "list"],
+    queryFn: () => fetchPublicPosts(),
+  });
+  const categories = useQuery({
+    queryKey: ["public-blog", "categories"],
+    queryFn: () => fetchPublicCategories(),
+  });
+
+  const categoryNames = useMemo(
+    () => (categories.data || []).map((c) => c.name),
+    [categories.data],
+  );
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return ARTICLES.filter((a) => {
-      const matchCat = category === "Všetky" || a.category === category;
+    return (posts.data || []).filter((a) => {
+      const catName = a.category?.name || "";
+      const matchCat = category === "Všetky" || catName === category;
       const matchQ =
         !q ||
         a.title.toLowerCase().includes(q) ||
-        a.excerpt.toLowerCase().includes(q);
+        (a.excerpt || "").toLowerCase().includes(q);
       return matchCat && matchQ;
-    }).sort((a, b) => +new Date(b.date) - +new Date(a.date));
-  }, [query, category]);
+    });
+  }, [posts.data, query, category]);
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
 
-      {/* Hero */}
       <section className="border-b border-border bg-gradient-to-b from-muted/40 to-background">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:py-24">
           <div className="max-w-3xl">
@@ -65,11 +92,10 @@ function NovinkyPage() {
         </div>
       </section>
 
-      {/* Filters */}
       <section className="border-b border-border bg-background sticky top-20 z-30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row gap-4 md:items-center justify-between">
           <div className="flex flex-wrap gap-2">
-            {(["Všetky", ...CATEGORIES] as const).map((c) => (
+            {(["Všetky", ...categoryNames]).map((c) => (
               <button
                 key={c}
                 onClick={() => setCategory(c)}
@@ -96,21 +122,26 @@ function NovinkyPage() {
         </div>
       </section>
 
-      {/* Articles grid */}
       <section className="py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl md:text-3xl font-bold mb-8">
             Najnovšie články
           </h2>
 
-          {filtered.length === 0 ? (
-            <p className="text-muted-foreground">
-              Žiadne články nezodpovedajú vášmu výberu.
-            </p>
+          {posts.isLoading ? (
+            <div className="flex items-center text-muted-foreground">
+              <Loader2 className="h-5 w-5 animate-spin mr-2" /> Načítavam…
+            </div>
+          ) : filtered.length === 0 ? (
+            <div className="rounded-xl border border-dashed border-border p-12 text-center">
+              <p className="text-muted-foreground">
+                Zatiaľ tu nie sú žiadne publikované články.
+              </p>
+            </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filtered.map((a) => (
-                <ArticleCard key={a.slug} article={a} />
+                <ArticleCard key={a.id} article={a} />
               ))}
             </div>
           )}
@@ -122,7 +153,8 @@ function NovinkyPage() {
   );
 }
 
-function ArticleCard({ article }: { article: Article }) {
+function ArticleCard({ article }: { article: BlogPost }) {
+  const dateStr = article.published_at || article.created_at;
   return (
     <article className="group flex flex-col rounded-2xl overflow-hidden border border-border bg-card shadow-soft hover:shadow-lg transition-shadow">
       <Link
@@ -130,21 +162,27 @@ function ArticleCard({ article }: { article: Article }) {
         params={{ slug: article.slug }}
         className="block aspect-[16/10] overflow-hidden bg-muted"
       >
-        <img
-          src={article.image}
-          alt={article.title}
-          loading="lazy"
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        />
+        {article.cover_image_url ? (
+          <img
+            src={article.cover_image_url}
+            alt={article.title}
+            loading="lazy"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-primary/10 to-accent" />
+        )}
       </Link>
       <div className="p-6 flex-1 flex flex-col">
         <div className="flex items-center gap-3 text-xs text-muted-foreground mb-3">
-          <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-semibold">
-            {article.category}
-          </span>
+          {article.category?.name && (
+            <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-semibold">
+              {article.category.name}
+            </span>
+          )}
           <span className="inline-flex items-center gap-1">
             <Calendar className="h-3 w-3" />
-            {formatDate(article.date)}
+            {formatDate(dateStr)}
           </span>
         </div>
         <h3 className="text-lg font-semibold leading-snug mb-2">
@@ -156,9 +194,11 @@ function ArticleCard({ article }: { article: Article }) {
             {article.title}
           </Link>
         </h3>
-        <p className="text-sm text-muted-foreground line-clamp-3 flex-1">
-          {article.excerpt}
-        </p>
+        {article.excerpt && (
+          <p className="text-sm text-muted-foreground line-clamp-3 flex-1">
+            {article.excerpt}
+          </p>
+        )}
         <Button asChild variant="link" className="mt-4 px-0 self-start">
           <Link to="/novinky/$slug" params={{ slug: article.slug }}>
             Čítať viac <ArrowRight className="ml-1 h-4 w-4" />
