@@ -1,0 +1,1 @@
+DELETE FROM public.test_questions WHERE id='308c044d-4ec1-4f4b-9f73-6311e15b936e';
