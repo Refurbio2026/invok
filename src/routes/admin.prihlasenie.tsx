@@ -52,12 +52,23 @@ function AdminLogin() {
           options: { emailRedirectTo: `${window.location.origin}/admin/prihlasenie` },
         });
         if (error) throw error;
-        toast.success("Účet vytvorený. Ak je vyžadovaná verifikácia e-mailu, skontrolujte si schránku.");
         // Pokus o prihlásenie (ak je auto-confirm)
-        await supabase.auth.signInWithPassword(parsed.data);
+        const { error: signInErr } = await supabase.auth.signInWithPassword(parsed.data);
+        if (signInErr) {
+          toast.success(
+            "Účet vytvorený. Potvrďte si e-mail kliknutím na odkaz v doručenej správe a potom sa prihláste.",
+          );
+          return;
+        }
       } else {
         const { error } = await supabase.auth.signInWithPassword(parsed.data);
         if (error) throw error;
+      }
+      // Overenie, že máme aktívnu session pred volaním chránených server fn
+      const { data: sessionData } = await supabase.auth.getSession();
+      if (!sessionData.session) {
+        toast.error("Prihlásenie zlyhalo – chýba aktívna relácia.");
+        return;
       }
       // Bootstrap admin role ak ešte žiadny nie je
       try {
@@ -72,6 +83,7 @@ function AdminLogin() {
         return;
       }
       navigate({ to: search.redirect ?? "/admin/dashboard" });
+
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Prihlásenie zlyhalo.";
       toast.error(msg);
