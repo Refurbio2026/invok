@@ -88,6 +88,7 @@ type Question = {
   test_id: string;
   position: number;
   question_text: string;
+  question_description?: string | null;
   question_type: string;
   competency: string | null;
   options: Option[];
