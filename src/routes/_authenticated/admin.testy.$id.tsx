@@ -578,6 +578,7 @@ function QuestionsTab({
           test_id: testId,
           position: qst.position,
           question_text: qst.question_text,
+          question_description: qst.question_description ?? null,
           question_type: qst.question_type as any,
           competency: qst.competency,
           options: qst.options,
@@ -592,6 +593,17 @@ function QuestionsTab({
       toast.error(e instanceof Error ? e.message : "Chyba");
     }
   };
+
+  const onDuplicate = async (qid: string) => {
+    try {
+      await dupQ({ data: { id: qid } });
+      toast.success("Otázka duplikovaná");
+      qc.invalidateQueries({ queryKey: ["test", testId] });
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Chyba");
+    }
+  };
+
 
   const onDelete = async (qid: string) => {
     if (!confirm("Zmazať otázku?")) return;
