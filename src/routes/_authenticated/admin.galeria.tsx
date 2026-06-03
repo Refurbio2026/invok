@@ -225,16 +225,13 @@ function EditImageDialog({
   const [caption, setCaption] = useState("");
   const [filename, setFilename] = useState("");
 
-  useState(() => {
-    /* noop */
-  });
-
-  // Sync when image changes
-  if (image && filename === "" && alt === "" && caption === "") {
-    setAlt(image.alt || "");
-    setCaption(image.caption || "");
-    setFilename(image.filename);
-  }
+  useEffect(() => {
+    if (image) {
+      setAlt(image.alt || "");
+      setCaption(image.caption || "");
+      setFilename(image.filename);
+    }
+  }, [image]);
 
   return (
     <Dialog
