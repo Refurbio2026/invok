@@ -656,10 +656,12 @@ function SortableQuestion({
   question,
   onSave,
   onDelete,
+  onDuplicate,
 }: {
   question: Question;
   onSave: (q: Question) => void;
   onDelete: () => void;
+  onDuplicate: () => void;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
     useSortable({ id: question.id });
@@ -675,6 +677,7 @@ function SortableQuestion({
         question={question}
         onSave={onSave}
         onDelete={onDelete}
+        onDuplicate={onDuplicate}
         dragHandle={
           <button
             type="button"
