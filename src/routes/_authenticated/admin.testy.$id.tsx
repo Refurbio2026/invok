@@ -294,6 +294,8 @@ function DetailTab({ test, testId }: { test: any; testId: string }) {
           duration_min: state.duration_min ? Number(state.duration_min) : null,
           description: state.description || null,
           instructions: state.instructions || null,
+          completion_text: state.completion_text || null,
+          start_button_text: state.start_button_text || null,
           show_result_to_student: state.show_result_to_student,
           save_to_school_report: state.save_to_school_report,
           allow_retake: state.allow_retake,
