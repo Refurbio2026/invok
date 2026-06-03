@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as RegistraciaSkolyRouteImport } from './routes/registracia-skoly'
 import { Route as PrihlasenieRouteImport } from './routes/prihlasenie'
 import { Route as KontaktRouteImport } from './routes/kontakt'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TestyIndexRouteImport } from './routes/testy.index'
 import { Route as NovinkyIndexRouteImport } from './routes/novinky.index'
@@ -27,7 +28,9 @@ import { Route as SkolaDashboardRouteImport } from './routes/skola.dashboard'
 import { Route as NovinkySlugRouteImport } from './routes/novinky.$slug'
 import { Route as ModulUkazkaRouteImport } from './routes/modul.ukazka'
 import { Route as AdminPrihlasenieRouteImport } from './routes/admin.prihlasenie'
-import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
+import { Route as AuthenticatedAdminZiadostiRouteImport } from './routes/_authenticated/admin.ziadosti'
+import { Route as AuthenticatedAdminSkolyRouteImport } from './routes/_authenticated/admin.skoly'
+import { Route as AuthenticatedAdminDashboardRouteImport } from './routes/_authenticated/admin.dashboard'
 
 const RegistraciaSkolyRoute = RegistraciaSkolyRouteImport.update({
   id: '/registracia-skoly',
@@ -42,6 +45,10 @@ const PrihlasenieRoute = PrihlasenieRouteImport.update({
 const KontaktRoute = KontaktRouteImport.update({
   id: '/kontakt',
   path: '/kontakt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -119,18 +126,29 @@ const AdminPrihlasenieRoute = AdminPrihlasenieRouteImport.update({
   path: '/admin/prihlasenie',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminDashboardRoute = AdminDashboardRouteImport.update({
-  id: '/admin/dashboard',
-  path: '/admin/dashboard',
-  getParentRoute: () => rootRouteImport,
+const AuthenticatedAdminZiadostiRoute =
+  AuthenticatedAdminZiadostiRouteImport.update({
+    id: '/admin/ziadosti',
+    path: '/admin/ziadosti',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminSkolyRoute = AuthenticatedAdminSkolyRouteImport.update({
+  id: '/admin/skoly',
+  path: '/admin/skoly',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminDashboardRoute =
+  AuthenticatedAdminDashboardRouteImport.update({
+    id: '/admin/dashboard',
+    path: '/admin/dashboard',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/kontakt': typeof KontaktRoute
   '/prihlasenie': typeof PrihlasenieRoute
   '/registracia-skoly': typeof RegistraciaSkolyRoute
-  '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/prihlasenie': typeof AdminPrihlasenieRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
   '/novinky/$slug': typeof NovinkySlugRoute
@@ -145,13 +163,15 @@ export interface FileRoutesByFullPath {
   '/ziak/prihlasenie': typeof ZiakPrihlasenieRoute
   '/novinky/': typeof NovinkyIndexRoute
   '/testy/': typeof TestyIndexRoute
+  '/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
+  '/admin/skoly': typeof AuthenticatedAdminSkolyRoute
+  '/admin/ziadosti': typeof AuthenticatedAdminZiadostiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/kontakt': typeof KontaktRoute
   '/prihlasenie': typeof PrihlasenieRoute
   '/registracia-skoly': typeof RegistraciaSkolyRoute
-  '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/prihlasenie': typeof AdminPrihlasenieRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
   '/novinky/$slug': typeof NovinkySlugRoute
@@ -166,14 +186,17 @@ export interface FileRoutesByTo {
   '/ziak/prihlasenie': typeof ZiakPrihlasenieRoute
   '/novinky': typeof NovinkyIndexRoute
   '/testy': typeof TestyIndexRoute
+  '/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
+  '/admin/skoly': typeof AuthenticatedAdminSkolyRoute
+  '/admin/ziadosti': typeof AuthenticatedAdminZiadostiRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/kontakt': typeof KontaktRoute
   '/prihlasenie': typeof PrihlasenieRoute
   '/registracia-skoly': typeof RegistraciaSkolyRoute
-  '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/prihlasenie': typeof AdminPrihlasenieRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
   '/novinky/$slug': typeof NovinkySlugRoute
@@ -188,6 +211,9 @@ export interface FileRoutesById {
   '/ziak/prihlasenie': typeof ZiakPrihlasenieRoute
   '/novinky/': typeof NovinkyIndexRoute
   '/testy/': typeof TestyIndexRoute
+  '/_authenticated/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
+  '/_authenticated/admin/skoly': typeof AuthenticatedAdminSkolyRoute
+  '/_authenticated/admin/ziadosti': typeof AuthenticatedAdminZiadostiRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -196,7 +222,6 @@ export interface FileRouteTypes {
     | '/kontakt'
     | '/prihlasenie'
     | '/registracia-skoly'
-    | '/admin/dashboard'
     | '/admin/prihlasenie'
     | '/modul/ukazka'
     | '/novinky/$slug'
@@ -211,13 +236,15 @@ export interface FileRouteTypes {
     | '/ziak/prihlasenie'
     | '/novinky/'
     | '/testy/'
+    | '/admin/dashboard'
+    | '/admin/skoly'
+    | '/admin/ziadosti'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/kontakt'
     | '/prihlasenie'
     | '/registracia-skoly'
-    | '/admin/dashboard'
     | '/admin/prihlasenie'
     | '/modul/ukazka'
     | '/novinky/$slug'
@@ -232,13 +259,16 @@ export interface FileRouteTypes {
     | '/ziak/prihlasenie'
     | '/novinky'
     | '/testy'
+    | '/admin/dashboard'
+    | '/admin/skoly'
+    | '/admin/ziadosti'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/kontakt'
     | '/prihlasenie'
     | '/registracia-skoly'
-    | '/admin/dashboard'
     | '/admin/prihlasenie'
     | '/modul/ukazka'
     | '/novinky/$slug'
@@ -253,14 +283,17 @@ export interface FileRouteTypes {
     | '/ziak/prihlasenie'
     | '/novinky/'
     | '/testy/'
+    | '/_authenticated/admin/dashboard'
+    | '/_authenticated/admin/skoly'
+    | '/_authenticated/admin/ziadosti'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   KontaktRoute: typeof KontaktRoute
   PrihlasenieRoute: typeof PrihlasenieRoute
   RegistraciaSkolyRoute: typeof RegistraciaSkolyRoute
-  AdminDashboardRoute: typeof AdminDashboardRoute
   AdminPrihlasenieRoute: typeof AdminPrihlasenieRoute
   ModulUkazkaRoute: typeof ModulUkazkaRoute
   NovinkySlugRoute: typeof NovinkySlugRoute
@@ -298,6 +331,13 @@ declare module '@tanstack/react-router' {
       path: '/kontakt'
       fullPath: '/kontakt'
       preLoaderRoute: typeof KontaktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -405,22 +445,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPrihlasenieRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/dashboard': {
-      id: '/admin/dashboard'
+    '/_authenticated/admin/ziadosti': {
+      id: '/_authenticated/admin/ziadosti'
+      path: '/admin/ziadosti'
+      fullPath: '/admin/ziadosti'
+      preLoaderRoute: typeof AuthenticatedAdminZiadostiRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/skoly': {
+      id: '/_authenticated/admin/skoly'
+      path: '/admin/skoly'
+      fullPath: '/admin/skoly'
+      preLoaderRoute: typeof AuthenticatedAdminSkolyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/dashboard': {
+      id: '/_authenticated/admin/dashboard'
       path: '/admin/dashboard'
       fullPath: '/admin/dashboard'
-      preLoaderRoute: typeof AdminDashboardRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedAdminDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminDashboardRoute: typeof AuthenticatedAdminDashboardRoute
+  AuthenticatedAdminSkolyRoute: typeof AuthenticatedAdminSkolyRoute
+  AuthenticatedAdminZiadostiRoute: typeof AuthenticatedAdminZiadostiRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminDashboardRoute: AuthenticatedAdminDashboardRoute,
+  AuthenticatedAdminSkolyRoute: AuthenticatedAdminSkolyRoute,
+  AuthenticatedAdminZiadostiRoute: AuthenticatedAdminZiadostiRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   KontaktRoute: KontaktRoute,
   PrihlasenieRoute: PrihlasenieRoute,
   RegistraciaSkolyRoute: RegistraciaSkolyRoute,
-  AdminDashboardRoute: AdminDashboardRoute,
   AdminPrihlasenieRoute: AdminPrihlasenieRoute,
   ModulUkazkaRoute: ModulUkazkaRoute,
   NovinkySlugRoute: NovinkySlugRoute,
