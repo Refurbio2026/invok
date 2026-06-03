@@ -839,26 +839,59 @@ function QuestionCard({
 
       {hasOptions && (
         <div className="space-y-2">
-          <Label className="text-xs">Možnosti (zaškrtnite správne)</Label>
+          <Label className="text-xs">
+            Odpovede (zaškrtnite správnu / správne)
+          </Label>
           {draft.options.map((opt, i) => (
-            <div key={i} className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={draft.correct_keys.includes(opt.key)}
-                onChange={() => toggleCorrect(opt.key)}
-                className="h-4 w-4"
-              />
+            <div
+              key={i}
+              className="grid grid-cols-12 gap-2 items-center bg-muted/30 rounded-md p-2"
+            >
+              <div className="col-span-1 flex justify-center">
+                <input
+                  type="checkbox"
+                  checked={draft.correct_keys.includes(opt.key)}
+                  onChange={() => toggleCorrect(opt.key)}
+                  className="h-4 w-4"
+                  title="Označiť ako správnu"
+                />
+              </div>
               <Input
                 value={opt.key}
                 onChange={(e) => setOption(i, { key: e.target.value })}
-                className="w-16"
+                className="col-span-1"
+                placeholder="kód"
               />
               <Input
                 value={opt.label}
                 onChange={(e) => setOption(i, { label: e.target.value })}
-                placeholder="Text možnosti"
+                placeholder="Text odpovede"
+                className="col-span-5"
               />
-              <Button variant="ghost" size="icon" onClick={() => removeOption(i)}>
+              <Input
+                type="number"
+                value={opt.points ?? ""}
+                onChange={(e) =>
+                  setOption(i, {
+                    points: e.target.value === "" ? undefined : Number(e.target.value),
+                  })
+                }
+                placeholder="body"
+                className="col-span-2"
+                title="Body za túto odpoveď"
+              />
+              <Input
+                value={opt.feedback ?? ""}
+                onChange={(e) => setOption(i, { feedback: e.target.value })}
+                placeholder="Spätná väzba (voliteľné)"
+                className="col-span-2"
+              />
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => removeOption(i)}
+                className="col-span-1"
+              >
                 <Trash2 className="h-4 w-4 text-destructive" />
               </Button>
             </div>
@@ -870,10 +903,11 @@ function QuestionCard({
             onClick={addOption}
             className="gap-1.5"
           >
-            <Plus className="h-3.5 w-3.5" /> Pridať možnosť
+            <Plus className="h-3.5 w-3.5" /> Pridať odpoveď
           </Button>
         </div>
       )}
+
 
       {(draft.question_type === "scale_1_5" ||
         draft.question_type === "scale_0_10" ||
