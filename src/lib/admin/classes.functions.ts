@@ -20,14 +20,21 @@ export const listClasses = createServerFn({ method: "GET" })
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data, error } = await supabaseAdmin
       .from("classes")
-      .select(
-        "id,school_id,name,grade,school_year,teacher_id,notes,created_at,schools(name)",
-      )
+      .select("id,school_id,name,grade,school_year,teacher_id,notes,created_at")
       .order("created_at", { ascending: false });
     if (error) throw new Error(error.message);
+    const schoolIds = Array.from(new Set((data ?? []).map((c: any) => c.school_id).filter(Boolean)));
+    let schoolMap: Record<string, string> = {};
+    if (schoolIds.length) {
+      const { data: schools } = await supabaseAdmin
+        .from("schools")
+        .select("id,name")
+        .in("id", schoolIds);
+      schoolMap = Object.fromEntries((schools ?? []).map((s: any) => [s.id, s.name]));
+    }
     return (data ?? []).map((c: any) => ({
       ...c,
-      school_name: c.schools?.name ?? null,
+      school_name: schoolMap[c.school_id] ?? null,
     }));
   });
 
