@@ -304,6 +304,7 @@ export const saveQuestion = createServerFn({ method: "POST" })
         test_id: z.string().uuid(),
         position: z.number().int().min(1).max(500),
         question_text: z.string().min(1).max(2000),
+        question_description: z.string().max(2000).nullable().optional(),
         question_type: z.enum(QUESTION_TYPES).default("single"),
         competency: z.string().max(120).nullable().optional(),
         options: z.array(optionSchema).max(20).default([]),
