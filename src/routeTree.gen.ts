@@ -38,7 +38,7 @@ import { Route as AuthenticatedAdminSkolyRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAdminReportyRouteImport } from './routes/_authenticated/admin.reporty'
 import { Route as AuthenticatedAdminPouzivateliaRouteImport } from './routes/_authenticated/admin.pouzivatelia'
 import { Route as AuthenticatedAdminDashboardRouteImport } from './routes/_authenticated/admin.dashboard'
-import { Route as AuthenticatedAdminBlogRouteImport } from './routes/_authenticated/admin.blog'
+import { Route as AuthenticatedAdminBlogIndexRouteImport } from './routes/_authenticated/admin.blog.index'
 import { Route as AuthenticatedAdminTestyIdRouteImport } from './routes/_authenticated/admin.testy.$id'
 import { Route as AuthenticatedAdminBlogIdRouteImport } from './routes/_authenticated/admin.blog.$id'
 
@@ -192,11 +192,12 @@ const AuthenticatedAdminDashboardRoute =
     path: '/admin/dashboard',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedAdminBlogRoute = AuthenticatedAdminBlogRouteImport.update({
-  id: '/admin/blog',
-  path: '/admin/blog',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
+const AuthenticatedAdminBlogIndexRoute =
+  AuthenticatedAdminBlogIndexRouteImport.update({
+    id: '/admin/blog/',
+    path: '/admin/blog/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminTestyIdRoute =
   AuthenticatedAdminTestyIdRouteImport.update({
     id: '/$id',
@@ -205,9 +206,9 @@ const AuthenticatedAdminTestyIdRoute =
   } as any)
 const AuthenticatedAdminBlogIdRoute =
   AuthenticatedAdminBlogIdRouteImport.update({
-    id: '/$id',
-    path: '/$id',
-    getParentRoute: () => AuthenticatedAdminBlogRoute,
+    id: '/admin/blog/$id',
+    path: '/admin/blog/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -229,7 +230,6 @@ export interface FileRoutesByFullPath {
   '/ziak/prihlasenie': typeof ZiakPrihlasenieRoute
   '/novinky/': typeof NovinkyIndexRoute
   '/testy/': typeof TestyIndexRoute
-  '/admin/blog': typeof AuthenticatedAdminBlogRouteWithChildren
   '/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
   '/admin/pouzivatelia': typeof AuthenticatedAdminPouzivateliaRoute
   '/admin/reporty': typeof AuthenticatedAdminReportyRoute
@@ -242,6 +242,7 @@ export interface FileRoutesByFullPath {
   '/ziak/test/$testId': typeof ZiakTestTestIdRoute
   '/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
   '/admin/testy/$id': typeof AuthenticatedAdminTestyIdRoute
+  '/admin/blog/': typeof AuthenticatedAdminBlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -262,7 +263,6 @@ export interface FileRoutesByTo {
   '/ziak/prihlasenie': typeof ZiakPrihlasenieRoute
   '/novinky': typeof NovinkyIndexRoute
   '/testy': typeof TestyIndexRoute
-  '/admin/blog': typeof AuthenticatedAdminBlogRouteWithChildren
   '/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
   '/admin/pouzivatelia': typeof AuthenticatedAdminPouzivateliaRoute
   '/admin/reporty': typeof AuthenticatedAdminReportyRoute
@@ -275,6 +275,7 @@ export interface FileRoutesByTo {
   '/ziak/test/$testId': typeof ZiakTestTestIdRoute
   '/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
   '/admin/testy/$id': typeof AuthenticatedAdminTestyIdRoute
+  '/admin/blog': typeof AuthenticatedAdminBlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -297,7 +298,6 @@ export interface FileRoutesById {
   '/ziak/prihlasenie': typeof ZiakPrihlasenieRoute
   '/novinky/': typeof NovinkyIndexRoute
   '/testy/': typeof TestyIndexRoute
-  '/_authenticated/admin/blog': typeof AuthenticatedAdminBlogRouteWithChildren
   '/_authenticated/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
   '/_authenticated/admin/pouzivatelia': typeof AuthenticatedAdminPouzivateliaRoute
   '/_authenticated/admin/reporty': typeof AuthenticatedAdminReportyRoute
@@ -310,6 +310,7 @@ export interface FileRoutesById {
   '/ziak/test/$testId': typeof ZiakTestTestIdRoute
   '/_authenticated/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
   '/_authenticated/admin/testy/$id': typeof AuthenticatedAdminTestyIdRoute
+  '/_authenticated/admin/blog/': typeof AuthenticatedAdminBlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -332,7 +333,6 @@ export interface FileRouteTypes {
     | '/ziak/prihlasenie'
     | '/novinky/'
     | '/testy/'
-    | '/admin/blog'
     | '/admin/dashboard'
     | '/admin/pouzivatelia'
     | '/admin/reporty'
@@ -345,6 +345,7 @@ export interface FileRouteTypes {
     | '/ziak/test/$testId'
     | '/admin/blog/$id'
     | '/admin/testy/$id'
+    | '/admin/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -365,7 +366,6 @@ export interface FileRouteTypes {
     | '/ziak/prihlasenie'
     | '/novinky'
     | '/testy'
-    | '/admin/blog'
     | '/admin/dashboard'
     | '/admin/pouzivatelia'
     | '/admin/reporty'
@@ -378,6 +378,7 @@ export interface FileRouteTypes {
     | '/ziak/test/$testId'
     | '/admin/blog/$id'
     | '/admin/testy/$id'
+    | '/admin/blog'
   id:
     | '__root__'
     | '/'
@@ -399,7 +400,6 @@ export interface FileRouteTypes {
     | '/ziak/prihlasenie'
     | '/novinky/'
     | '/testy/'
-    | '/_authenticated/admin/blog'
     | '/_authenticated/admin/dashboard'
     | '/_authenticated/admin/pouzivatelia'
     | '/_authenticated/admin/reporty'
@@ -412,6 +412,7 @@ export interface FileRouteTypes {
     | '/ziak/test/$testId'
     | '/_authenticated/admin/blog/$id'
     | '/_authenticated/admin/testy/$id'
+    | '/_authenticated/admin/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -642,11 +643,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/admin/blog': {
-      id: '/_authenticated/admin/blog'
+    '/_authenticated/admin/blog/': {
+      id: '/_authenticated/admin/blog/'
       path: '/admin/blog'
-      fullPath: '/admin/blog'
-      preLoaderRoute: typeof AuthenticatedAdminBlogRouteImport
+      fullPath: '/admin/blog/'
+      preLoaderRoute: typeof AuthenticatedAdminBlogIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/admin/testy/$id': {
@@ -658,27 +659,13 @@ declare module '@tanstack/react-router' {
     }
     '/_authenticated/admin/blog/$id': {
       id: '/_authenticated/admin/blog/$id'
-      path: '/$id'
+      path: '/admin/blog/$id'
       fullPath: '/admin/blog/$id'
       preLoaderRoute: typeof AuthenticatedAdminBlogIdRouteImport
-      parentRoute: typeof AuthenticatedAdminBlogRoute
+      parentRoute: typeof AuthenticatedRouteRoute
     }
   }
 }
-
-interface AuthenticatedAdminBlogRouteChildren {
-  AuthenticatedAdminBlogIdRoute: typeof AuthenticatedAdminBlogIdRoute
-}
-
-const AuthenticatedAdminBlogRouteChildren: AuthenticatedAdminBlogRouteChildren =
-  {
-    AuthenticatedAdminBlogIdRoute: AuthenticatedAdminBlogIdRoute,
-  }
-
-const AuthenticatedAdminBlogRouteWithChildren =
-  AuthenticatedAdminBlogRoute._addFileChildren(
-    AuthenticatedAdminBlogRouteChildren,
-  )
 
 interface AuthenticatedAdminTestyRouteChildren {
   AuthenticatedAdminTestyIdRoute: typeof AuthenticatedAdminTestyIdRoute
@@ -695,7 +682,6 @@ const AuthenticatedAdminTestyRouteWithChildren =
   )
 
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedAdminBlogRoute: typeof AuthenticatedAdminBlogRouteWithChildren
   AuthenticatedAdminDashboardRoute: typeof AuthenticatedAdminDashboardRoute
   AuthenticatedAdminPouzivateliaRoute: typeof AuthenticatedAdminPouzivateliaRoute
   AuthenticatedAdminReportyRoute: typeof AuthenticatedAdminReportyRoute
@@ -705,10 +691,11 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminVysledkyRoute: typeof AuthenticatedAdminVysledkyRoute
   AuthenticatedAdminZiaciRoute: typeof AuthenticatedAdminZiaciRoute
   AuthenticatedAdminZiadostiRoute: typeof AuthenticatedAdminZiadostiRoute
+  AuthenticatedAdminBlogIdRoute: typeof AuthenticatedAdminBlogIdRoute
+  AuthenticatedAdminBlogIndexRoute: typeof AuthenticatedAdminBlogIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedAdminBlogRoute: AuthenticatedAdminBlogRouteWithChildren,
   AuthenticatedAdminDashboardRoute: AuthenticatedAdminDashboardRoute,
   AuthenticatedAdminPouzivateliaRoute: AuthenticatedAdminPouzivateliaRoute,
   AuthenticatedAdminReportyRoute: AuthenticatedAdminReportyRoute,
@@ -718,6 +705,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminVysledkyRoute: AuthenticatedAdminVysledkyRoute,
   AuthenticatedAdminZiaciRoute: AuthenticatedAdminZiaciRoute,
   AuthenticatedAdminZiadostiRoute: AuthenticatedAdminZiadostiRoute,
+  AuthenticatedAdminBlogIdRoute: AuthenticatedAdminBlogIdRoute,
+  AuthenticatedAdminBlogIndexRoute: AuthenticatedAdminBlogIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -748,3 +737,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
