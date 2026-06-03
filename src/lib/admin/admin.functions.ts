@@ -4,11 +4,24 @@ import { z } from "zod";
 
 export type AppRole = "admin" | "editor" | "koordinator" | "viewer" | "skola";
 
-// Vráti role aktuálneho používateľa (bezpečne, podľa RLS)
+// Vráti role aktuálneho používateľa. Ak ešte nie je obnovená session,
+// nezhodí UI 401 chybou, iba vráti neprihlásený stav.
 export const getMyRoles = createServerFn({ method: "GET" })
-  .middleware([requireSupabaseAuth])
-  .handler(async ({ context }) => {
-    const { supabase, userId } = context;
+  .handler(async () => {
+    const { getRequestHeader } = await import("@tanstack/react-start/server");
+    const authorization = getRequestHeader("Authorization");
+    const token = authorization?.match(/^Bearer\s+(.+)$/i)?.[1];
+    if (!token) {
+      return { userId: null, roles: [] as AppRole[], schoolId: null, authenticated: false as const };
+    }
+
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: userData, error: userError } = await supabaseAdmin.auth.getUser(token);
+    if (userError || !userData.user) {
+      return { userId: null, roles: [] as AppRole[], schoolId: null, authenticated: false as const };
+    }
+
+    const userId = userData.user.id;
     const { data, error } = await supabase
       .from("user_roles")
       .select("role, school_id")
@@ -18,22 +31,32 @@ export const getMyRoles = createServerFn({ method: "GET" })
       userId,
       roles: (data ?? []).map((r) => r.role as AppRole),
       schoolId: data?.[0]?.school_id ?? null,
+      authenticated: true as const,
     };
   });
 
 // Bootstrap: ak ešte nie je žiadny admin, priradí aktuálnemu používateľovi rolu admin.
 // Volá sa po prvom prihlásení v /admin/prihlasenie.
 export const claimAdminIfFirst = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
-  .handler(async ({ context }) => {
-    const { userId } = context;
+  .handler(async () => {
+    const { getRequestHeader } = await import("@tanstack/react-start/server");
+    const authorization = getRequestHeader("Authorization");
+    const token = authorization?.match(/^Bearer\s+(.+)$/i)?.[1];
+    if (!token) return { granted: false as const, authenticated: false as const };
+
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: userData, error: userError } = await supabaseAdmin.auth.getUser(token);
+    if (userError || !userData.user) {
+      return { granted: false as const, authenticated: false as const };
+    }
+
+    const userId = userData.user.id;
     const { count, error: cntErr } = await supabaseAdmin
       .from("user_roles")
       .select("id", { count: "exact", head: true })
       .eq("role", "admin");
     if (cntErr) throw new Error(cntErr.message);
-    if ((count ?? 0) > 0) return { granted: false as const };
+    if ((count ?? 0) > 0) return { granted: false as const, authenticated: true as const };
     const { error: insErr } = await supabaseAdmin
       .from("user_roles")
       .insert({ user_id: userId, role: "admin" });
@@ -44,7 +67,7 @@ export const claimAdminIfFirst = createServerFn({ method: "POST" })
       module: "auth",
       description: "Prvý admin účet vytvorený bootstrapom.",
     });
-    return { granted: true as const };
+    return { granted: true as const, authenticated: true as const };
   });
 
 // Štatistiky pre admin dashboard
