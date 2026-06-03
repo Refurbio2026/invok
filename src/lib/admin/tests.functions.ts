@@ -128,6 +128,8 @@ const baseTestFields = {
   duration_min: z.number().int().min(1).max(240).nullable().optional(),
   description: z.string().max(2000).nullable().optional(),
   instructions: z.string().max(4000).nullable().optional(),
+  completion_text: z.string().max(2000).nullable().optional(),
+  start_button_text: z.string().max(60).nullable().optional(),
   module_id: z.string().uuid().nullable().optional(),
   show_result_to_student: z.boolean().optional(),
   save_to_school_report: z.boolean().optional(),
