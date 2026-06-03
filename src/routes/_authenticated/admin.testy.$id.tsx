@@ -271,6 +271,8 @@ function DetailTab({ test, testId }: { test: any; testId: string }) {
     duration_min: test.duration_min ?? "",
     description: test.description ?? "",
     instructions: test.instructions ?? "",
+    completion_text: test.completion_text ?? "",
+    start_button_text: test.start_button_text ?? "",
     show_result_to_student: !!test.show_result_to_student,
     save_to_school_report: !!test.save_to_school_report,
     allow_retake: !!test.allow_retake,
