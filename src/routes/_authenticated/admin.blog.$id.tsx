@@ -34,6 +34,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
+  ImagePickerDialog,
+  type PickedImage,
+} from "@/components/invok/admin/ImagePickerDialog";
+import {
   getBlogPostAdmin,
   listBlogCategories,
   saveBlogPost,
@@ -297,18 +307,49 @@ function BlogEditor() {
 
             <div className="rounded-xl border border-border bg-card p-4 space-y-3">
               <h3 className="font-semibold text-sm">Titulný obrázok</h3>
-              <Input
-                value={form.cover_image_url}
-                onChange={(e) => update("cover_image_url", e.target.value)}
-                placeholder="https://…"
-              />
-              {form.cover_image_url && (
+              {form.cover_image_url ? (
                 <img
                   src={form.cover_image_url}
                   alt=""
                   className="rounded-lg w-full aspect-video object-cover border border-border"
                 />
+              ) : (
+                <div className="rounded-lg w-full aspect-video bg-muted flex items-center justify-center text-xs text-muted-foreground border border-dashed border-border">
+                  Bez obrázka
+                </div>
               )}
+              <div className="flex flex-wrap gap-2">
+                <ImagePickerDialog
+                  title="Titulný obrázok"
+                  onPick={(img) => update("cover_image_url", img.url)}
+                  trigger={
+                    <Button type="button" variant="outline" size="sm">
+                      {form.cover_image_url ? "Zmeniť obrázok" : "Vybrať obrázok"}
+                    </Button>
+                  }
+                />
+                {form.cover_image_url && (
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => update("cover_image_url", "")}
+                  >
+                    Odstrániť
+                  </Button>
+                )}
+              </div>
+              <details className="text-xs">
+                <summary className="cursor-pointer text-muted-foreground">
+                  Alebo zadať URL ručne
+                </summary>
+                <Input
+                  value={form.cover_image_url}
+                  onChange={(e) => update("cover_image_url", e.target.value)}
+                  placeholder="https://…"
+                  className="mt-2"
+                />
+              </details>
             </div>
 
             <div className="rounded-xl border border-border bg-card p-4 space-y-3">
@@ -383,11 +424,38 @@ function RichEditor({
     wrap(`<a href="${url}" target="_blank" rel="noreferrer">`, "</a>");
   };
 
-  const imgAction = () => {
-    const url = prompt("URL obrázka (https://…)");
-    if (!url) return;
-    const alt = prompt("Alt text (popis obrázka)", "") || "";
-    insertBlock(`\n<img src="${url}" alt="${alt}" />\n`);
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const [pendingImg, setPendingImg] = useState<PickedImage | null>(null);
+  const [imgAlt, setImgAlt] = useState("");
+  const [imgCaption, setImgCaption] = useState("");
+  const [imgSize, setImgSize] = useState<"small" | "medium" | "large" | "full">(
+    "large",
+  );
+
+  const onPickImage = (img: PickedImage) => {
+    setPendingImg(img);
+    setImgAlt(img.alt || "");
+    setImgCaption(img.caption || "");
+    setImgSize("large");
+  };
+
+  const insertConfiguredImage = () => {
+    if (!pendingImg) return;
+    const sizeClass = {
+      small: "max-w-xs",
+      medium: "max-w-md",
+      large: "max-w-2xl",
+      full: "w-full",
+    }[imgSize];
+    const altAttr = (imgAlt || "").replace(/"/g, "&quot;");
+    const captionHtml = imgCaption
+      ? `<figcaption>${escapeHtml(imgCaption)}</figcaption>`
+      : "";
+    const html = `\n<figure class="article-figure ${sizeClass}">\n  <img src="${pendingImg.url}" alt="${altAttr}" loading="lazy" />\n  ${captionHtml}\n</figure>\n`;
+    insertBlock(html);
+    setPendingImg(null);
+    setImgAlt("");
+    setImgCaption("");
   };
 
   return (
@@ -442,9 +510,19 @@ function RichEditor({
         >
           <Quote className="h-4 w-4" />
         </ToolBtn>
-        <ToolBtn onClick={imgAction} title="Obrázok">
-          <ImageIcon className="h-4 w-4" />
-        </ToolBtn>
+        <ImagePickerDialog
+          title="Vložiť obrázok do článku"
+          onPick={onPickImage}
+          trigger={
+            <button
+              type="button"
+              title="Vložiť obrázok"
+              className="h-8 w-8 inline-flex items-center justify-center rounded hover:bg-muted text-foreground"
+            >
+              <ImageIcon className="h-4 w-4" />
+            </button>
+          }
+        />
       </div>
       <Textarea
         ref={ref}
@@ -453,8 +531,77 @@ function RichEditor({
         placeholder="Napíšte obsah článku v HTML. Použite tlačidlá hore na vloženie nadpisov, zoznamov, citácií a obrázkov."
         className="min-h-[420px] border-0 rounded-none font-mono text-sm focus-visible:ring-0"
       />
+
+      <Dialog
+        open={!!pendingImg}
+        onOpenChange={(o) => {
+          if (!o) setPendingImg(null);
+        }}
+      >
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Vlastnosti obrázka</DialogTitle>
+          </DialogHeader>
+          {pendingImg && (
+            <div className="space-y-3">
+              <img
+                src={pendingImg.url}
+                alt={imgAlt}
+                className="w-full max-h-48 object-contain rounded-lg border border-border bg-muted"
+              />
+              <div>
+                <Label>Alternatívny text</Label>
+                <Input
+                  value={imgAlt}
+                  onChange={(e) => setImgAlt(e.target.value)}
+                  placeholder="Popis pre prístupnosť"
+                />
+              </div>
+              <div>
+                <Label>Titulok pod obrázkom</Label>
+                <Input
+                  value={imgCaption}
+                  onChange={(e) => setImgCaption(e.target.value)}
+                  placeholder="Voliteľný titulok"
+                />
+              </div>
+              <div>
+                <Label>Veľkosť</Label>
+                <Select
+                  value={imgSize}
+                  onValueChange={(v) => setImgSize(v as typeof imgSize)}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="small">Malá</SelectItem>
+                    <SelectItem value="medium">Stredná</SelectItem>
+                    <SelectItem value="large">Veľká</SelectItem>
+                    <SelectItem value="full">Na celú šírku</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="flex justify-end gap-2 pt-2">
+                <Button variant="outline" onClick={() => setPendingImg(null)}>
+                  Zrušiť
+                </Button>
+                <Button onClick={insertConfiguredImage}>Vložiť do článku</Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
+}
+
+function escapeHtml(s: string) {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 function ToolBtn({
