@@ -60,6 +60,7 @@ import {
   saveQuestion,
   deleteQuestion,
   reorderQuestions,
+  duplicateQuestion,
   duplicateTest,
   listModules,
   COMPETENCY_AREAS,
@@ -87,6 +88,7 @@ type Question = {
   test_id: string;
   position: number;
   question_text: string;
+  question_description?: string | null;
   question_type: string;
   competency: string | null;
   options: Option[];
@@ -269,6 +271,8 @@ function DetailTab({ test, testId }: { test: any; testId: string }) {
     duration_min: test.duration_min ?? "",
     description: test.description ?? "",
     instructions: test.instructions ?? "",
+    completion_text: test.completion_text ?? "",
+    start_button_text: test.start_button_text ?? "",
     show_result_to_student: !!test.show_result_to_student,
     save_to_school_report: !!test.save_to_school_report,
     allow_retake: !!test.allow_retake,
@@ -290,6 +294,8 @@ function DetailTab({ test, testId }: { test: any; testId: string }) {
           duration_min: state.duration_min ? Number(state.duration_min) : null,
           description: state.description || null,
           instructions: state.instructions || null,
+          completion_text: state.completion_text || null,
+          start_button_text: state.start_button_text || null,
           show_result_to_student: state.show_result_to_student,
           save_to_school_report: state.save_to_school_report,
           allow_retake: state.allow_retake,
@@ -408,6 +414,28 @@ function DetailTab({ test, testId }: { test: any; testId: string }) {
           placeholder="Zobrazia sa žiakovi pred začatím testu"
         />
       </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <Label>Text tlačidla „Začať"</Label>
+          <Input
+            value={state.start_button_text}
+            onChange={(e) => setState({ ...state, start_button_text: e.target.value })}
+            placeholder="Začať test"
+            className="mt-1.5"
+          />
+        </div>
+      </div>
+      <div>
+        <Label>Záverečný text (po dokončení testu)</Label>
+        <Textarea
+          rows={2}
+          value={state.completion_text}
+          onChange={(e) => setState({ ...state, completion_text: e.target.value })}
+          className="mt-1.5"
+          placeholder="Ďakujeme za vyplnenie testu!"
+        />
+      </div>
+
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
         <ToggleRow
@@ -472,6 +500,7 @@ function QuestionsTab({
   const saveQ = useServerFn(saveQuestion);
   const removeQ = useServerFn(deleteQuestion);
   const reorder = useServerFn(reorderQuestions);
+  const dupQ = useServerFn(duplicateQuestion);
   const qc = useQueryClient();
 
   const [items, setItems] = useState<Question[]>(
@@ -549,6 +578,7 @@ function QuestionsTab({
           test_id: testId,
           position: qst.position,
           question_text: qst.question_text,
+          question_description: qst.question_description ?? null,
           question_type: qst.question_type as any,
           competency: qst.competency,
           options: qst.options,
@@ -563,6 +593,17 @@ function QuestionsTab({
       toast.error(e instanceof Error ? e.message : "Chyba");
     }
   };
+
+  const onDuplicate = async (qid: string) => {
+    try {
+      await dupQ({ data: { id: qid } });
+      toast.success("Otázka duplikovaná");
+      qc.invalidateQueries({ queryKey: ["test", testId] });
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Chyba");
+    }
+  };
+
 
   const onDelete = async (qid: string) => {
     if (!confirm("Zmazať otázku?")) return;
@@ -600,6 +641,7 @@ function QuestionsTab({
                   question={qst}
                   onSave={onSave}
                   onDelete={() => onDelete(qst.id)}
+                  onDuplicate={() => onDuplicate(qst.id)}
                 />
               ))}
             </div>
@@ -614,10 +656,12 @@ function SortableQuestion({
   question,
   onSave,
   onDelete,
+  onDuplicate,
 }: {
   question: Question;
   onSave: (q: Question) => void;
   onDelete: () => void;
+  onDuplicate: () => void;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
     useSortable({ id: question.id });
@@ -633,6 +677,7 @@ function SortableQuestion({
         question={question}
         onSave={onSave}
         onDelete={onDelete}
+        onDuplicate={onDuplicate}
         dragHandle={
           <button
             type="button"
@@ -653,11 +698,13 @@ function QuestionCard({
   question,
   onSave,
   onDelete,
+  onDuplicate,
   dragHandle,
 }: {
   question: Question;
   onSave: (q: Question) => void;
   onDelete: () => void;
+  onDuplicate?: () => void;
   dragHandle?: React.ReactNode;
 }) {
   const [draft, setDraft] = useState<Question>(question);
@@ -703,17 +750,32 @@ function QuestionCard({
         <span className="h-7 w-7 rounded-full bg-primary text-primary-foreground text-xs font-semibold flex items-center justify-center shrink-0 mt-1">
           {draft.position}
         </span>
-        <div className="flex-1">
+        <div className="flex-1 space-y-2">
           <Textarea
             value={draft.question_text}
             onChange={(e) => setDraft({ ...draft, question_text: e.target.value })}
             rows={2}
+            placeholder="Text otázky"
+          />
+          <Input
+            value={draft.question_description ?? ""}
+            onChange={(e) =>
+              setDraft({ ...draft, question_description: e.target.value })
+            }
+            placeholder="Doplnkový popis (voliteľné)"
+            className="text-sm"
           />
         </div>
-        <Button variant="ghost" size="icon" onClick={onDelete}>
+        {onDuplicate && (
+          <Button variant="ghost" size="icon" onClick={onDuplicate} title="Duplikovať">
+            <Copy className="h-4 w-4" />
+          </Button>
+        )}
+        <Button variant="ghost" size="icon" onClick={onDelete} title="Zmazať">
           <Trash2 className="h-4 w-4 text-destructive" />
         </Button>
       </div>
+
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div>
@@ -777,26 +839,59 @@ function QuestionCard({
 
       {hasOptions && (
         <div className="space-y-2">
-          <Label className="text-xs">Možnosti (zaškrtnite správne)</Label>
+          <Label className="text-xs">
+            Odpovede (zaškrtnite správnu / správne)
+          </Label>
           {draft.options.map((opt, i) => (
-            <div key={i} className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={draft.correct_keys.includes(opt.key)}
-                onChange={() => toggleCorrect(opt.key)}
-                className="h-4 w-4"
-              />
+            <div
+              key={i}
+              className="grid grid-cols-12 gap-2 items-center bg-muted/30 rounded-md p-2"
+            >
+              <div className="col-span-1 flex justify-center">
+                <input
+                  type="checkbox"
+                  checked={draft.correct_keys.includes(opt.key)}
+                  onChange={() => toggleCorrect(opt.key)}
+                  className="h-4 w-4"
+                  title="Označiť ako správnu"
+                />
+              </div>
               <Input
                 value={opt.key}
                 onChange={(e) => setOption(i, { key: e.target.value })}
-                className="w-16"
+                className="col-span-1"
+                placeholder="kód"
               />
               <Input
                 value={opt.label}
                 onChange={(e) => setOption(i, { label: e.target.value })}
-                placeholder="Text možnosti"
+                placeholder="Text odpovede"
+                className="col-span-5"
               />
-              <Button variant="ghost" size="icon" onClick={() => removeOption(i)}>
+              <Input
+                type="number"
+                value={opt.points ?? ""}
+                onChange={(e) =>
+                  setOption(i, {
+                    points: e.target.value === "" ? undefined : Number(e.target.value),
+                  })
+                }
+                placeholder="body"
+                className="col-span-2"
+                title="Body za túto odpoveď"
+              />
+              <Input
+                value={opt.feedback ?? ""}
+                onChange={(e) => setOption(i, { feedback: e.target.value })}
+                placeholder="Spätná väzba (voliteľné)"
+                className="col-span-2"
+              />
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => removeOption(i)}
+                className="col-span-1"
+              >
                 <Trash2 className="h-4 w-4 text-destructive" />
               </Button>
             </div>
@@ -808,10 +903,11 @@ function QuestionCard({
             onClick={addOption}
             className="gap-1.5"
           >
-            <Plus className="h-3.5 w-3.5" /> Pridať možnosť
+            <Plus className="h-3.5 w-3.5" /> Pridať odpoveď
           </Button>
         </div>
       )}
+
 
       {(draft.question_type === "scale_1_5" ||
         draft.question_type === "scale_0_10" ||

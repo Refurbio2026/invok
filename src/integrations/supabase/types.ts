@@ -509,6 +509,7 @@ export type Database = {
           options: Json
           points: number
           position: number
+          question_description: string | null
           question_text: string
           question_type: string
           scale_labels: Json | null
@@ -527,6 +528,7 @@ export type Database = {
           options?: Json
           points?: number
           position: number
+          question_description?: string | null
           question_text: string
           question_type?: string
           scale_labels?: Json | null
@@ -545,6 +547,7 @@ export type Database = {
           options?: Json
           points?: number
           position?: number
+          question_description?: string | null
           question_text?: string
           question_type?: string
           scale_labels?: Json | null
@@ -612,6 +615,7 @@ export type Database = {
         Row: {
           allow_retake: boolean
           anonymous_allowed: boolean
+          completion_text: string | null
           created_at: string
           created_by: string | null
           description: string | null
@@ -625,6 +629,7 @@ export type Database = {
           save_to_school_report: boolean
           show_result_to_student: boolean
           slug: string
+          start_button_text: string | null
           status: string
           title: string
           type: string
@@ -633,6 +638,7 @@ export type Database = {
         Insert: {
           allow_retake?: boolean
           anonymous_allowed?: boolean
+          completion_text?: string | null
           created_at?: string
           created_by?: string | null
           description?: string | null
@@ -646,6 +652,7 @@ export type Database = {
           save_to_school_report?: boolean
           show_result_to_student?: boolean
           slug: string
+          start_button_text?: string | null
           status?: string
           title: string
           type?: string
@@ -654,6 +661,7 @@ export type Database = {
         Update: {
           allow_retake?: boolean
           anonymous_allowed?: boolean
+          completion_text?: string | null
           created_at?: string
           created_by?: string | null
           description?: string | null
@@ -667,6 +675,7 @@ export type Database = {
           save_to_school_report?: boolean
           show_result_to_student?: boolean
           slug?: string
+          start_button_text?: string | null
           status?: string
           title?: string
           type?: string

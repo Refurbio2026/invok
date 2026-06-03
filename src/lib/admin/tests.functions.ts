@@ -128,6 +128,8 @@ const baseTestFields = {
   duration_min: z.number().int().min(1).max(240).nullable().optional(),
   description: z.string().max(2000).nullable().optional(),
   instructions: z.string().max(4000).nullable().optional(),
+  completion_text: z.string().max(2000).nullable().optional(),
+  start_button_text: z.string().max(60).nullable().optional(),
   module_id: z.string().uuid().nullable().optional(),
   show_result_to_student: z.boolean().optional(),
   save_to_school_report: z.boolean().optional(),
@@ -184,14 +186,45 @@ export const updateTest = createServerFn({ method: "POST" })
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { id, ...patch } = data as any;
 
-    // Pri publikovaní validuj že test má aspoň jednu otázku
+    // Pri publikovaní validuj test komplexne
     if (patch.status === "published") {
-      const { count } = await supabaseAdmin
+      const { data: testRow } = await supabaseAdmin
+        .from("tests")
+        .select("title")
+        .eq("id", id)
+        .single();
+      const finalTitle = (patch.title ?? testRow?.title ?? "").trim();
+      if (!finalTitle) {
+        throw new Error("Test musí mať názov.");
+      }
+      const { data: qs } = await supabaseAdmin
         .from("test_questions")
-        .select("id", { count: "exact", head: true })
+        .select("id,question_text,question_type,options,correct_keys,is_required")
         .eq("test_id", id);
-      if (!count || count === 0) {
+      if (!qs || qs.length === 0) {
         throw new Error("Test nemá žiadne otázky — najskôr ich pridajte.");
+      }
+      for (const q of qs as any[]) {
+        const idx = `Otázka #${(qs as any[]).indexOf(q) + 1}`;
+        if (q.is_required !== false && !String(q.question_text ?? "").trim()) {
+          throw new Error(`${idx}: chýba text otázky.`);
+        }
+        const opts = Array.isArray(q.options) ? q.options : [];
+        const correct = Array.isArray(q.correct_keys) ? q.correct_keys : [];
+        if (q.question_type === "single" || q.question_type === "multi") {
+          if (opts.length < 2) {
+            throw new Error(`${idx}: musí mať aspoň 2 odpovede.`);
+          }
+          if (q.question_type === "single" && correct.length !== 1) {
+            throw new Error(`${idx}: musí mať označenú práve jednu správnu odpoveď.`);
+          }
+          if (q.question_type === "multi" && correct.length < 1) {
+            throw new Error(`${idx}: musí mať označenú aspoň jednu správnu odpoveď.`);
+          }
+        }
+        if (q.question_type === "yes_no" && opts.length < 2) {
+          throw new Error(`${idx}: typ Áno/Nie musí mať dve možnosti.`);
+        }
       }
     }
     const { error } = await supabaseAdmin.from("tests").update(patch).eq("id", id);
@@ -271,6 +304,7 @@ export const saveQuestion = createServerFn({ method: "POST" })
         test_id: z.string().uuid(),
         position: z.number().int().min(1).max(500),
         question_text: z.string().min(1).max(2000),
+        question_description: z.string().max(2000).nullable().optional(),
         question_type: z.enum(QUESTION_TYPES).default("single"),
         competency: z.string().max(120).nullable().optional(),
         options: z.array(optionSchema).max(20).default([]),
@@ -316,6 +350,34 @@ export const deleteQuestion = createServerFn({ method: "POST" })
       .delete()
       .eq("id", data.id);
     if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+export const duplicateQuestion = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((i) => z.object({ id: z.string().uuid() }).parse(i))
+  .handler(async ({ data, context }) => {
+    await assertAdminish(context.supabase, context.userId);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: src, error } = await supabaseAdmin
+      .from("test_questions")
+      .select("*")
+      .eq("id", data.id)
+      .single();
+    if (error) throw new Error(error.message);
+    const { id: _i, created_at: _c, updated_at: _u, ...rest } = src as any;
+    const { count } = await supabaseAdmin
+      .from("test_questions")
+      .select("id", { count: "exact", head: true })
+      .eq("test_id", src.test_id);
+    const { error: insErr } = await supabaseAdmin
+      .from("test_questions")
+      .insert({
+        ...rest,
+        position: (count ?? 0) + 1,
+        question_text: `${src.question_text} (kópia)`,
+      });
+    if (insErr) throw new Error(insErr.message);
     return { ok: true };
   });
 
