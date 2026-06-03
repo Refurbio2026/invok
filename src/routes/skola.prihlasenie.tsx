@@ -1,11 +1,12 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
+import { z } from "zod";
 import { AuthShell } from "@/components/invok/AuthShell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { loginStub } from "@/lib/auth-stub";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/skola/prihlasenie")({
   head: () => ({ meta: [{ title: "Prihlásenie školy – INVOK" }] }),
@@ -15,33 +16,42 @@ export const Route = createFileRoute("/skola/prihlasenie")({
 function SkolaLogin() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
-    setLoading(true);
-    try {
-      await loginStub({
-        role: "skola",
+    const parsed = z
+      .object({ email: z.string().email(), password: z.string().min(8) })
+      .safeParse({
         email: String(fd.get("email") ?? ""),
         password: String(fd.get("password") ?? ""),
       });
+    if (!parsed.success) {
+      toast.error(parsed.error.issues[0].message);
+      return;
+    }
+    setLoading(true);
+    try {
+      const { error } = await supabase.auth.signInWithPassword(parsed.data);
+      if (error) throw error;
       navigate({ to: "/skola/dashboard" });
-    } catch {
-      toast.error("Prihlásenie zlyhalo.");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Prihlásenie zlyhalo.");
     } finally {
       setLoading(false);
     }
   };
+
   return (
     <AuthShell title="Prihlásenie školy" subtitle="Prístup pre koordinátora školy.">
       <form onSubmit={onSubmit} className="space-y-4">
         <div>
-          <Label htmlFor="email">E-mail alebo používateľský kód</Label>
-          <Input id="email" name="email" required className="mt-1.5" />
+          <Label htmlFor="email">E-mail</Label>
+          <Input id="email" name="email" type="email" required className="mt-1.5" />
         </div>
         <div>
           <Label htmlFor="password">Heslo</Label>
-          <Input id="password" name="password" type="password" required className="mt-1.5" />
+          <Input id="password" name="password" type="password" required minLength={8} className="mt-1.5" />
         </div>
         <Button type="submit" disabled={loading} className="w-full rounded-full">
           {loading ? "Prihlasujem…" : "Prihlásiť sa"}
@@ -50,9 +60,6 @@ function SkolaLogin() {
           <Link to="/prihlasenie" className="text-muted-foreground hover:text-primary">
             Späť na výber
           </Link>
-          <a href="#" className="text-primary hover:underline">
-            Zabudnuté heslo
-          </a>
         </div>
         <p className="text-xs text-muted-foreground text-center pt-2">
           Ešte nie ste v programe?{" "}
