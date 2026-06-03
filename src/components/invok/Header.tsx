@@ -42,7 +42,11 @@ function NavItem({
         if (el) {
           const headerOffset = 80;
           const top = el.getBoundingClientRect().top + window.scrollY - headerOffset;
-          window.scrollTo({ top, behavior: "auto" });
+          const html = document.documentElement;
+          const previousScrollBehavior = html.style.scrollBehavior;
+          html.style.scrollBehavior = "auto";
+          window.scrollTo(0, top);
+          html.style.scrollBehavior = previousScrollBehavior;
           history.replaceState(null, "", `#${targetId}`);
         }
         onClick?.();
