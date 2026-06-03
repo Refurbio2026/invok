@@ -31,6 +31,7 @@ import { Route as AdminPrihlasenieRouteImport } from './routes/admin.prihlasenie
 import { Route as ZiakTestTestIdRouteImport } from './routes/ziak.test.$testId'
 import { Route as AuthenticatedAdminZiadostiRouteImport } from './routes/_authenticated/admin.ziadosti'
 import { Route as AuthenticatedAdminZiaciRouteImport } from './routes/_authenticated/admin.ziaci'
+import { Route as AuthenticatedAdminVysledkyRouteImport } from './routes/_authenticated/admin.vysledky'
 import { Route as AuthenticatedAdminTriedyRouteImport } from './routes/_authenticated/admin.triedy'
 import { Route as AuthenticatedAdminTestyRouteImport } from './routes/_authenticated/admin.testy'
 import { Route as AuthenticatedAdminSkolyRouteImport } from './routes/_authenticated/admin.skoly'
@@ -147,6 +148,12 @@ const AuthenticatedAdminZiaciRoute = AuthenticatedAdminZiaciRouteImport.update({
   path: '/admin/ziaci',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminVysledkyRoute =
+  AuthenticatedAdminVysledkyRouteImport.update({
+    id: '/admin/vysledky',
+    path: '/admin/vysledky',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminTriedyRoute =
   AuthenticatedAdminTriedyRouteImport.update({
     id: '/admin/triedy',
@@ -199,6 +206,7 @@ export interface FileRoutesByFullPath {
   '/admin/skoly': typeof AuthenticatedAdminSkolyRoute
   '/admin/testy': typeof AuthenticatedAdminTestyRouteWithChildren
   '/admin/triedy': typeof AuthenticatedAdminTriedyRoute
+  '/admin/vysledky': typeof AuthenticatedAdminVysledkyRoute
   '/admin/ziaci': typeof AuthenticatedAdminZiaciRoute
   '/admin/ziadosti': typeof AuthenticatedAdminZiadostiRoute
   '/ziak/test/$testId': typeof ZiakTestTestIdRoute
@@ -227,6 +235,7 @@ export interface FileRoutesByTo {
   '/admin/skoly': typeof AuthenticatedAdminSkolyRoute
   '/admin/testy': typeof AuthenticatedAdminTestyRouteWithChildren
   '/admin/triedy': typeof AuthenticatedAdminTriedyRoute
+  '/admin/vysledky': typeof AuthenticatedAdminVysledkyRoute
   '/admin/ziaci': typeof AuthenticatedAdminZiaciRoute
   '/admin/ziadosti': typeof AuthenticatedAdminZiadostiRoute
   '/ziak/test/$testId': typeof ZiakTestTestIdRoute
@@ -257,6 +266,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/skoly': typeof AuthenticatedAdminSkolyRoute
   '/_authenticated/admin/testy': typeof AuthenticatedAdminTestyRouteWithChildren
   '/_authenticated/admin/triedy': typeof AuthenticatedAdminTriedyRoute
+  '/_authenticated/admin/vysledky': typeof AuthenticatedAdminVysledkyRoute
   '/_authenticated/admin/ziaci': typeof AuthenticatedAdminZiaciRoute
   '/_authenticated/admin/ziadosti': typeof AuthenticatedAdminZiadostiRoute
   '/ziak/test/$testId': typeof ZiakTestTestIdRoute
@@ -287,6 +297,7 @@ export interface FileRouteTypes {
     | '/admin/skoly'
     | '/admin/testy'
     | '/admin/triedy'
+    | '/admin/vysledky'
     | '/admin/ziaci'
     | '/admin/ziadosti'
     | '/ziak/test/$testId'
@@ -315,6 +326,7 @@ export interface FileRouteTypes {
     | '/admin/skoly'
     | '/admin/testy'
     | '/admin/triedy'
+    | '/admin/vysledky'
     | '/admin/ziaci'
     | '/admin/ziadosti'
     | '/ziak/test/$testId'
@@ -344,6 +356,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/skoly'
     | '/_authenticated/admin/testy'
     | '/_authenticated/admin/triedy'
+    | '/_authenticated/admin/vysledky'
     | '/_authenticated/admin/ziaci'
     | '/_authenticated/admin/ziadosti'
     | '/ziak/test/$testId'
@@ -529,6 +542,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminZiaciRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/vysledky': {
+      id: '/_authenticated/admin/vysledky'
+      path: '/admin/vysledky'
+      fullPath: '/admin/vysledky'
+      preLoaderRoute: typeof AuthenticatedAdminVysledkyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/triedy': {
       id: '/_authenticated/admin/triedy'
       path: '/admin/triedy'
@@ -586,6 +606,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminSkolyRoute: typeof AuthenticatedAdminSkolyRoute
   AuthenticatedAdminTestyRoute: typeof AuthenticatedAdminTestyRouteWithChildren
   AuthenticatedAdminTriedyRoute: typeof AuthenticatedAdminTriedyRoute
+  AuthenticatedAdminVysledkyRoute: typeof AuthenticatedAdminVysledkyRoute
   AuthenticatedAdminZiaciRoute: typeof AuthenticatedAdminZiaciRoute
   AuthenticatedAdminZiadostiRoute: typeof AuthenticatedAdminZiadostiRoute
 }
@@ -595,6 +616,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminSkolyRoute: AuthenticatedAdminSkolyRoute,
   AuthenticatedAdminTestyRoute: AuthenticatedAdminTestyRouteWithChildren,
   AuthenticatedAdminTriedyRoute: AuthenticatedAdminTriedyRoute,
+  AuthenticatedAdminVysledkyRoute: AuthenticatedAdminVysledkyRoute,
   AuthenticatedAdminZiaciRoute: AuthenticatedAdminZiaciRoute,
   AuthenticatedAdminZiadostiRoute: AuthenticatedAdminZiadostiRoute,
 }
@@ -627,3 +649,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
