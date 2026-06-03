@@ -307,18 +307,49 @@ function BlogEditor() {
 
             <div className="rounded-xl border border-border bg-card p-4 space-y-3">
               <h3 className="font-semibold text-sm">Titulný obrázok</h3>
-              <Input
-                value={form.cover_image_url}
-                onChange={(e) => update("cover_image_url", e.target.value)}
-                placeholder="https://…"
-              />
-              {form.cover_image_url && (
+              {form.cover_image_url ? (
                 <img
                   src={form.cover_image_url}
                   alt=""
                   className="rounded-lg w-full aspect-video object-cover border border-border"
                 />
+              ) : (
+                <div className="rounded-lg w-full aspect-video bg-muted flex items-center justify-center text-xs text-muted-foreground border border-dashed border-border">
+                  Bez obrázka
+                </div>
               )}
+              <div className="flex flex-wrap gap-2">
+                <ImagePickerDialog
+                  title="Titulný obrázok"
+                  onPick={(img) => update("cover_image_url", img.url)}
+                  trigger={
+                    <Button type="button" variant="outline" size="sm">
+                      {form.cover_image_url ? "Zmeniť obrázok" : "Vybrať obrázok"}
+                    </Button>
+                  }
+                />
+                {form.cover_image_url && (
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => update("cover_image_url", "")}
+                  >
+                    Odstrániť
+                  </Button>
+                )}
+              </div>
+              <details className="text-xs">
+                <summary className="cursor-pointer text-muted-foreground">
+                  Alebo zadať URL ručne
+                </summary>
+                <Input
+                  value={form.cover_image_url}
+                  onChange={(e) => update("cover_image_url", e.target.value)}
+                  placeholder="https://…"
+                  className="mt-2"
+                />
+              </details>
             </div>
 
             <div className="rounded-xl border border-border bg-card p-4 space-y-3">
