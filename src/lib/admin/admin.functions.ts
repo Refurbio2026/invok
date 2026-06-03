@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
 
-export type AppRole = "admin" | "editor" | "koordinator" | "viewer" | "skola";
+export type AppRole = "admin" | "editor" | "koordinator" | "viewer" | "skola" | "ucitel";
 
 // Vráti role aktuálneho používateľa. Ak ešte nie je obnovená session,
 // nezhodí UI 401 chybou, iba vráti neprihlásený stav.
