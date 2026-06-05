@@ -41,6 +41,7 @@ import { Route as AuthenticatedAdminGaleriaRouteImport } from './routes/_authent
 import { Route as AuthenticatedAdminDashboardRouteImport } from './routes/_authenticated/admin.dashboard'
 import { Route as AuthenticatedAdminVideaIndexRouteImport } from './routes/_authenticated/admin.videa.index'
 import { Route as AuthenticatedAdminBlogIndexRouteImport } from './routes/_authenticated/admin.blog.index'
+import { Route as AuthenticatedAdminVideaIdRouteImport } from './routes/_authenticated/admin.videa.$id'
 import { Route as AuthenticatedAdminTestyIdRouteImport } from './routes/_authenticated/admin.testy.$id'
 import { Route as AuthenticatedAdminBlogIdRouteImport } from './routes/_authenticated/admin.blog.$id'
 
@@ -212,6 +213,12 @@ const AuthenticatedAdminBlogIndexRoute =
     path: '/admin/blog/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAdminVideaIdRoute =
+  AuthenticatedAdminVideaIdRouteImport.update({
+    id: '/admin/videa/$id',
+    path: '/admin/videa/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminTestyIdRoute =
   AuthenticatedAdminTestyIdRouteImport.update({
     id: '/$id',
@@ -257,6 +264,7 @@ export interface FileRoutesByFullPath {
   '/ziak/test/$testId': typeof ZiakTestTestIdRoute
   '/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
   '/admin/testy/$id': typeof AuthenticatedAdminTestyIdRoute
+  '/admin/videa/$id': typeof AuthenticatedAdminVideaIdRoute
   '/admin/blog/': typeof AuthenticatedAdminBlogIndexRoute
   '/admin/videa/': typeof AuthenticatedAdminVideaIndexRoute
 }
@@ -292,6 +300,7 @@ export interface FileRoutesByTo {
   '/ziak/test/$testId': typeof ZiakTestTestIdRoute
   '/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
   '/admin/testy/$id': typeof AuthenticatedAdminTestyIdRoute
+  '/admin/videa/$id': typeof AuthenticatedAdminVideaIdRoute
   '/admin/blog': typeof AuthenticatedAdminBlogIndexRoute
   '/admin/videa': typeof AuthenticatedAdminVideaIndexRoute
 }
@@ -329,6 +338,7 @@ export interface FileRoutesById {
   '/ziak/test/$testId': typeof ZiakTestTestIdRoute
   '/_authenticated/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
   '/_authenticated/admin/testy/$id': typeof AuthenticatedAdminTestyIdRoute
+  '/_authenticated/admin/videa/$id': typeof AuthenticatedAdminVideaIdRoute
   '/_authenticated/admin/blog/': typeof AuthenticatedAdminBlogIndexRoute
   '/_authenticated/admin/videa/': typeof AuthenticatedAdminVideaIndexRoute
 }
@@ -366,6 +376,7 @@ export interface FileRouteTypes {
     | '/ziak/test/$testId'
     | '/admin/blog/$id'
     | '/admin/testy/$id'
+    | '/admin/videa/$id'
     | '/admin/blog/'
     | '/admin/videa/'
   fileRoutesByTo: FileRoutesByTo
@@ -401,6 +412,7 @@ export interface FileRouteTypes {
     | '/ziak/test/$testId'
     | '/admin/blog/$id'
     | '/admin/testy/$id'
+    | '/admin/videa/$id'
     | '/admin/blog'
     | '/admin/videa'
   id:
@@ -437,6 +449,7 @@ export interface FileRouteTypes {
     | '/ziak/test/$testId'
     | '/_authenticated/admin/blog/$id'
     | '/_authenticated/admin/testy/$id'
+    | '/_authenticated/admin/videa/$id'
     | '/_authenticated/admin/blog/'
     | '/_authenticated/admin/videa/'
   fileRoutesById: FileRoutesById
@@ -690,6 +703,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminBlogIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/videa/$id': {
+      id: '/_authenticated/admin/videa/$id'
+      path: '/admin/videa/$id'
+      fullPath: '/admin/videa/$id'
+      preLoaderRoute: typeof AuthenticatedAdminVideaIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/testy/$id': {
       id: '/_authenticated/admin/testy/$id'
       path: '/$id'
@@ -733,6 +753,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminZiaciRoute: typeof AuthenticatedAdminZiaciRoute
   AuthenticatedAdminZiadostiRoute: typeof AuthenticatedAdminZiadostiRoute
   AuthenticatedAdminBlogIdRoute: typeof AuthenticatedAdminBlogIdRoute
+  AuthenticatedAdminVideaIdRoute: typeof AuthenticatedAdminVideaIdRoute
   AuthenticatedAdminBlogIndexRoute: typeof AuthenticatedAdminBlogIndexRoute
   AuthenticatedAdminVideaIndexRoute: typeof AuthenticatedAdminVideaIndexRoute
 }
@@ -749,6 +770,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminZiaciRoute: AuthenticatedAdminZiaciRoute,
   AuthenticatedAdminZiadostiRoute: AuthenticatedAdminZiadostiRoute,
   AuthenticatedAdminBlogIdRoute: AuthenticatedAdminBlogIdRoute,
+  AuthenticatedAdminVideaIdRoute: AuthenticatedAdminVideaIdRoute,
   AuthenticatedAdminBlogIndexRoute: AuthenticatedAdminBlogIndexRoute,
   AuthenticatedAdminVideaIndexRoute: AuthenticatedAdminVideaIndexRoute,
 }
