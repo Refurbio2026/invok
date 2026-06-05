@@ -39,7 +39,9 @@ import { Route as AuthenticatedAdminReportyRouteImport } from './routes/_authent
 import { Route as AuthenticatedAdminPouzivateliaRouteImport } from './routes/_authenticated/admin.pouzivatelia'
 import { Route as AuthenticatedAdminGaleriaRouteImport } from './routes/_authenticated/admin.galeria'
 import { Route as AuthenticatedAdminDashboardRouteImport } from './routes/_authenticated/admin.dashboard'
+import { Route as AuthenticatedAdminVideaIndexRouteImport } from './routes/_authenticated/admin.videa.index'
 import { Route as AuthenticatedAdminBlogIndexRouteImport } from './routes/_authenticated/admin.blog.index'
+import { Route as AuthenticatedAdminVideaIdRouteImport } from './routes/_authenticated/admin.videa.$id'
 import { Route as AuthenticatedAdminTestyIdRouteImport } from './routes/_authenticated/admin.testy.$id'
 import { Route as AuthenticatedAdminBlogIdRouteImport } from './routes/_authenticated/admin.blog.$id'
 
@@ -199,10 +201,22 @@ const AuthenticatedAdminDashboardRoute =
     path: '/admin/dashboard',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAdminVideaIndexRoute =
+  AuthenticatedAdminVideaIndexRouteImport.update({
+    id: '/admin/videa/',
+    path: '/admin/videa/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminBlogIndexRoute =
   AuthenticatedAdminBlogIndexRouteImport.update({
     id: '/admin/blog/',
     path: '/admin/blog/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminVideaIdRoute =
+  AuthenticatedAdminVideaIdRouteImport.update({
+    id: '/admin/videa/$id',
+    path: '/admin/videa/$id',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedAdminTestyIdRoute =
@@ -250,7 +264,9 @@ export interface FileRoutesByFullPath {
   '/ziak/test/$testId': typeof ZiakTestTestIdRoute
   '/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
   '/admin/testy/$id': typeof AuthenticatedAdminTestyIdRoute
+  '/admin/videa/$id': typeof AuthenticatedAdminVideaIdRoute
   '/admin/blog/': typeof AuthenticatedAdminBlogIndexRoute
+  '/admin/videa/': typeof AuthenticatedAdminVideaIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -284,7 +300,9 @@ export interface FileRoutesByTo {
   '/ziak/test/$testId': typeof ZiakTestTestIdRoute
   '/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
   '/admin/testy/$id': typeof AuthenticatedAdminTestyIdRoute
+  '/admin/videa/$id': typeof AuthenticatedAdminVideaIdRoute
   '/admin/blog': typeof AuthenticatedAdminBlogIndexRoute
+  '/admin/videa': typeof AuthenticatedAdminVideaIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -320,7 +338,9 @@ export interface FileRoutesById {
   '/ziak/test/$testId': typeof ZiakTestTestIdRoute
   '/_authenticated/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
   '/_authenticated/admin/testy/$id': typeof AuthenticatedAdminTestyIdRoute
+  '/_authenticated/admin/videa/$id': typeof AuthenticatedAdminVideaIdRoute
   '/_authenticated/admin/blog/': typeof AuthenticatedAdminBlogIndexRoute
+  '/_authenticated/admin/videa/': typeof AuthenticatedAdminVideaIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -356,7 +376,9 @@ export interface FileRouteTypes {
     | '/ziak/test/$testId'
     | '/admin/blog/$id'
     | '/admin/testy/$id'
+    | '/admin/videa/$id'
     | '/admin/blog/'
+    | '/admin/videa/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -390,7 +412,9 @@ export interface FileRouteTypes {
     | '/ziak/test/$testId'
     | '/admin/blog/$id'
     | '/admin/testy/$id'
+    | '/admin/videa/$id'
     | '/admin/blog'
+    | '/admin/videa'
   id:
     | '__root__'
     | '/'
@@ -425,7 +449,9 @@ export interface FileRouteTypes {
     | '/ziak/test/$testId'
     | '/_authenticated/admin/blog/$id'
     | '/_authenticated/admin/testy/$id'
+    | '/_authenticated/admin/videa/$id'
     | '/_authenticated/admin/blog/'
+    | '/_authenticated/admin/videa/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -663,11 +689,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/videa/': {
+      id: '/_authenticated/admin/videa/'
+      path: '/admin/videa'
+      fullPath: '/admin/videa/'
+      preLoaderRoute: typeof AuthenticatedAdminVideaIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/blog/': {
       id: '/_authenticated/admin/blog/'
       path: '/admin/blog'
       fullPath: '/admin/blog/'
       preLoaderRoute: typeof AuthenticatedAdminBlogIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/videa/$id': {
+      id: '/_authenticated/admin/videa/$id'
+      path: '/admin/videa/$id'
+      fullPath: '/admin/videa/$id'
+      preLoaderRoute: typeof AuthenticatedAdminVideaIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/admin/testy/$id': {
@@ -713,7 +753,9 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminZiaciRoute: typeof AuthenticatedAdminZiaciRoute
   AuthenticatedAdminZiadostiRoute: typeof AuthenticatedAdminZiadostiRoute
   AuthenticatedAdminBlogIdRoute: typeof AuthenticatedAdminBlogIdRoute
+  AuthenticatedAdminVideaIdRoute: typeof AuthenticatedAdminVideaIdRoute
   AuthenticatedAdminBlogIndexRoute: typeof AuthenticatedAdminBlogIndexRoute
+  AuthenticatedAdminVideaIndexRoute: typeof AuthenticatedAdminVideaIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -728,7 +770,9 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminZiaciRoute: AuthenticatedAdminZiaciRoute,
   AuthenticatedAdminZiadostiRoute: AuthenticatedAdminZiadostiRoute,
   AuthenticatedAdminBlogIdRoute: AuthenticatedAdminBlogIdRoute,
+  AuthenticatedAdminVideaIdRoute: AuthenticatedAdminVideaIdRoute,
   AuthenticatedAdminBlogIndexRoute: AuthenticatedAdminBlogIndexRoute,
+  AuthenticatedAdminVideaIndexRoute: AuthenticatedAdminVideaIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
