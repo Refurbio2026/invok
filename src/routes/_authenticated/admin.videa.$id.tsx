@@ -419,14 +419,16 @@ function VideoEditor() {
                 </div>
               )}
               <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="flex-1"
-                  onClick={() => setPickerOpen(true)}
-                >
-                  Vybrať z Fotogalérie
-                </Button>
+                <ImagePickerDialog
+                  trigger={
+                    <Button variant="outline" size="sm" className="flex-1">
+                      Vybrať z Fotogalérie
+                    </Button>
+                  }
+                  onPick={(img: PickedImage) =>
+                    setForm((f) => ({ ...f, thumbnail_url: img.url }))
+                  }
+                />
                 {form.thumbnail_url && (
                   <Button
                     variant="ghost"
@@ -448,14 +450,6 @@ function VideoEditor() {
           </div>
         </div>
 
-        <ImagePickerDialog
-          open={pickerOpen}
-          onOpenChange={setPickerOpen}
-          onPick={(img: PickedImage) => {
-            setForm((f) => ({ ...f, thumbnail_url: img.url }));
-            setPickerOpen(false);
-          }}
-        />
       </div>
     </AdminLayout>
   );
