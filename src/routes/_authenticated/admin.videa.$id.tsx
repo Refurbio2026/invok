@@ -109,7 +109,6 @@ function VideoEditor() {
   });
 
   const [form, setForm] = useState<FormState>(emptyForm);
-  const [pickerOpen, setPickerOpen] = useState(false);
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
