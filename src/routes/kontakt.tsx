@@ -4,14 +4,8 @@ import { z } from "zod";
 import {
   Mail,
   Phone,
-  MapPin,
-  Linkedin,
-  Facebook,
-  Instagram,
   Check,
   ArrowRight,
-  MessageSquare,
-  Map as MapIcon,
 } from "lucide-react";
 import { Header } from "@/components/invok/Header";
 import { Footer } from "@/components/invok/Footer";
@@ -50,7 +44,6 @@ function KontaktPage() {
         <ContactCards />
         <SchoolFormSection />
         <PartnershipSection />
-        <MapSection />
         <FaqSection />
       </main>
       <Footer />
@@ -93,28 +86,15 @@ function ContactCards() {
     {
       I: Phone,
       label: "Telefón",
-      value: "+421 900 000 000",
+      value: "+421 905 266 681",
       hint: "Po – Pi · 9:00 – 17:00",
-      href: "tel:+421900000000",
-    },
-    {
-      I: MapPin,
-      label: "Adresa",
-      value: "Hlavná 1, 811 01 Bratislava",
-      hint: "Slovenská republika",
-    },
-    {
-      I: MessageSquare,
-      label: "Sociálne siete",
-      value: "LinkedIn · Facebook · Instagram",
-      hint: "Sledujte novinky z programu",
-      social: true,
+      href: "tel:+421905266681",
     },
   ];
   return (
     <section className="py-16 md:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 max-w-2xl mx-auto">
           {cards.map((c) => (
             <div
               key={c.label}
@@ -126,51 +106,18 @@ function ContactCards() {
               <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 {c.label}
               </div>
-              {c.href ? (
-                <a
-                  href={c.href}
-                  className="mt-1 block font-semibold text-foreground hover:text-primary transition-colors break-words"
-                >
-                  {c.value}
-                </a>
-              ) : (
-                <div className="mt-1 font-semibold text-foreground break-words">
-                  {c.value}
-                </div>
-              )}
+              <a
+                href={c.href}
+                className="mt-1 block font-semibold text-foreground hover:text-primary transition-colors break-words"
+              >
+                {c.value}
+              </a>
               <p className="mt-2 text-xs text-muted-foreground">{c.hint}</p>
-              {c.social && (
-                <div className="mt-3 flex gap-2">
-                  <SocialIcon I={Linkedin} href="#" label="LinkedIn" />
-                  <SocialIcon I={Facebook} href="#" label="Facebook" />
-                  <SocialIcon I={Instagram} href="#" label="Instagram" />
-                </div>
-              )}
             </div>
           ))}
         </div>
       </div>
     </section>
-  );
-}
-
-function SocialIcon({
-  I,
-  href,
-  label,
-}: {
-  I: typeof Linkedin;
-  href: string;
-  label: string;
-}) {
-  return (
-    <a
-      href={href}
-      aria-label={label}
-      className="h-9 w-9 rounded-lg border border-border grid place-items-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
-    >
-      <I className="h-4 w-4" />
-    </a>
   );
 }
 
@@ -352,26 +299,6 @@ function PartnershipSection() {
   );
 }
 
-/* ------------------ MAP ------------------ */
-function MapSection() {
-  return (
-    <section className="pb-16 md:pb-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-2xl border border-border bg-muted/40 aspect-[21/9] grid place-items-center text-center p-8">
-          <div>
-            <div className="mx-auto h-12 w-12 rounded-xl bg-background grid place-items-center mb-3 shadow-soft">
-              <MapIcon className="h-6 w-6 text-primary" />
-            </div>
-            <div className="font-semibold">Mapa sídla tímu INVOK</div>
-            <p className="text-sm text-muted-foreground mt-1">
-              Pripravené miesto pre vloženie interaktívnej mapy.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ------------------ FAQ ------------------ */
 function FaqSection() {
