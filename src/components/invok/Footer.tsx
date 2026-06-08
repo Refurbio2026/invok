@@ -54,6 +54,9 @@ export function Footer() {
           <span>© 2026 INVOK · Všetky práva vyhradené</span>
           <span>Projekt podporený z Programu Slovensko a Európskej únie</span>
         </div>
+        <div className="mt-4 text-xs text-white/40 text-center">
+          Projekt INVOK realizuje PSC n.o. – nezisková organizácia zameraná na rozvoj vzdelávania, kompetencií a príležitostí pre mladých ľudí.
+        </div>
       </div>
     </footer>
   );
