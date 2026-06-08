@@ -5,7 +5,7 @@ import {
   Building2,
   Users,
   GraduationCap,
-  FileText,
+  
   BarChart3,
   Newspaper,
   Video,
@@ -39,7 +39,7 @@ const adminNav: NavItem[] = [
   { to: "/admin/skoly", label: "Školy", icon: Building2 },
   { to: "/admin/triedy", label: "Triedy", icon: Users },
   { to: "/admin/ziaci", label: "Žiaci", icon: GraduationCap },
-  { to: "/admin/testy", label: "Testy", icon: FileText },
+  
   { to: "/admin/vysledky", label: "Výsledky", icon: BarChart3 },
   { to: "/admin/reporty", label: "Reporty", icon: BarChart3 },
   { to: "/admin/blog", label: "Blog", icon: Newspaper },
