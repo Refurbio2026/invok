@@ -169,6 +169,14 @@ function WhySchools() {
   ];
   return (
     <Section id="o-programe" eyebrow="O programe" title="Prečo sa školy zapájajú do programu INVOK?">
+      <div className="max-w-3xl mb-10 sm:mb-14">
+        <p className="text-lg text-muted-foreground leading-relaxed">
+          INVOK je vzdelávací program zameraný na rozvoj kľúčových kompetencií žiakov základných škôl. Prostredníctvom interaktívnych modulov, praktických aktivít a merania kompetencií pomáha mladým ľuďom rozvíjať kritické myslenie, podnikavosť, tímovú spoluprácu, digitálne zručnosti a schopnosť orientovať sa v súčasnom svete.
+        </p>
+        <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
+          Projekt realizuje PSC n.o., nezisková organizácia zameraná na podporu vzdelávania, rozvoja mladých ľudí a budovania kompetencií potrebných pre život a budúce uplatnenie.
+        </p>
+      </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {items.map(({ i: I, t }) => (
           <div key={t} className="rounded-2xl bg-card border border-border p-6 shadow-soft hover:shadow-card transition">
