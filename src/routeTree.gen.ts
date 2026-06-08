@@ -10,7 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RegistraciaSkolyRouteImport } from './routes/registracia-skoly'
+import { Route as PristupnostRouteImport } from './routes/pristupnost'
 import { Route as PrihlasenieRouteImport } from './routes/prihlasenie'
+import { Route as PodmienkyPouzivaniaRouteImport } from './routes/podmienky-pouzivania'
+import { Route as OchranaOsobnychUdajovRouteImport } from './routes/ochrana-osobnych-udajov'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
@@ -50,9 +53,24 @@ const RegistraciaSkolyRoute = RegistraciaSkolyRouteImport.update({
   path: '/registracia-skoly',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PristupnostRoute = PristupnostRouteImport.update({
+  id: '/pristupnost',
+  path: '/pristupnost',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrihlasenieRoute = PrihlasenieRouteImport.update({
   id: '/prihlasenie',
   path: '/prihlasenie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PodmienkyPouzivaniaRoute = PodmienkyPouzivaniaRouteImport.update({
+  id: '/podmienky-pouzivania',
+  path: '/podmienky-pouzivania',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OchranaOsobnychUdajovRoute = OchranaOsobnychUdajovRouteImport.update({
+  id: '/ochrana-osobnych-udajov',
+  path: '/ochrana-osobnych-udajov',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KontaktRoute = KontaktRouteImport.update({
@@ -235,7 +253,10 @@ const AuthenticatedAdminBlogIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/kontakt': typeof KontaktRoute
+  '/ochrana-osobnych-udajov': typeof OchranaOsobnychUdajovRoute
+  '/podmienky-pouzivania': typeof PodmienkyPouzivaniaRoute
   '/prihlasenie': typeof PrihlasenieRoute
+  '/pristupnost': typeof PristupnostRoute
   '/registracia-skoly': typeof RegistraciaSkolyRoute
   '/admin/prihlasenie': typeof AdminPrihlasenieRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
@@ -271,7 +292,10 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/kontakt': typeof KontaktRoute
+  '/ochrana-osobnych-udajov': typeof OchranaOsobnychUdajovRoute
+  '/podmienky-pouzivania': typeof PodmienkyPouzivaniaRoute
   '/prihlasenie': typeof PrihlasenieRoute
+  '/pristupnost': typeof PristupnostRoute
   '/registracia-skoly': typeof RegistraciaSkolyRoute
   '/admin/prihlasenie': typeof AdminPrihlasenieRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
@@ -309,7 +333,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/kontakt': typeof KontaktRoute
+  '/ochrana-osobnych-udajov': typeof OchranaOsobnychUdajovRoute
+  '/podmienky-pouzivania': typeof PodmienkyPouzivaniaRoute
   '/prihlasenie': typeof PrihlasenieRoute
+  '/pristupnost': typeof PristupnostRoute
   '/registracia-skoly': typeof RegistraciaSkolyRoute
   '/admin/prihlasenie': typeof AdminPrihlasenieRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
@@ -347,7 +374,10 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/kontakt'
+    | '/ochrana-osobnych-udajov'
+    | '/podmienky-pouzivania'
     | '/prihlasenie'
+    | '/pristupnost'
     | '/registracia-skoly'
     | '/admin/prihlasenie'
     | '/modul/ukazka'
@@ -383,7 +413,10 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/kontakt'
+    | '/ochrana-osobnych-udajov'
+    | '/podmienky-pouzivania'
     | '/prihlasenie'
+    | '/pristupnost'
     | '/registracia-skoly'
     | '/admin/prihlasenie'
     | '/modul/ukazka'
@@ -420,7 +453,10 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/kontakt'
+    | '/ochrana-osobnych-udajov'
+    | '/podmienky-pouzivania'
     | '/prihlasenie'
+    | '/pristupnost'
     | '/registracia-skoly'
     | '/admin/prihlasenie'
     | '/modul/ukazka'
@@ -458,7 +494,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   KontaktRoute: typeof KontaktRoute
+  OchranaOsobnychUdajovRoute: typeof OchranaOsobnychUdajovRoute
+  PodmienkyPouzivaniaRoute: typeof PodmienkyPouzivaniaRoute
   PrihlasenieRoute: typeof PrihlasenieRoute
+  PristupnostRoute: typeof PristupnostRoute
   RegistraciaSkolyRoute: typeof RegistraciaSkolyRoute
   AdminPrihlasenieRoute: typeof AdminPrihlasenieRoute
   ModulUkazkaRoute: typeof ModulUkazkaRoute
@@ -486,11 +525,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegistraciaSkolyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pristupnost': {
+      id: '/pristupnost'
+      path: '/pristupnost'
+      fullPath: '/pristupnost'
+      preLoaderRoute: typeof PristupnostRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/prihlasenie': {
       id: '/prihlasenie'
       path: '/prihlasenie'
       fullPath: '/prihlasenie'
       preLoaderRoute: typeof PrihlasenieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/podmienky-pouzivania': {
+      id: '/podmienky-pouzivania'
+      path: '/podmienky-pouzivania'
+      fullPath: '/podmienky-pouzivania'
+      preLoaderRoute: typeof PodmienkyPouzivaniaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ochrana-osobnych-udajov': {
+      id: '/ochrana-osobnych-udajov'
+      path: '/ochrana-osobnych-udajov'
+      fullPath: '/ochrana-osobnych-udajov'
+      preLoaderRoute: typeof OchranaOsobnychUdajovRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/kontakt': {
@@ -782,7 +842,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   KontaktRoute: KontaktRoute,
+  OchranaOsobnychUdajovRoute: OchranaOsobnychUdajovRoute,
+  PodmienkyPouzivaniaRoute: PodmienkyPouzivaniaRoute,
   PrihlasenieRoute: PrihlasenieRoute,
+  PristupnostRoute: PristupnostRoute,
   RegistraciaSkolyRoute: RegistraciaSkolyRoute,
   AdminPrihlasenieRoute: AdminPrihlasenieRoute,
   ModulUkazkaRoute: ModulUkazkaRoute,
@@ -803,13 +866,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
