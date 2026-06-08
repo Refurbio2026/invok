@@ -44,10 +44,9 @@ export function Footer() {
           <FooterCol title="Právne" items={legalItems} />
         </div>
 
-        <div className="mt-12 pt-8 border-t border-white/10 grid gap-4 md:grid-cols-3 text-sm text-white/60">
+        <div className="mt-12 pt-8 border-t border-white/10 grid gap-4 md:grid-cols-2 text-sm text-white/60">
           <span className="inline-flex items-center gap-2"><Mail className="h-4 w-4" />{"info@invok.sk"}</span>
-          <span className="inline-flex items-center gap-2"><Phone className="h-4 w-4" />{"+421 900 000 000"}</span>
-          <span className="inline-flex items-center gap-2"><MapPin className="h-4 w-4" />{"Hlavná 1, 811 01 Bratislava"}</span>
+          <span className="inline-flex items-center gap-2"><Phone className="h-4 w-4" />{"+421 905 266 681"}</span>
         </div>
 
         <div className="mt-8 flex flex-col sm:flex-row justify-between gap-2 text-xs text-white/50">
