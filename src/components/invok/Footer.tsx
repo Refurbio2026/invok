@@ -21,7 +21,6 @@ const usefulItems: FooterItem[] = [
 
 const legalItems: FooterItem[] = [
   { label: "Ochrana osobných údajov", href: "/ochrana-osobnych-udajov" },
-  { label: "GDPR", href: "/ochrana-osobnych-udajov" },
   { label: "Podmienky používania", href: "/podmienky-pouzivania" },
   { label: "Vyhlásenie o prístupnosti", href: "/pristupnost" },
 ];
