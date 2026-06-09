@@ -162,69 +162,6 @@ export const TESTS: Record<string, TestDef> = {
       "Silná stránka: jasná komunikácia, počúvanie a zvládanie konfliktov.",
     ),
   },
-  "financna-gramotnost": {
-    kind: "scored",
-    slug: "financna-gramotnost",
-    title: "Finančná gramotnosť",
-    description: "Praktické rozhodovanie o financiách a rozpočte.",
-    questions: [
-      {
-        q: "Máš 50 € a chceš si kúpiť slúchadlá za 40 € aj hru za 25 €. Čo je najrozumnejšie?",
-        options: [
-          { key: "A", text: "Kúpiť oboje a požičať si peniaze." },
-          { key: "B", text: "Vybrať si jednu vec alebo si ešte došetriť." },
-          { key: "C", text: "Minúť všetko hneď." },
-          { key: "D", text: "Kúpiť drahšiu vec, lebo je určite lepšia." },
-        ],
-        correct: "B",
-      },
-      {
-        q: "Čo znamená rozpočet?",
-        options: [
-          { key: "A", text: "Zoznam vecí, ktoré si chcem kúpiť." },
-          { key: "B", text: "Plán príjmov a výdavkov." },
-          { key: "C", text: "Peniaze od rodičov." },
-          { key: "D", text: "Účet v banke." },
-        ],
-        correct: "B",
-      },
-      {
-        q: "Ak si niečo kúpiš na splátky, znamená to:",
-        options: [
-          { key: "A", text: "Vec je zadarmo." },
-          { key: "B", text: "Zaplatíš ju postupne, často aj s navýšením ceny." },
-          { key: "C", text: "Nemusíš za ňu nikdy zaplatiť celú sumu." },
-          { key: "D", text: "Je vždy lacnejšia." },
-        ],
-        correct: "B",
-      },
-      {
-        q: "Prečo je dobré mať finančnú rezervu?",
-        options: [
-          { key: "A", text: "Aby som mohol minúť viac peňazí." },
-          { key: "B", text: "Aby som zvládol nečakané výdavky." },
-          { key: "C", text: "Aby som nemusel plánovať." },
-          { key: "D", text: "Aby som si mohol vždy kúpiť niečo drahé." },
-        ],
-        correct: "B",
-      },
-      {
-        q: "Čo je najlepší postup pred väčším nákupom?",
-        options: [
-          { key: "A", text: "Kúpiť hneď prvú možnosť." },
-          { key: "B", text: "Porovnať cenu, kvalitu, potrebu a dostupný rozpočet." },
-          { key: "C", text: "Riadiť sa len reklamou." },
-          { key: "D", text: "Kúpiť to, čo majú všetci ostatní." },
-        ],
-        correct: "B",
-      },
-    ],
-    evaluation: scoredEval(
-      "Odporúčanie: pracovať s rozpočtom, plánovaním výdavkov a rozlišovaním potrieb od želaní.",
-      "Odporúčanie: ďalej rozvíjať rozhodovanie pri nákupoch a tvorbu rezervy.",
-      "Silná stránka: zodpovedné finančné rozhodovanie a plánovanie.",
-    ),
-  },
   "timova-spolupraca": {
     kind: "scored",
     slug: "timova-spolupraca",
