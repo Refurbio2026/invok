@@ -99,14 +99,6 @@ export function Header() {
           >
             Prihlásenie
           </a>
-          <Button
-            asChild
-            className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-soft px-5"
-          >
-            <a href="/registracia-skoly" className="inline-flex items-center gap-2">
-              Registrovať školu <ArrowRight className="h-4 w-4" />
-            </a>
-          </Button>
         </div>
 
         <button
