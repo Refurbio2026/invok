@@ -71,7 +71,6 @@ function Page() {
         <TeamSection />
         <FundingSection />
         <ReadinessSection />
-        <RegistrationSection />
         <FaqSection />
         <PartnersSection />
         <ContactSection />
