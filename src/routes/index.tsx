@@ -253,7 +253,7 @@ function ModulesSection() {
       n: "Modul 1", t: "Podnikavosť a inovácie",
       d: "Žiaci sa učia identifikovať príležitosti, generovať nápady a premeniť ich na realizovateľné projekty.",
       pr: ["Rozvoj iniciatívy", "Plánovanie a realizácia", "Zodpovednosť za výsledok"],
-      ak: ["Návrh vlastného mini-projektu", "Pitch nápadu pred porotou", "Tvorba podnikateľského plánu"],
+      ak: ["Návrh vlastného mini-projektu", "Pitch nápadu pred porotou", "Rozvoj kreatívneho myslenia"],
       v: "Žiak vie premeniť nápad na konkrétny projekt s merateľnými cieľmi.",
     },
     {
