@@ -230,7 +230,7 @@ function CompetenciesSection() {
     { I: Users, t: "Tímová spolupráca", d: "Práca v tíme, rozdelenie rolí a spoločné dosahovanie cieľov v projektoch." },
   ];
   return (
-    <Section eyebrow="Prečo INVOK" title="Pripravujeme žiakov na výzvy 21. storočia" subtitle="Šesť kľúčových kompetencií, ktoré program rozvíja systematicky a v praxi.">
+    <Section eyebrow="Prečo INVOK" title={<>Pripravujeme žiakov na výzvy<br />21. storočia</>} subtitle="Šesť kľúčových kompetencií, ktoré program rozvíja systematicky a v praxi.">
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {list.map(({ I, t, d }) => (
           <div key={t} className="group rounded-3xl bg-card border border-border p-7 shadow-soft hover:shadow-card hover:-translate-y-1 transition">
