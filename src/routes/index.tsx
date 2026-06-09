@@ -52,7 +52,6 @@ function Page() {
         <CompetenciesSection />
         <ComparisonSection />
         <ModulesSection />
-        <SampleModuleSection />
         <WhatSchoolDoesntNeedSection />
         <ValueSection />
         <SchoolGainsSection />
