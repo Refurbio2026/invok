@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
@@ -9,7 +9,7 @@ import { Section } from "@/components/invok/Section";
 import { RadarChart } from "@/components/invok/RadarChart";
 import { COMPETENCIES, MAX_PER_COMP } from "@/data/assessment";
 import {
-  ArrowRight, BookOpen, CheckCircle2, ClipboardList, FileBarChart,
+  ArrowRight, BookOpen, ClipboardList, FileBarChart,
   GraduationCap, Layers, Sparkles, Timer, TrendingUp,
 } from "lucide-react";
 
