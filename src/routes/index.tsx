@@ -578,7 +578,7 @@ function ContactSection() {
           <p className="mt-2 text-white/85 max-w-xl">Napíšte nám, zavolajte, alebo vyplňte krátky formulár pre školy na kontaktnej stránke.</p>
           <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/90">
             <a href="mailto:info@invok.sk" className="inline-flex items-center gap-2 hover:underline"><Mail className="h-4 w-4" />info@invok.sk</a>
-            <a href="tel:+421900000000" className="inline-flex items-center gap-2 hover:underline"><Phone className="h-4 w-4" />+421 900 000 000</a>
+            <a href="tel:+421905266681" className="inline-flex items-center gap-2 hover:underline"><Phone className="h-4 w-4" />+421 905 266 681</a>
             <span className="inline-flex items-center gap-2"><MapPin className="h-4 w-4" />Hlavná 1, Bratislava</span>
           </div>
         </div>
