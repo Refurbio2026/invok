@@ -99,14 +99,6 @@ export function Header() {
           >
             Prihlásenie
           </a>
-          <Button
-            asChild
-            className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-soft px-5"
-          >
-            <a href="/registracia-skoly" className="inline-flex items-center gap-2">
-              Registrovať školu <ArrowRight className="h-4 w-4" />
-            </a>
-          </Button>
         </div>
 
         <button
@@ -133,15 +125,6 @@ export function Header() {
               <Button asChild variant="ghost" size="sm" className="flex-1">
                 <a href="/prihlasenie" onClick={() => setOpen(false)}>
                   Prihlásenie
-                </a>
-              </Button>
-              <Button
-                asChild
-                size="sm"
-                className="flex-1 rounded-full bg-primary text-primary-foreground"
-              >
-                <a href="/registracia-skoly" onClick={() => setOpen(false)}>
-                  Registrovať školu
                 </a>
               </Button>
             </div>

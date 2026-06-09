@@ -90,15 +90,6 @@ function PrihlasenieRozcestnik() {
           })}
         </div>
 
-        <p className="text-center text-sm text-muted-foreground mt-10">
-          Ešte nie ste v programe?{" "}
-          <Link
-            to="/registracia-skoly"
-            className="text-primary font-medium hover:underline"
-          >
-            Registrovať školu
-          </Link>
-        </p>
       </main>
       <Footer />
     </div>

@@ -16,7 +16,6 @@ const usefulItems: FooterItem[] = [
   { label: "Novinky a články", href: "/novinky" },
   { label: "Testovanie kompetencií", href: "/testy" },
   { label: "Prihlásenie", href: "/prihlasenie" },
-  { label: "Registrovať školu", href: "/registracia-skoly" },
 ];
 
 const legalItems: FooterItem[] = [

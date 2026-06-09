@@ -10,7 +10,7 @@ import {
   TimeCommitmentSection, TeamSection, SchoolsLocationMapSection,
   FundingSection, ComparisonSection,
 } from "@/components/invok/CredibilitySections";
-import { RegistrationForm } from "@/components/invok/RegistrationForm";
+
 
 import { ReadinessTest } from "@/components/invok/ReadinessTest";
 import { Button } from "@/components/ui/button";
@@ -71,7 +71,6 @@ function Page() {
         <TeamSection />
         <FundingSection />
         <ReadinessSection />
-        <RegistrationSection />
         <FaqSection />
         <PartnersSection />
         <ContactSection />
@@ -104,7 +103,7 @@ function Hero() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg" className="bg-gradient-badge text-white hover:opacity-90 shadow-glow">
-                <a href="#registracia">Stať sa partnerskou školou <ArrowRight className="ml-1.5 h-4 w-4" /></a>
+                <a href="/kontakt">Kontaktovať nás <ArrowRight className="ml-1.5 h-4 w-4" /></a>
               </Button>
               <Button asChild size="lg" variant="outline">
                 <a href="#moduly">Pozrieť moduly</a>
@@ -527,16 +526,6 @@ function ReadinessSection() {
   );
 }
 
-/* ---------------- REGISTRATION ---------------- */
-function RegistrationSection() {
-  return (
-    <Section id="registracia" alt eyebrow="Registrácia partnerskej školy" title="Zapojte vašu školu do programu INVOK" subtitle="Vyplnenie formulára trvá 3 minúty. Po odoslaní vás kontaktuje koordinátor programu.">
-      <div className="max-w-3xl">
-        <RegistrationForm />
-      </div>
-    </Section>
-  );
-}
 
 /* ---------------- FAQ ---------------- */
 function FaqSection() {
