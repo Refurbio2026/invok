@@ -99,6 +99,9 @@ export function Header() {
           >
             Prihlásenie
           </a>
+          <Button asChild size="sm">
+            <Link to="/registracia-skoly">Registrovať školu</Link>
+          </Button>
         </div>
 
         <button
@@ -126,6 +129,11 @@ export function Header() {
                 <a href="/prihlasenie" onClick={() => setOpen(false)}>
                   Prihlásenie
                 </a>
+              </Button>
+              <Button asChild size="sm" className="flex-1">
+                <Link to="/registracia-skoly" onClick={() => setOpen(false)}>
+                  Registrovať školu
+                </Link>
               </Button>
             </div>
           </nav>
