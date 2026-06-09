@@ -13,7 +13,6 @@ export function SchoolGainsSection() {
   const items = [
     { I: BarChart3, t: "Merateľné výsledky kompetencií", d: "Vstupné a výstupné merania ukazujú konkrétny progres žiakov v každej oblasti." },
     { I: FileBarChart, t: "Reporty pre vedenie školy", d: "Pravidelné prehľady s dátami o aktivite žiakov, dokončenosti modulov a dopade." },
-    { I: FileText, t: "Reporty pre vedenie školy a rodičov", d: "Prehľadné súhrny o pokroku žiakov pre vedenie školy aj pre rodičov, aby mali prehľad o rozvoji kompetencií." },
     { I: Award, t: "Certifikáty pre žiakov", d: "Oficiálne potvrdenie absolvovaných modulov a získaných kompetencií." },
     { I: ShieldCheck, t: "Certifikát partnerskej školy", d: "Verejne preukázateľný status školy zapojenej do národného programu INVOK." },
     { I: BookOpen, t: "Metodické materiály", d: "Scenáre hodín, pracovné listy a podklady, ktoré ostávajú škole natrvalo." },
