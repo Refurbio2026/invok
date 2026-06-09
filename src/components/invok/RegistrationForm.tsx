@@ -1,76 +1,88 @@
 import { useState } from "react";
 import { z } from "zod";
-import { Check, ArrowRight, ArrowLeft } from "lucide-react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 
 const schema = z.object({
-  schoolName: z.string().min(2, "Zadajte názov školy"),
-  schoolType: z.string().min(2, "Zadajte typ školy"),
-  city: z.string().min(2, "Zadajte mesto"),
-  contactName: z.string().min(2, "Zadajte meno"),
-  role: z.string().min(2, "Zadajte vašu funkciu"),
-  email: z.string().email("Neplatný email"),
-  phone: z.string().min(6, "Zadajte telefónne číslo"),
-  studentsCount: z.string().optional(),
-  note: z.string().optional(),
+  schoolName: z.string().trim().min(2, "Zadajte názov školy").max(200),
+  schoolType: z.string().min(1, "Vyberte typ školy"),
+  ico: z.string().trim().max(20).optional().or(z.literal("")),
+  dic: z.string().trim().max(20).optional().or(z.literal("")),
+  web: z.string().trim().max(200).optional().or(z.literal("")),
+  street: z.string().trim().max(200).optional().or(z.literal("")),
+  city: z.string().trim().min(2, "Zadajte mesto").max(100),
+  zip: z.string().trim().max(10).optional().or(z.literal("")),
+  region: z.string().trim().max(100).optional().or(z.literal("")),
+  contactName: z.string().trim().min(2, "Zadajte meno kontaktnej osoby").max(120),
+  contactRole: z.string().trim().max(120).optional().or(z.literal("")),
+  email: z.string().trim().email("Neplatný email").max(200),
+  phone: z.string().trim().min(6, "Zadajte telefón").max(40),
+  studentsCount: z.string().trim().max(20).optional().or(z.literal("")),
+  classesCount: z.string().trim().max(20).optional().or(z.literal("")),
+  interestedTesting: z.boolean().optional(),
+  note: z.string().trim().max(1000).optional().or(z.literal("")),
+  gdpr: z.literal(true, { errorMap: () => ({ message: "Musíte súhlasiť so spracovaním údajov" }) }),
+  contactConsent: z.boolean().optional(),
 });
 
-type FormData = z.infer<typeof schema>;
+type FormData = {
+  schoolName: string;
+  schoolType: string;
+  ico: string;
+  dic: string;
+  web: string;
+  street: string;
+  city: string;
+  zip: string;
+  region: string;
+  contactName: string;
+  contactRole: string;
+  email: string;
+  phone: string;
+  studentsCount: string;
+  classesCount: string;
+  interestedTesting: boolean;
+  note: string;
+  gdpr: boolean;
+  contactConsent: boolean;
+};
 
-const steps = ["Škola", "Kontakt", "Doplňujúce informácie"];
+const initial: FormData = {
+  schoolName: "",
+  schoolType: "",
+  ico: "",
+  dic: "",
+  web: "",
+  street: "",
+  city: "",
+  zip: "",
+  region: "",
+  contactName: "",
+  contactRole: "",
+  email: "",
+  phone: "",
+  studentsCount: "",
+  classesCount: "",
+  interestedTesting: true,
+  note: "",
+  gdpr: false,
+  contactConsent: false,
+};
 
 export function RegistrationForm() {
-  const [step, setStep] = useState(0);
+  const [data, setData] = useState<FormData>(initial);
   const [submitted, setSubmitted] = useState(false);
-  const [data, setData] = useState<FormData>({
-    schoolName: "",
-    schoolType: "",
-    city: "",
-    contactName: "",
-    role: "",
-    email: "",
-    phone: "",
-    studentsCount: "",
-    note: "",
-  });
 
-  const update = (k: keyof FormData, v: string) =>
+  const update = <K extends keyof FormData>(k: K, v: FormData[K]) =>
     setData((d) => ({ ...d, [k]: v }));
 
-  const validateStep = () => {
-    try {
-      if (step === 0) {
-        z.object({
-          schoolName: schema.shape.schoolName,
-          schoolType: schema.shape.schoolType,
-          city: schema.shape.city,
-        }).parse(data);
-      } else if (step === 1) {
-        z.object({
-          contactName: schema.shape.contactName,
-          role: schema.shape.role,
-          email: schema.shape.email,
-          phone: schema.shape.phone,
-        }).parse(data);
-      }
-      return true;
-    } catch (e) {
-      if (e instanceof z.ZodError) {
-        toast.error(e.errors[0]?.message ?? "Skontrolujte vyplnené údaje");
-      }
-      return false;
-    }
-  };
-
-  const next = () => {
-    if (validateStep()) setStep((s) => Math.min(s + 1, steps.length - 1));
-  };
-
-  const submit = () => {
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
     const parsed = schema.safeParse(data);
     if (!parsed.success) {
       toast.error(parsed.error.errors[0]?.message ?? "Skontrolujte údaje");
@@ -96,146 +108,164 @@ export function RegistrationForm() {
   }
 
   return (
-    <div className="rounded-2xl border border-border bg-card p-6 md:p-10 shadow-soft">
-      <div className="flex items-center justify-between mb-8">
-        {steps.map((label, i) => (
-          <div key={label} className="flex-1 flex items-center">
-            <div
-              className={`h-9 w-9 rounded-full flex items-center justify-center text-sm font-semibold ${
-                i <= step
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-muted text-muted-foreground"
-              }`}
+    <form
+      onSubmit={submit}
+      className="rounded-2xl border border-border bg-card p-6 md:p-10 shadow-soft"
+    >
+      <div className="grid gap-5">
+        <div>
+          <Label htmlFor="schoolName">Názov školy</Label>
+          <Input
+            id="schoolName"
+            value={data.schoolName}
+            onChange={(e) => update("schoolName", e.target.value)}
+            className="mt-1.5"
+          />
+        </div>
+
+        <div className="grid sm:grid-cols-2 gap-5">
+          <div>
+            <Label htmlFor="schoolType">Typ školy</Label>
+            <select
+              id="schoolType"
+              value={data.schoolType}
+              onChange={(e) => update("schoolType", e.target.value)}
+              className="mt-1.5 flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
             >
-              {i + 1}
-            </div>
-            <span className="ml-2 text-sm hidden sm:block">{label}</span>
-            {i < steps.length - 1 && (
-              <div
-                className={`flex-1 h-px mx-3 ${
-                  i < step ? "bg-primary" : "bg-border"
-                }`}
-              />
-            )}
-          </div>
-        ))}
-      </div>
-
-      {step === 0 && (
-        <div className="grid gap-4">
-          <div>
-            <Label htmlFor="schoolName">Názov školy</Label>
-            <Input
-              id="schoolName"
-              value={data.schoolName}
-              onChange={(e) => update("schoolName", e.target.value)}
-            />
-          </div>
-          <div className="grid sm:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="schoolType">Typ školy</Label>
-              <Input
-                id="schoolType"
-                placeholder="ZŠ / SŠ / Gymnázium"
-                value={data.schoolType}
-                onChange={(e) => update("schoolType", e.target.value)}
-              />
-            </div>
-            <div>
-              <Label htmlFor="city">Mesto</Label>
-              <Input
-                id="city"
-                value={data.city}
-                onChange={(e) => update("city", e.target.value)}
-              />
-            </div>
-          </div>
-        </div>
-      )}
-
-      {step === 1 && (
-        <div className="grid gap-4">
-          <div className="grid sm:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="contactName">Meno a priezvisko</Label>
-              <Input
-                id="contactName"
-                value={data.contactName}
-                onChange={(e) => update("contactName", e.target.value)}
-              />
-            </div>
-            <div>
-              <Label htmlFor="role">Funkcia</Label>
-              <Input
-                id="role"
-                placeholder="Riaditeľ/ka, koordinátor/ka…"
-                value={data.role}
-                onChange={(e) => update("role", e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="grid sm:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                value={data.email}
-                onChange={(e) => update("email", e.target.value)}
-              />
-            </div>
-            <div>
-              <Label htmlFor="phone">Telefón</Label>
-              <Input
-                id="phone"
-                value={data.phone}
-                onChange={(e) => update("phone", e.target.value)}
-              />
-            </div>
-          </div>
-        </div>
-      )}
-
-      {step === 2 && (
-        <div className="grid gap-4">
-          <div>
-            <Label htmlFor="studentsCount">Predpokladaný počet žiakov</Label>
-            <Input
-              id="studentsCount"
-              value={data.studentsCount}
-              onChange={(e) => update("studentsCount", e.target.value)}
-            />
+              <option value="">— vyberte —</option>
+              <option value="ZŠ">Základná škola</option>
+              <option value="SŠ">Stredná škola</option>
+              <option value="Gymnázium">Gymnázium</option>
+              <option value="SOŠ">Stredná odborná škola</option>
+              <option value="Iné">Iné</option>
+            </select>
           </div>
           <div>
-            <Label htmlFor="note">Poznámka</Label>
-            <Textarea
-              id="note"
-              rows={5}
-              value={data.note}
-              onChange={(e) => update("note", e.target.value)}
-            />
+            <Label htmlFor="ico">IČO</Label>
+            <Input id="ico" value={data.ico} onChange={(e) => update("ico", e.target.value)} className="mt-1.5" />
           </div>
         </div>
-      )}
 
-      <div className="flex justify-between mt-8">
-        <Button
-          variant="ghost"
-          onClick={() => setStep((s) => Math.max(0, s - 1))}
-          disabled={step === 0}
-        >
-          <ArrowLeft className="h-4 w-4 mr-2" /> Späť
-        </Button>
-        {step < steps.length - 1 ? (
-          <Button onClick={next}>
-            Pokračovať <ArrowRight className="h-4 w-4 ml-2" />
+        <div className="grid sm:grid-cols-2 gap-5">
+          <div>
+            <Label htmlFor="dic">DIČ</Label>
+            <Input id="dic" value={data.dic} onChange={(e) => update("dic", e.target.value)} className="mt-1.5" />
+          </div>
+          <div>
+            <Label htmlFor="web">Web školy</Label>
+            <Input id="web" value={data.web} onChange={(e) => update("web", e.target.value)} className="mt-1.5" />
+          </div>
+        </div>
+
+        <div>
+          <Label htmlFor="street">Ulica a číslo</Label>
+          <Input id="street" value={data.street} onChange={(e) => update("street", e.target.value)} className="mt-1.5" />
+        </div>
+
+        <div className="grid sm:grid-cols-2 gap-5">
+          <div>
+            <Label htmlFor="city">Mesto</Label>
+            <Input id="city" value={data.city} onChange={(e) => update("city", e.target.value)} className="mt-1.5" />
+          </div>
+          <div>
+            <Label htmlFor="zip">PSČ</Label>
+            <Input id="zip" value={data.zip} onChange={(e) => update("zip", e.target.value)} className="mt-1.5" />
+          </div>
+        </div>
+
+        <div className="grid sm:grid-cols-2 gap-5">
+          <div>
+            <Label htmlFor="region">Kraj</Label>
+            <Input id="region" value={data.region} onChange={(e) => update("region", e.target.value)} className="mt-1.5" />
+          </div>
+          <div>
+            <Label htmlFor="contactName">Meno kontaktnej osoby</Label>
+            <Input id="contactName" value={data.contactName} onChange={(e) => update("contactName", e.target.value)} className="mt-1.5" />
+          </div>
+        </div>
+
+        <div className="grid sm:grid-cols-2 gap-5">
+          <div>
+            <Label htmlFor="contactRole">Pozícia kontaktnej osoby</Label>
+            <Input id="contactRole" value={data.contactRole} onChange={(e) => update("contactRole", e.target.value)} className="mt-1.5" />
+          </div>
+          <div>
+            <Label htmlFor="email">E-mail</Label>
+            <Input id="email" type="email" value={data.email} onChange={(e) => update("email", e.target.value)} className="mt-1.5" />
+          </div>
+        </div>
+
+        <div className="grid sm:grid-cols-2 gap-5">
+          <div>
+            <Label htmlFor="phone">Telefón</Label>
+            <Input id="phone" value={data.phone} onChange={(e) => update("phone", e.target.value)} className="mt-1.5" />
+          </div>
+          <div>
+            <Label htmlFor="studentsCount">Počet žiakov</Label>
+            <Input id="studentsCount" value={data.studentsCount} onChange={(e) => update("studentsCount", e.target.value)} className="mt-1.5" />
+          </div>
+        </div>
+
+        <div className="grid sm:grid-cols-2 gap-5">
+          <div>
+            <Label htmlFor="classesCount">Počet tried</Label>
+            <Input id="classesCount" value={data.classesCount} onChange={(e) => update("classesCount", e.target.value)} className="mt-1.5" />
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 mt-1">
+          <Checkbox
+            id="interestedTesting"
+            checked={data.interestedTesting}
+            onCheckedChange={(v) => update("interestedTesting", v === true)}
+          />
+          <Label htmlFor="interestedTesting" className="font-normal cursor-pointer">
+            Máme záujem o testovanie kompetencií
+          </Label>
+        </div>
+
+        <div>
+          <Label htmlFor="note">Poznámka</Label>
+          <Textarea
+            id="note"
+            rows={5}
+            value={data.note}
+            onChange={(e) => update("note", e.target.value)}
+            className="mt-1.5"
+          />
+        </div>
+
+        <div className="space-y-2 pt-1">
+          <div className="flex items-start gap-2">
+            <Checkbox
+              id="gdpr"
+              checked={data.gdpr}
+              onCheckedChange={(v) => update("gdpr", v === true)}
+              className="mt-0.5"
+            />
+            <Label htmlFor="gdpr" className="font-normal cursor-pointer">
+              Súhlasím so spracovaním osobných údajov v zmysle GDPR. *
+            </Label>
+          </div>
+          <div className="flex items-start gap-2">
+            <Checkbox
+              id="contactConsent"
+              checked={data.contactConsent}
+              onCheckedChange={(v) => update("contactConsent", v === true)}
+              className="mt-0.5"
+            />
+            <Label htmlFor="contactConsent" className="font-normal cursor-pointer">
+              Súhlasím s kontaktovaním zo strany tímu INVOK.
+            </Label>
+          </div>
+        </div>
+
+        <div>
+          <Button type="submit" size="lg" className="rounded-full">
+            Odoslať registráciu
           </Button>
-        ) : (
-          <Button onClick={submit}>
-            Odoslať registráciu <Check className="h-4 w-4 ml-2" />
-          </Button>
-        )}
+        </div>
       </div>
-    </div>
+    </form>
   );
 }
