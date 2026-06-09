@@ -61,8 +61,6 @@ function Page() {
         <TimeCommitmentSection />
         
         <ImpactMethodologySection />
-        <SchoolDashboardSection />
-        <ReportPreviewSection />
         <TrustBadgesSection />
         <SampleTestsSection />
         <PlatformSection />
