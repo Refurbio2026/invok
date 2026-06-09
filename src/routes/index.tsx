@@ -6,7 +6,7 @@ import { Footer } from "@/components/invok/Footer";
 import { Section } from "@/components/invok/Section";
 import { ImpactMethodologySection, ProjectLogicSection, TrustBadgesSection } from "@/components/invok/TrustSections";
 import {
-  SchoolGainsSection, StudentGainsSection, SchoolDashboardSection, ReportPreviewSection,
+  SchoolGainsSection, StudentGainsSection,
   TimeCommitmentSection, TeamSection, TestimonialsSection, SchoolsLocationMapSection,
   FundingSection, ComparisonSection,
 } from "@/components/invok/CredibilitySections";
