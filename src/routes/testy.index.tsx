@@ -34,7 +34,6 @@ function TestyPage() {
         <HeroTesty />
         <HowItWorks />
         <Competencies />
-        <ChooseTest />
         <WhatWeMeasure />
         <SampleResults />
         <FAQ />
