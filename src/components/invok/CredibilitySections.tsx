@@ -313,7 +313,7 @@ export function FundingSection() {
           </div>
           <h2 className="mt-4 text-3xl sm:text-4xl font-extrabold">Zapojenie školy je bezplatné</h2>
           <p className="mt-3 text-white/85 leading-relaxed max-w-2xl">
-            Program INVOK je financovaný z externých zdrojov – verejných grantov, partnerov a Programu Slovensko podporeného z Európskej únie. Školy neplatia žiadne poplatky za moduly, workshopy ani metodické materiály.
+            Program INVOK je financovaný z Ministerstva školstva. Školy neplatia žiadne poplatky za moduly, workshopy ani metodické materiály.
           </p>
         </div>
         <ul className="space-y-3 text-sm">
