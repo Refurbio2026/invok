@@ -7,7 +7,7 @@ import { Section } from "@/components/invok/Section";
 import { ImpactMethodologySection, ProjectLogicSection, TrustBadgesSection } from "@/components/invok/TrustSections";
 import {
   SchoolGainsSection, StudentGainsSection,
-  TimeCommitmentSection, TeamSection, SchoolsLocationMapSection,
+  TimeCommitmentSection, SchoolsLocationMapSection,
   FundingSection, ComparisonSection,
 } from "@/components/invok/CredibilitySections";
 
@@ -68,7 +68,7 @@ function Page() {
         <SchoolsMapSection />
         <SchoolsLocationMapSection />
         <ImpactSection />
-        <TeamSection />
+        
         <FundingSection />
         <ReadinessSection />
         <FaqSection />
