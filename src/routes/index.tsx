@@ -68,7 +68,7 @@ function Page() {
         <SchoolsMapSection />
         <SchoolsLocationMapSection />
         <ImpactSection />
-        <TeamSection />
+        
         <FundingSection />
         <ReadinessSection />
         <FaqSection />
