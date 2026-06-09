@@ -313,7 +313,7 @@ function FaqSection() {
     },
     {
       q: "Pre ktoré ročníky je určený?",
-      a: "Program je primárne určený pre žiakov 2. stupňa základných škôl a 1. ročníkov stredných škôl. Vybrané moduly je možné využiť aj v iných ročníkoch.",
+      a: "Program je určený pre žiakov 8 a 9 ročníka ZŠ.",
     },
     {
       q: "Ako funguje testovanie kompetencií?",
