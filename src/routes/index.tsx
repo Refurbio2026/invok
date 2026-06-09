@@ -70,7 +70,6 @@ function Page() {
         <ImpactSection />
         <TeamSection />
         <FundingSection />
-        <NewsSection />
         <ReadinessSection />
         <RegistrationSection />
         <FaqSection />
