@@ -414,9 +414,6 @@ export function SampleModuleSection() {
           ))}
         </div>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Button asChild size="lg" className="bg-gradient-badge text-white hover:opacity-90">
-            <Link to="/modul/ukazka">Preskúmať ukážkový modul <Target className="ml-1.5 h-4 w-4" /></Link>
-          </Button>
           <Button asChild size="lg" variant="outline">
             <a href="#registracia">Zapojiť školu</a>
           </Button>
