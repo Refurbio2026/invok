@@ -81,7 +81,7 @@ function SampleModulePage() {
                 <p className="text-white/85 text-sm mt-1">Zapojenie do programu INVOK je pre školy bezplatné.</p>
               </div>
               <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
-                <Link to="/" hash="registracia">Zapojiť školu</Link>
+                <Link to="/kontakt">Kontaktovať nás</Link>
               </Button>
             </div>
           </div>

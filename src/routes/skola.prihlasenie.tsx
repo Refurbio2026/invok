@@ -61,12 +61,6 @@ function SkolaLogin() {
             Späť na výber
           </Link>
         </div>
-        <p className="text-xs text-muted-foreground text-center pt-2">
-          Ešte nie ste v programe?{" "}
-          <Link to="/registracia-skoly" className="text-primary hover:underline">
-            Registrovať školu
-          </Link>
-        </p>
       </form>
     </AuthShell>
   );
