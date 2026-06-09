@@ -554,7 +554,7 @@ function FaqSection() {
 
 /* ---------------- PARTNERS ---------------- */
 function PartnersSection() {
-  const partners = ["Program Slovensko", "Európska únia", "Ministerstvo práce, sociálnych vecí a rodiny SR", "Odborní garanti", "Partnerské školy", "Mestá a obce"];
+  const partners = ["Program Slovensko", "Európska únia", "Ministerstvo práce, sociálnych vecí\u00a0a\u00a0rodiny\u00a0SR", "Odborní garanti", "Partnerské školy", "Mestá a obce"];
   return (
     <Section alt eyebrow="Partneri projektu" title="Spolupracujeme so silnými partnermi">
       <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
