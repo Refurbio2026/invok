@@ -70,7 +70,6 @@ function Page() {
         <ImpactSection />
         <TeamSection />
         <FundingSection />
-        <NewsSection />
         <ReadinessSection />
         <RegistrationSection />
         <FaqSection />
@@ -516,69 +515,6 @@ function ImpactSection() {
         </div>
       </div>
     </section>
-  );
-}
-
-/* ---------------- NEWS ---------------- */
-const ALL_CATS = ["Všetky", "Kritické myslenie", "Mediálna gramotnosť", "Podnikavosť", "Digitálne vzdelávanie", "Moderná škola", "Príklady dobrej praxe"];
-function NewsSection() {
-  const [cat, setCat] = useState("Všetky");
-  const [q, setQ] = useState("");
-  const articles = [
-    { c: "Kritické myslenie", t: "Päť cvičení, ktoré rozvíjajú kritické myslenie už na druhom stupni", p: "Praktické tipy a hotové cvičenia, ktoré môžete použiť na nasledujúcej hodine.", d: "12. mája 2025" },
-    { c: "Príklady dobrej praxe", t: "Ako ZŠ Lúčna začlenila projektové vyučovanie do bežných hodín", p: "Príbeh školy, ktorá zmenila prístup k výučbe a žiaci na to reagujú nadšením.", d: "28. apríla 2025" },
-    { c: "Digitálne vzdelávanie", t: "Digitálne nástroje pre tímovú spoluprácu žiakov ZŠ", p: "Prehľad bezplatných nástrojov pre triedne projekty a tímovú spoluprácu.", d: "15. apríla 2025" },
-  ];
-  const filtered = articles.filter((a) =>
-    (cat === "Všetky" || a.c === cat) && (q === "" || (a.t + a.p).toLowerCase().includes(q.toLowerCase()))
-  );
-  return (
-    <Section id="novinky" alt eyebrow="Novinky a články" title="Inšpirácia pre modernú školu">
-      <div className="flex flex-col gap-4 mb-8">
-        <div className="flex flex-wrap gap-2">
-          {ALL_CATS.map((c) => (
-            <button key={c} onClick={() => setCat(c)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-medium border transition ${
-                cat === c ? "bg-primary text-primary-foreground border-primary" : "bg-card border-border text-muted-foreground hover:border-primary/50"
-              }`}>{c}</button>
-          ))}
-        </div>
-        <div className="relative max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Vyhľadať článok..." className="pl-9" maxLength={100} />
-        </div>
-      </div>
-      <div className="grid gap-6 md:grid-cols-3">
-        {filtered.map((a) => (
-          <article key={a.t} className="rounded-3xl bg-card border border-border overflow-hidden shadow-soft hover:shadow-card transition">
-            <div className="aspect-[16/10] bg-gradient-to-br from-primary/20 via-teal/20 to-amber/20 grid place-items-center">
-              <BookOpen className="h-10 w-10 text-primary/40" />
-            </div>
-            <div className="p-6">
-              <span className="text-xs font-semibold text-teal uppercase tracking-wider">{a.c}</span>
-              <h3 className="mt-2 font-bold text-foreground leading-snug">{a.t}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{a.p}</p>
-              <div className="mt-5 flex items-center justify-between">
-                <span className="text-xs text-muted-foreground">{a.d}</span>
-                <a href="#" className="text-sm font-semibold text-primary hover:underline inline-flex items-center gap-1">Čítať článok <ArrowRight className="h-3.5 w-3.5" /></a>
-              </div>
-            </div>
-          </article>
-        ))}
-        {filtered.length === 0 && <p className="text-muted-foreground">Žiadne články nezodpovedajú filtru.</p>}
-      </div>
-
-      <div className="mt-12 rounded-3xl bg-gradient-badge p-8 sm:p-10 text-white grid gap-6 md:grid-cols-2 items-center shadow-glow">
-        <div>
-          <h3 className="text-2xl font-bold">Odoberajte novinky</h3>
-          <p className="mt-2 text-white/85">Raz mesačne pošleme najlepšie články, pozvánky na podujatia a metodické tipy.</p>
-        </div>
-        <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
-          <Input type="email" placeholder="Váš e-mail" maxLength={150} className="bg-white/15 border-white/30 text-white placeholder:text-white/60" />
-          <Button type="submit" className="bg-white text-primary hover:bg-white/90 font-semibold">Odoberať</Button>
-        </form>
-      </div>
-    </Section>
   );
 }
 
