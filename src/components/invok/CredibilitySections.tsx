@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import {
   Award, BarChart3, BookOpen, Brain, CheckCircle2, ClipboardCheck,
   FileBarChart, FileText, GraduationCap, Layers, MessageSquare,
-  Mic, PieChart, Rocket, ScrollText, Settings2, ShieldCheck, Sparkles,
+  Mic, PieChart, Rocket, Settings2, ShieldCheck, Sparkles,
   Timer, TrendingUp, Users, Wallet, XCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -243,29 +243,7 @@ export function TeamSection() {
 }
 
 /* 7. Referencie škôl */
-export function TestimonialsSection() {
-  const refs = [
-    { q: "Program INVOK priniesol do našej školy konkrétnu metodiku, ako pracovať s kritickým myslením naprieč predmetmi.", a: "Mgr. Jana K.", r: "riaditeľka, ZŠ Komenského Trnava" },
-    { q: "Žiaci sa naučili prezentovať vlastné nápady a obhajovať ich. Vidíme to aj na výsledkoch maturitných ročníkov.", a: "PaedDr. Peter S.", r: "zástupca riaditeľa, ZŠ Lúčna Žilina" },
-    { q: "Po prvýkrát máme dáta o tom, ako sa kompetencie žiakov skutočne menia. Pre vedenie školy obrovská hodnota.", a: "Mgr. Eva M.", r: "riaditeľka, ZŠ Mierová Poprad" },
-  ];
-  return (
-    <Section eyebrow="Referencie" title="Skúsenosti zapojených škôl">
-      <div className="grid gap-6 lg:grid-cols-3">
-        {refs.map((r) => (
-          <figure key={r.q} className="rounded-3xl bg-card border border-border p-7 shadow-soft hover:shadow-card transition flex flex-col">
-            <ScrollText className="h-6 w-6 text-teal mb-4" />
-            <blockquote className="text-sm text-foreground leading-relaxed flex-1">„{r.q}"</blockquote>
-            <figcaption className="mt-5 pt-5 border-t border-border">
-              <div className="font-bold text-foreground text-sm">{r.a}</div>
-              <div className="text-xs text-muted-foreground">{r.r}</div>
-            </figcaption>
-          </figure>
-        ))}
-      </div>
-    </Section>
-  );
-}
+
 
 /* 8. Mapa škôl */
 export function SchoolsLocationMapSection() {
