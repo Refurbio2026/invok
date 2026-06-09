@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import {
   Award, BarChart3, BookOpen, Brain, Briefcase, CheckCircle2, ClipboardCheck,
   FileBarChart, FileText, GraduationCap, Layers, Lightbulb, MessageSquare,
-  Mic, PieChart, Rocket, ScrollText, Settings2, ShieldCheck, Sparkles, Target,
+  Mic, PieChart, Rocket, ScrollText, Settings2, ShieldCheck, Sparkles,
   Timer, TrendingUp, Users, Wallet, XCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
