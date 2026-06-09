@@ -379,7 +379,7 @@ import { TEST_LIST } from "@/data/tests";
 
 function SampleTestsSection() {
   return (
-    <Section eyebrow="Ukážkové testy" title="Otestujte si kompetencie v praxi">
+    <Section id="testy" eyebrow="Ukážkové testy" title="Otestujte si kompetencie v praxi">
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {TEST_LIST.map((t) => (
           <div key={t.slug} className="rounded-3xl bg-card border border-border p-7 shadow-soft flex flex-col">
