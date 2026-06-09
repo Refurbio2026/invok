@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import {
-  Award, BarChart3, BookOpen, Brain, Briefcase, CheckCircle2, ClipboardCheck,
-  FileBarChart, FileText, GraduationCap, Layers, Lightbulb, MessageSquare,
+  Award, BarChart3, BookOpen, Brain, CheckCircle2, ClipboardCheck,
+  FileBarChart, FileText, GraduationCap, Layers, MessageSquare,
   Mic, PieChart, Rocket, ScrollText, Settings2, ShieldCheck, Sparkles,
   Timer, TrendingUp, Users, Wallet, XCircle,
 } from "lucide-react";
@@ -380,45 +380,3 @@ export function ComparisonSection() {
   );
 }
 
-/* 11. Ukážkový modul */
-export function SampleModuleSection() {
-  const parts = [
-    { I: Mic, t: "Video lekcia", d: "Krátka úvodná lekcia s odborníkom z praxe." },
-    { I: ClipboardCheck, t: "Zadanie", d: "Konkrétne úlohy pre žiakov v tíme aj individuálne." },
-    { I: BarChart3, t: "Hlasovanie", d: "Žiaci hodnotia nápady spolužiakov a obhajujú výber." },
-    { I: Briefcase, t: "Projektová karta", d: "Štruktúrovaný výstup – cieľ, plán, role, indikátory." },
-    { I: GraduationCap, t: "Prezentácia riešenia", d: "Záverečné predstavenie projektu pred triedou a porotou." },
-  ];
-  return (
-    <Section eyebrow="Ukážkový modul" title="Pozrite si ukážku modulu INVOK" subtitle="Modul 1 – Inovátor školy: žiaci hľadajú a realizujú zlepšenia vo vlastnej škole.">
-      <div className="rounded-3xl bg-card border border-border p-6 sm:p-8 shadow-card">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="h-12 w-12 rounded-2xl bg-gradient-badge grid place-items-center shadow-soft">
-            <Lightbulb className="h-6 w-6 text-white" />
-          </div>
-          <div>
-            <div className="text-xs font-bold uppercase tracking-wider text-teal">Modul 1</div>
-            <div className="font-bold text-foreground text-lg">Inovátor školy</div>
-          </div>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {parts.map(({ I, t, d }, i) => (
-            <div key={t} className="rounded-2xl border border-border bg-gradient-subtle p-5">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="h-7 w-7 rounded-lg bg-primary text-primary-foreground grid place-items-center text-xs font-bold">{i + 1}</span>
-                <I className="h-4 w-4 text-teal" />
-              </div>
-              <div className="font-bold text-foreground text-sm">{t}</div>
-              <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">{d}</p>
-            </div>
-          ))}
-        </div>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Button asChild size="lg" variant="outline">
-            <a href="#registracia">Zapojiť školu</a>
-          </Button>
-        </div>
-      </div>
-    </Section>
-  );
-}

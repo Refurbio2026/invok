@@ -8,7 +8,7 @@ import { ImpactMethodologySection, ProjectLogicSection, TrustBadgesSection } fro
 import {
   SchoolGainsSection, StudentGainsSection, SchoolDashboardSection, ReportPreviewSection,
   TimeCommitmentSection, TeamSection, TestimonialsSection, SchoolsLocationMapSection,
-  FundingSection, ComparisonSection, SampleModuleSection,
+  FundingSection, ComparisonSection,
 } from "@/components/invok/CredibilitySections";
 import { RegistrationForm } from "@/components/invok/RegistrationForm";
 
@@ -52,7 +52,6 @@ function Page() {
         <CompetenciesSection />
         <ComparisonSection />
         <ModulesSection />
-        <SampleModuleSection />
         <WhatSchoolDoesntNeedSection />
         <ValueSection />
         <SchoolGainsSection />
