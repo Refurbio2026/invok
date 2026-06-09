@@ -59,7 +59,7 @@ function Page() {
         <ProjectLogicSection />
         <CompetencyMeasurementSection />
         <TimeCommitmentSection />
-        <HarmonogramSection />
+        
         <ImpactMethodologySection />
         <SchoolDashboardSection />
         <ReportPreviewSection />
@@ -807,26 +807,4 @@ function WhatSchoolDoesntNeedSection() {
   );
 }
 
-/* ---------------- HARMONOGRAM ---------------- */
-function HarmonogramSection() {
-  const years = [
-    { y: "ROK 1", t: "Pilot programu", d: "10 partnerských škôl, testovanie modulov, prvé workshopy a zber spätnej väzby." },
-    { y: "ROK 2", t: "Rozšírenie", d: "Vylepšenie programu na základe pilotu, zapojenie ďalších 10 škôl a nových projektových výziev." },
-    { y: "ROK 3", t: "Škálovanie a udržateľnosť", d: "Konsolidácia programu, certifikácia, metodické príručky a príprava na dlhodobé fungovanie." },
-  ];
-  return (
-    <Section eyebrow="Harmonogram" title="Tri roky systematickej zmeny">
-      <div className="grid gap-6 md:grid-cols-3">
-        {years.map((y, i) => (
-          <div key={y.y} className="relative rounded-3xl bg-gradient-to-br from-primary to-primary/70 text-primary-foreground p-8 shadow-card overflow-hidden">
-            <div className="absolute -top-6 -right-6 text-[120px] font-extrabold text-white/10 leading-none">{i + 1}</div>
-            <span className="inline-block text-xs font-bold uppercase tracking-wider bg-white/15 px-3 py-1.5 rounded-full">{y.y}</span>
-            <h3 className="mt-4 text-2xl font-extrabold">{y.t}</h3>
-            <p className="mt-3 text-sm text-white/85 leading-relaxed">{y.d}</p>
-          </div>
-        ))}
-      </div>
-    </Section>
-  );
-}
 
