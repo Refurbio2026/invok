@@ -103,7 +103,7 @@ function Hero() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg" className="bg-gradient-badge text-white hover:opacity-90 shadow-glow">
-                <a href="#registracia">Stať sa partnerskou školou <ArrowRight className="ml-1.5 h-4 w-4" /></a>
+                <a href="/kontakt">Kontaktovať nás <ArrowRight className="ml-1.5 h-4 w-4" /></a>
               </Button>
               <Button asChild size="lg" variant="outline">
                 <a href="#moduly">Pozrieť moduly</a>
