@@ -21,7 +21,7 @@ import {
 import {
   Brain, Eye, Rocket, Laptop, MessageSquare, Users, GraduationCap,
   Sparkles, BarChart3, HeartHandshake, BookOpen, Award, ArrowRight,
-  CheckCircle2, XCircle, Mail, Phone, MapPin, Search, PlayCircle, MapPinned,
+  CheckCircle2, XCircle, Mail, Phone, Search, PlayCircle, MapPinned,
   Calendar, School, Trophy, ClipboardCheck,
 } from "lucide-react";
 
@@ -579,7 +579,6 @@ function ContactSection() {
           <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/90">
             <a href="mailto:info@invok.sk" className="inline-flex items-center gap-2 hover:underline"><Mail className="h-4 w-4" />info@invok.sk</a>
             <a href="tel:+421905266681" className="inline-flex items-center gap-2 hover:underline"><Phone className="h-4 w-4" />+421 905 266 681</a>
-            <span className="inline-flex items-center gap-2"><MapPin className="h-4 w-4" />Hlavná 1, Bratislava</span>
           </div>
         </div>
         <Button asChild size="lg" className="rounded-full bg-white text-foreground hover:bg-white/90 shrink-0">
