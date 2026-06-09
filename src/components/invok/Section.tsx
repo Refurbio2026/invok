@@ -12,7 +12,7 @@ export function Section({
 }: {
   id?: string;
   eyebrow?: string;
-  title?: string;
+  title?: ReactNode;
   subtitle?: string;
   children: ReactNode;
   className?: string;
