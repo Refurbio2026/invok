@@ -526,16 +526,6 @@ function ReadinessSection() {
   );
 }
 
-/* ---------------- REGISTRATION ---------------- */
-function RegistrationSection() {
-  return (
-    <Section id="registracia" alt eyebrow="Registrácia partnerskej školy" title="Zapojte vašu školu do programu INVOK" subtitle="Vyplnenie formulára trvá 3 minúty. Po odoslaní vás kontaktuje koordinátor programu.">
-      <div className="max-w-3xl">
-        <RegistrationForm />
-      </div>
-    </Section>
-  );
-}
 
 /* ---------------- FAQ ---------------- */
 function FaqSection() {
