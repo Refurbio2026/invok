@@ -57,7 +57,6 @@ function Page() {
         <SchoolGainsSection />
         <StudentGainsSection />
         <ProjectLogicSection />
-        <HowItWorksSection />
         <CompetencyMeasurementSection />
         <TimeCommitmentSection />
         <HarmonogramSection />
@@ -113,7 +112,7 @@ function Hero() {
                 <a href="#registracia">Stať sa partnerskou školou <ArrowRight className="ml-1.5 h-4 w-4" /></a>
               </Button>
               <Button asChild size="lg" variant="outline">
-                <a href="#ako-to-funguje">Ako program funguje</a>
+                <a href="#moduly">Pozrieť moduly</a>
               </Button>
             </div>
             <div className="mt-8 flex flex-wrap gap-2">
@@ -343,32 +342,6 @@ function ValueSection() {
   );
 }
 
-/* ---------------- HOW IT WORKS ---------------- */
-function HowItWorksSection() {
-  const steps = [
-    { t: "Analýza potrieb školy", d: "Vstupný rozhovor s vedením a mapovanie aktuálneho stavu kompetencií žiakov." },
-    { t: "Online vzdelávacie moduly", d: "Spustenie štyroch modulov v digitálnej platforme pre žiakov aj učiteľov." },
-    { t: "Workshopy v škole", d: "Praktické workshopy vedené odbornými lektormi priamo vo vašej škole." },
-    { t: "Projektové výzvy", d: "Žiaci pracujú v tímoch na reálnych projektoch s konkrétnym výstupom." },
-    { t: "Meranie pokroku", d: "Priebežné vyhodnocovanie rozvoja kompetencií prostredníctvom platformy." },
-    { t: "Vyhodnotenie dopadu", d: "Záverečné hodnotenie, certifikáty pre žiakov a reporting pre vedenie školy." },
-  ];
-  return (
-    <Section id="ako-to-funguje" alt eyebrow="Ako program funguje" title="Šesť krokov k modernej škole">
-      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {steps.map((s, i) => (
-          <div key={s.t} className="relative rounded-3xl bg-card border border-border p-7 shadow-soft hover:shadow-card transition">
-            <div className="absolute -top-4 -left-2 h-12 w-12 rounded-2xl bg-gradient-badge text-white grid place-items-center font-bold text-lg shadow-soft">
-              {i + 1}
-            </div>
-            <h3 className="mt-4 text-lg font-bold text-foreground">{s.t}</h3>
-            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{s.d}</p>
-          </div>
-        ))}
-      </div>
-    </Section>
-  );
-}
 
 /* ---------------- COMPETENCY MEASUREMENT ---------------- */
 function CompetencyMeasurementSection() {
