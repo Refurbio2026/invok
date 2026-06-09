@@ -60,9 +60,6 @@ function HeroTesty() {
               INVOK využíva vstupné a výstupné kompetenčné testovanie, vďaka ktorému dokážeme sledovať rozvoj žiakov počas programu. Výsledky pomáhajú školám, pedagógom aj samotným žiakom lepšie pochopiť ich silné stránky a oblasti na rozvoj.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg" className="bg-gradient-badge text-white hover:opacity-90 shadow-glow">
-                <a href="#vyplnit-test">Spustiť testovanie <ArrowRight className="ml-1 h-4 w-4" /></a>
-              </Button>
               <Button asChild size="lg" variant="outline">
                 <a href="#ako-funguje">Ako funguje testovanie</a>
               </Button>
