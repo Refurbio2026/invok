@@ -67,7 +67,6 @@ function Page() {
         <VideotekaSection />
         <SchoolsMapSection />
         <SchoolsLocationMapSection />
-        <CaseStudiesSection />
         <TestimonialsSection />
         <ImpactSection />
         <TeamSection />
@@ -489,37 +488,6 @@ function SchoolsMapSection() {
   );
 }
 
-/* ---------------- CASE STUDIES ---------------- */
-function CaseStudiesSection() {
-  const cases = [
-    { s: "ZŠ Komenského, Trnava", p: "Žiaci mali ťažkosti s tímovou spoluprácou a prezentovaním vlastných nápadov.", z: "Všetky štyri moduly, sprievodné workshopy a projektová výzva.", v: "75 % žiakov si po roku zlepšilo prezentačné a komunikačné zručnosti." },
-    { s: "ZŠ Lúčna, Žilina", p: "Učitelia hľadali nové metódy rozvoja kritického myslenia v rámci ŠkVP.", z: "Implementácia modulu Kritické a mediálne myslenie do bežnej výučby.", v: "24 hotových scenárov hodín a metodická podpora počas celého roka." },
-    { s: "ZŠ Mierová, Poprad", p: "Vedenie chcelo posilniť podnikavosť a iniciatívu žiakov 9. ročníka.", z: "Projektová výzva – žiaci vytvárali mini-projekty pre svoje mesto.", v: "Tri projekty získali finančnú podporu mesta a sú v reálnej realizácii." },
-  ];
-  return (
-    <Section eyebrow="Príbehy škôl" title="Reálne výsledky z partnerských škôl">
-      <div className="grid gap-6 lg:grid-cols-3">
-        {cases.map((c) => (
-          <div key={c.s} className="rounded-3xl bg-card border border-border p-7 shadow-soft hover:shadow-card transition">
-            <h3 className="text-lg font-bold text-foreground">{c.s}</h3>
-            <CaseBlock label="Problém" text={c.p} />
-            <CaseBlock label="Zapojenie do programu" text={c.z} />
-            <CaseBlock label="Dosiahnuté výsledky" text={c.v} highlight />
-          </div>
-        ))}
-      </div>
-    </Section>
-  );
-}
-
-function CaseBlock({ label, text, highlight }: { label: string; text: string; highlight?: boolean }) {
-  return (
-    <div className="mt-5">
-      <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">{label}</div>
-      <p className={highlight ? "text-sm font-semibold text-teal" : "text-sm text-foreground"}>{text}</p>
-    </div>
-  );
-}
 
 /* ---------------- IMPACT ---------------- */
 function ImpactSection() {
