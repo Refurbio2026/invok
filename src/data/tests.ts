@@ -224,66 +224,7 @@ export const TESTS: Record<string, TestDef> = {
       "Odporúčanie: posilniť riešenie konfliktov a spätnú väzbu.",
       "Silná stránka: spolupráca, zodpovednosť a schopnosť prispieť k spoločnému cieľu.",
     ),
-  },
-  "sebapoznanie": {
-    kind: "personality",
-    slug: "sebapoznanie",
-    title: "Sebapoznanie",
-    description: "Objavovanie silných stránok a osobného potenciálu.",
-    questions: [
-      {
-        q: "Pri skupinovej práci najčastejšie:",
-        options: [
-          { key: "A", text: "Pomáham rozdeliť úlohy a sledovať postup." },
-          { key: "B", text: "Premýšľam nad tým, čo môže zlyhať." },
-          { key: "C", text: "Prinášam nové nápady." },
-          { key: "D", text: "Podporujem ostatných, aby sa zapojili." },
-        ],
-      },
-      {
-        q: "Najviac ma baví:",
-        options: [
-          { key: "A", text: "Plánovať a organizovať." },
-          { key: "B", text: "Riešiť logické problémy." },
-          { key: "C", text: "Vymýšľať nové riešenia." },
-          { key: "D", text: "Pomáhať ľuďom." },
-        ],
-      },
-      {
-        q: "Keď sa objaví problém:",
-        options: [
-          { key: "A", text: "Hľadám konkrétny plán." },
-          { key: "B", text: "Analyzujem príčinu." },
-          { key: "C", text: "Skúšam netradičné riešenie." },
-          { key: "D", text: "Zisťujem, ako sa cítia ostatní." },
-        ],
-      },
-      {
-        q: "V tíme si ma ostatní často všímajú ako človeka, ktorý:",
-        options: [
-          { key: "A", text: "Vie veci zorganizovať." },
-          { key: "B", text: "Premýšľa do hĺbky." },
-          { key: "C", text: "Má veľa nápadov." },
-          { key: "D", text: "Vytvára dobrú atmosféru." },
-        ],
-      },
-      {
-        q: "Najbližšie je mi tvrdenie:",
-        options: [
-          { key: "A", text: "Dobrý plán šetrí čas." },
-          { key: "B", text: "Dobré rozhodnutie potrebuje dobré informácie." },
-          { key: "C", text: "Každý problém sa dá riešiť inak." },
-          { key: "D", text: "Ľudia podávajú lepší výkon, keď sa cítia prijatí." },
-        ],
-      },
-    ],
-    profiles: {
-      A: { name: "Organizátor", strength: "plánovanie, zodpovednosť, koordinácia." },
-      B: { name: "Analytik", strength: "premýšľanie, práca s informáciami, hľadanie súvislostí." },
-      C: { name: "Tvorca", strength: "kreativita, nové nápady, flexibilita." },
-      D: { name: "Podporovateľ", strength: "empatia, spolupráca, podpora tímu." },
-    },
-  },
+  }
 };
 
 export const TEST_LIST = Object.values(TESTS).map((t) => ({
