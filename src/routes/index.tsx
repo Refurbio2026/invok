@@ -10,7 +10,7 @@ import {
   TimeCommitmentSection, TeamSection, SchoolsLocationMapSection,
   FundingSection, ComparisonSection,
 } from "@/components/invok/CredibilitySections";
-import { RegistrationForm } from "@/components/invok/RegistrationForm";
+
 
 import { ReadinessTest } from "@/components/invok/ReadinessTest";
 import { Button } from "@/components/ui/button";
