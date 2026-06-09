@@ -11,7 +11,6 @@ const links: NavLink[] = [
   { href: "/#o-programe", label: "O programe" },
   { href: "/#moduly", label: "Moduly" },
   { href: "/#pre-skoly", label: "Pre školy" },
-  { href: "/#ako-to-funguje", label: "Ako to funguje" },
   { href: "/testy", label: "Testovanie" },
   { href: "/novinky", label: "Novinky" },
   { href: "/kontakt", label: "Kontakt" },

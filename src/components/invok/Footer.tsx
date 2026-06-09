@@ -8,7 +8,6 @@ const aboutItems: FooterItem[] = [
   { label: "O programe", href: "/#o-programe" },
   { label: "Moduly", href: "/#moduly" },
   { label: "Pre školy", href: "/#pre-skoly" },
-  { label: "Ako to funguje", href: "/#ako-to-funguje" },
   { label: "Kontakt", href: "/kontakt" },
 ];
 
