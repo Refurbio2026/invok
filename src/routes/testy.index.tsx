@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
@@ -9,7 +9,7 @@ import { Section } from "@/components/invok/Section";
 import { RadarChart } from "@/components/invok/RadarChart";
 import { COMPETENCIES, MAX_PER_COMP } from "@/data/assessment";
 import {
-  ArrowRight, BookOpen, CheckCircle2, ClipboardList, FileBarChart,
+  ArrowRight, BookOpen, ClipboardList, FileBarChart,
   GraduationCap, Layers, Sparkles, Timer, TrendingUp,
 } from "lucide-react";
 
@@ -34,7 +34,6 @@ function TestyPage() {
         <HeroTesty />
         <HowItWorks />
         <Competencies />
-        <ChooseTest />
         <WhatWeMeasure />
         <SampleResults />
         <FAQ />
@@ -61,9 +60,6 @@ function HeroTesty() {
               INVOK využíva vstupné a výstupné kompetenčné testovanie, vďaka ktorému dokážeme sledovať rozvoj žiakov počas programu. Výsledky pomáhajú školám, pedagógom aj samotným žiakom lepšie pochopiť ich silné stránky a oblasti na rozvoj.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg" className="bg-gradient-badge text-white hover:opacity-90 shadow-glow">
-                <a href="#vyplnit-test">Spustiť testovanie <ArrowRight className="ml-1 h-4 w-4" /></a>
-              </Button>
               <Button asChild size="lg" variant="outline">
                 <a href="#ako-funguje">Ako funguje testovanie</a>
               </Button>
@@ -161,50 +157,6 @@ function Competencies() {
   );
 }
 
-function ChooseTest() {
-  const variants = [
-    {
-      slug: "vstupny-test" as const,
-      tone: "from-primary to-primary/70",
-      tag: "Pred programom",
-      title: "Vstupný test",
-      d: "Vstupné meranie kompetencií žiaka pred začatím programu INVOK.",
-    },
-    {
-      slug: "vystupny-test" as const,
-      tone: "from-teal to-primary",
-      tag: "Po programe",
-      title: "Výstupný test",
-      d: "Záverečné meranie kompetencií po ukončení modulov a workshopov.",
-    },
-  ];
-  return (
-    <Section id="vyplnit-test" alt eyebrow="Vyplnenie testu" title="Vyplnenie kompetenčného testu" subtitle="Test si môžete vyplniť v dvoch variantoch. Oba prebiehajú v identickej štruktúre, aby boli výsledky porovnateľné.">
-      <div className="grid gap-6 md:grid-cols-2">
-        {variants.map((v) => (
-          <div key={v.slug} className={`rounded-3xl text-white p-8 shadow-card bg-gradient-to-br ${v.tone}`}>
-            <span className="inline-block text-xs font-bold uppercase tracking-wider bg-white/15 px-3 py-1 rounded-full">{v.tag}</span>
-            <h3 className="mt-4 text-2xl font-extrabold">{v.title}</h3>
-            <p className="mt-2 text-white/85">{v.d}</p>
-            <ul className="mt-5 space-y-2 text-sm">
-              {[
-                "približne 15 minút",
-                "48 hodnotiacich otázok",
-                "4 otvorené otázky",
-                "automatické vyhodnotenie",
-              ].map((t) => (
-                <li key={t} className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-amber" />{t}</li>
-              ))}
-            </ul>
-            <Button asChild size="lg" className="mt-6 bg-white text-primary hover:bg-white/90">
-              <Link to="/testy/$slug" params={{ slug: v.slug }}>Spustiť {v.title.toLowerCase()} <ArrowRight className="ml-1 h-4 w-4" /></Link>
-            </Button>
-          </div>
-        ))}
-      </div>
-    </Section>
-  );
-}
 
 function WhatWeMeasure() {
   return (
