@@ -42,12 +42,75 @@ function KontaktPage() {
       <main>
         <Hero />
         <ContactCards />
+        <TeamSection />
         <SchoolFormSection />
         <PartnershipSection />
         <FaqSection />
       </main>
       <Footer />
     </div>
+  );
+}
+
+/* ------------------ TEAM ------------------ */
+function TeamSection() {
+  const team = [
+    {
+      name: "Meno Priezvisko",
+      role: "Riaditeľ programu",
+      bio: "Krátky popis zamestnanca – jeho rola, skúsenosti a zameranie v rámci programu INVOK.",
+    },
+    {
+      name: "Meno Priezvisko",
+      role: "Koordinátorka škôl",
+      bio: "Krátky popis zamestnanca – jeho rola, skúsenosti a zameranie v rámci programu INVOK.",
+    },
+    {
+      name: "Meno Priezvisko",
+      role: "Metodička",
+      bio: "Krátky popis zamestnanca – jeho rola, skúsenosti a zameranie v rámci programu INVOK.",
+    },
+    {
+      name: "Meno Priezvisko",
+      role: "Partnerstvá a komunikácia",
+      bio: "Krátky popis zamestnanca – jeho rola, skúsenosti a zameranie v rámci programu INVOK.",
+    },
+  ];
+  return (
+    <section className="py-16 md:py-20 border-t border-border">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <span className="inline-block text-xs font-semibold uppercase tracking-wider text-primary mb-3">
+            Náš tím
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+            Ľudia za programom INVOK
+          </h2>
+          <p className="mt-4 text-muted-foreground">
+            Spoznajte tím, ktorý každý deň pracuje na rozvoji kompetencií žiakov.
+          </p>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {team.map((m) => (
+            <div
+              key={m.name + m.role}
+              className="rounded-2xl border border-border bg-card p-5 shadow-soft hover:shadow-lg transition-shadow"
+            >
+              <div className="aspect-square w-full rounded-xl bg-muted border border-border grid place-items-center text-muted-foreground text-sm overflow-hidden mb-4">
+                Foto
+              </div>
+              <h3 className="font-semibold text-foreground">{m.name}</h3>
+              <p className="text-xs font-medium uppercase tracking-wider text-primary mt-1">
+                {m.role}
+              </p>
+              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+                {m.bio}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
