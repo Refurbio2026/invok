@@ -1,6 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import heroImg from "@/assets/hero-students.jpg";
+import euLogo from "@/assets/eu-logo.png.asset.json";
+import programSlovenskoLogo from "@/assets/program-slovensko-logo.png.asset.json";
+import mpsvrLogo from "@/assets/mpsvr-logo.png.asset.json";
 import { Header } from "@/components/invok/Header";
 import { Footer } from "@/components/invok/Footer";
 import { Section } from "@/components/invok/Section";
