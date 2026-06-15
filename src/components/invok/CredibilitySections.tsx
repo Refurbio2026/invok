@@ -7,6 +7,9 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/invok/Section";
+import euLogo from "@/assets/eu-logo.png.asset.json";
+import programSlovenskoLogo from "@/assets/program-slovensko-logo.png.asset.json";
+import mpsvrLogo from "@/assets/mpsvr-logo.png.asset.json";
 
 /* 1. Čo získava škola */
 export function SchoolGainsSection() {
