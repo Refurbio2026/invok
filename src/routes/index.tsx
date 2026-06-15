@@ -179,9 +179,37 @@ function WhySchools() {
           </div>
         ))}
       </div>
+      <FinancovanieBlock />
     </Section>
   );
 }
+
+function FinancovanieBlock() {
+  const logos = [
+    { src: euLogo.url, alt: "Európska únia" },
+    { src: programSlovenskoLogo.url, alt: "Program Slovensko" },
+    { src: mpsvrLogo.url, alt: "Ministerstvo práce, sociálnych vecí a rodiny SR" },
+  ];
+  return (
+    <div className="mt-12 sm:mt-16 rounded-3xl border border-border bg-card p-6 sm:p-10 shadow-soft">
+      <div className="max-w-3xl">
+        <div className="text-xs font-semibold uppercase tracking-wider text-teal mb-3">Financovanie</div>
+        <h3 className="text-2xl sm:text-3xl font-bold text-foreground">Projekt je financovaný z prostriedkov Európskej únie</h3>
+        <p className="mt-3 text-muted-foreground leading-relaxed">
+          Program INVOK je realizovaný vďaka podpore Európskej únie prostredníctvom programu Program Slovensko a Ministerstva práce, sociálnych vecí a rodiny Slovenskej republiky.
+        </p>
+      </div>
+      <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 items-center">
+        {logos.map((l) => (
+          <div key={l.alt} className="flex items-center justify-center bg-white rounded-2xl border border-border p-6 h-32">
+            <img src={l.src} alt={l.alt} className="max-h-full max-w-full object-contain" loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 
 /* ---------------- NUMBERS ---------------- */
 function NumbersSection() {
