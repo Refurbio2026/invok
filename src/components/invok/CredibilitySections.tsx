@@ -327,6 +327,21 @@ export function FundingSection() {
           ))}
         </ul>
       </div>
+
+      <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 items-center justify-items-center">
+        <div className="flex flex-col items-center gap-2">
+          <img src={euLogo.url} alt="Európska únia" className="h-16 w-auto object-contain" />
+          <span className="text-xs text-muted-foreground font-medium">Európska únia</span>
+        </div>
+        <div className="flex flex-col items-center gap-2">
+          <img src={programSlovenskoLogo.url} alt="Program Slovensko" className="h-16 w-auto object-contain" />
+          <span className="text-xs text-muted-foreground font-medium">Program Slovensko</span>
+        </div>
+        <div className="flex flex-col items-center gap-2">
+          <img src={mpsvrLogo.url} alt="Ministerstvo práce, sociálnych vecí a rodiny SR" className="h-24 w-auto object-contain" />
+          <span className="text-xs text-muted-foreground font-medium text-center">Ministerstvo práce, sociálnych vecí a rodiny SR</span>
+        </div>
+      </div>
     </Section>
   );
 }
