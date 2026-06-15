@@ -229,7 +229,7 @@ function SchoolFormSection() {
   };
 
   return (
-    <section className="py-16 md:py-20 bg-muted/40 border-y border-border">
+    <section id="kontaktny-formular" className="py-16 md:py-20 bg-muted/40 border-y border-border">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
@@ -353,7 +353,7 @@ function PartnershipSection() {
           variant="outline"
           className="mt-8 rounded-full"
         >
-          <a href="mailto:partneri@invok.sk">
+          <a href="#kontaktny-formular">
             Kontaktovať tím INVOK <ArrowRight className="ml-2 h-4 w-4" />
           </a>
         </Button>
