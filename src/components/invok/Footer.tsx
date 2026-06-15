@@ -43,7 +43,7 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-white/10 grid gap-4 md:grid-cols-2 text-sm text-white/60">
           <span className="inline-flex items-center gap-2"><Mail className="h-4 w-4" />{"info@pscno.sk"}</span>
-          <span className="inline-flex items-center gap-2"><Phone className="h-4 w-4" />{"+421 905 266 681"}</span>
+          <span className="inline-flex items-center gap-2"><Phone className="h-4 w-4" />{"+421 944 239 514"}</span>
         </div>
 
         <div className="mt-8 flex flex-col sm:flex-row justify-between gap-2 text-xs text-white/50">
