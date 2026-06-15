@@ -149,9 +149,9 @@ function ContactCards() {
     {
       I: Phone,
       label: "Telefón",
-      value: "+421 905 266 681",
+      value: "+421 944 239 514",
       hint: "Po – Pi · 9:00 – 17:00",
-      href: "tel:+421905266681",
+      href: "tel:+421944239514",
     },
   ];
   return (
