@@ -259,7 +259,7 @@ export function SchoolsLocationMapSection() {
     { x: 86, y: 70, c: "Košický kraj" },
   ];
   return (
-    <Section alt eyebrow="Mapa" title="Kde už INVOK pôsobí" subtitle="Partnerské školy zapojené do programu naprieč Slovenskom.">
+    <Section alt eyebrow="Mapa" title="Kde už INVOK pôsobí" subtitle="Partnerské školy zapojené do programu v týchto krajoch.">
       <div className="grid gap-8 lg:grid-cols-5 items-start">
         <div className="lg:col-span-3 rounded-3xl bg-card border border-border p-6 shadow-card">
           <div className="relative w-full" style={{ aspectRatio: "2/1" }}>
