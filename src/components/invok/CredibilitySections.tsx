@@ -252,16 +252,11 @@ export function TeamSection() {
 export function SchoolsLocationMapSection() {
   // Approx normalized coordinates on a simplified Slovakia bbox.
   const pins = [
-    { x: 14, y: 78, c: "Bratislava" },
-    { x: 22, y: 72, c: "Trnava" },
-    { x: 30, y: 75, c: "Nitra" },
-    { x: 32, y: 58, c: "Trenčín" },
-    { x: 44, y: 50, c: "Žilina" },
-    { x: 52, y: 64, c: "B. Bystrica" },
-    { x: 50, y: 42, c: "Martin" },
-    { x: 70, y: 48, c: "Poprad" },
-    { x: 82, y: 60, c: "Prešov" },
-    { x: 86, y: 70, c: "Košice" },
+    { x: 22, y: 72, c: "Trnavský kraj" },
+    { x: 30, y: 75, c: "Nitriansky kraj" },
+    { x: 52, y: 64, c: "Banskobystrický kraj" },
+    { x: 82, y: 60, c: "Prešovský kraj" },
+    { x: 86, y: 70, c: "Košický kraj" },
   ];
   return (
     <Section alt eyebrow="Mapa" title="Kde už INVOK pôsobí" subtitle="Partnerské školy zapojené do programu naprieč Slovenskom.">
