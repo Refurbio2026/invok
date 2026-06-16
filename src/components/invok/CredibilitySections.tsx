@@ -288,7 +288,7 @@ export function SchoolsLocationMapSection() {
           </div>
         </div>
 
-        <ul className="lg:col-span-2 grid grid-cols-2 gap-2">
+        <ul className="lg:col-span-2 grid grid-cols-1 gap-2">
           {pins.map((p) => (
             <li key={p.c} className="rounded-xl bg-card border border-border px-3 py-2 text-sm font-medium text-foreground flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-primary" /> {p.c}
