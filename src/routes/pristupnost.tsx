@@ -67,9 +67,9 @@ function Page() {
             E-mail:{" "}
             <a
               className="text-primary hover:underline"
-              href="mailto:info@pscno.sk"
+              href="mailto:invok@pscno.sk"
             >
-              info@pscno.sk
+              invok@pscno.sk
             </a>
           </p>
           <p className="mt-4 text-muted-foreground">
