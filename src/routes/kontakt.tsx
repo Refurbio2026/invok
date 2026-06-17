@@ -89,11 +89,11 @@ function TeamSection() {
               className="rounded-2xl border border-border bg-card p-5 shadow-soft hover:shadow-lg transition-shadow"
             >
               {m.img ? (
-                <div className="aspect-square w-full rounded-xl border border-border overflow-hidden mb-4">
+                <div className="aspect-[3/4] w-full rounded-xl border border-border overflow-hidden mb-4 bg-muted">
                   <img
                     src={m.img}
                     alt={m.name}
-                    className="w-full h-full object-cover object-top"
+                    className="w-full h-full object-contain"
                   />
                 </div>
               ) : (
