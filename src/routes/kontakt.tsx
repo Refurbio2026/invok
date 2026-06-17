@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import denisaAsset from "@/assets/denisa-chatrnuchova.png.asset.json";
+import radovanAsset from "@/assets/radovan-scerbak.png.asset.json";
 import { z } from "zod";
 import {
   Mail,
@@ -63,9 +64,10 @@ function TeamSection() {
       img: denisaAsset.url,
     },
     {
-      name: "Meno Priezvisko",
-      role: "Riaditeľ programu",
-      bio: "Krátky popis zamestnanca – jeho rola, skúsenosti a zameranie v rámci programu INVOK.",
+      name: "Mgr. Radovan Ščerbák",
+      role: "Koordinátor projektu",
+      bio: "Počas svojej kariéry pôsobil v oblasti bezpečnosti, verejnej správy a správy pohľadávok. Dlhodobo sa venuje témam finančnej zodpovednosti, právneho povedomia a podpory zodpovedného prístupu k plneniu záväzkov. Skúsenosti získané pri práci s ľuďmi v rôznych životných situáciách využíva pri budovaní transparentného a stabilného prostredia, založeného na dôvere, zodpovednosti a rešpekte.",
+      img: radovanAsset.url,
     },
   ];
   return (
