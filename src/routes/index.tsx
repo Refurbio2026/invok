@@ -608,7 +608,7 @@ function ContactSection() {
           <h3 className="text-2xl md:text-3xl font-bold">Máte záujem o predstavenie programu?</h3>
           <p className="mt-2 text-white/85 max-w-xl">Napíšte nám, zavolajte, alebo vyplňte krátky formulár pre školy na kontaktnej stránke.</p>
           <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/90">
-            <a href="mailto:info@invok.sk" className="inline-flex items-center gap-2 hover:underline"><Mail className="h-4 w-4" />info@invok.sk</a>
+            <a href="mailto:invok@pscno.sk" className="inline-flex items-center gap-2 hover:underline"><Mail className="h-4 w-4" />invok@pscno.sk</a>
             <a href="tel:+421944239514" className="inline-flex items-center gap-2 hover:underline"><Phone className="h-4 w-4" />+421 944 239 514</a>
           </div>
         </div>
