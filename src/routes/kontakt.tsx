@@ -88,9 +88,19 @@ function TeamSection() {
               key={m.name + m.role}
               className="rounded-2xl border border-border bg-card p-5 shadow-soft hover:shadow-lg transition-shadow"
             >
-              <div className="aspect-square w-full rounded-xl bg-muted border border-border grid place-items-center text-muted-foreground text-sm overflow-hidden mb-4">
-                Foto
-              </div>
+              {m.img ? (
+                <div className="aspect-square w-full rounded-xl border border-border overflow-hidden mb-4">
+                  <img
+                    src={m.img}
+                    alt={m.name}
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+              ) : (
+                <div className="aspect-square w-full rounded-xl bg-muted border border-border grid place-items-center text-muted-foreground text-sm overflow-hidden mb-4">
+                  Foto
+                </div>
+              )}
               <h3 className="font-semibold text-foreground">{m.name}</h3>
               <p className="text-xs font-medium uppercase tracking-wider text-primary mt-1">
                 {m.role}
