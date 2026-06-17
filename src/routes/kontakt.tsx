@@ -65,16 +65,6 @@ function TeamSection() {
       role: "Koordinátorka škôl",
       bio: "Krátky popis zamestnanca – jeho rola, skúsenosti a zameranie v rámci programu INVOK.",
     },
-    {
-      name: "Meno Priezvisko",
-      role: "Metodička",
-      bio: "Krátky popis zamestnanca – jeho rola, skúsenosti a zameranie v rámci programu INVOK.",
-    },
-    {
-      name: "Meno Priezvisko",
-      role: "Partnerstvá a komunikácia",
-      bio: "Krátky popis zamestnanca – jeho rola, skúsenosti a zameranie v rámci programu INVOK.",
-    },
   ];
   return (
     <section className="py-16 md:py-20 border-t border-border">
@@ -90,7 +80,7 @@ function TeamSection() {
             Spoznajte tím, ktorý každý deň pracuje na rozvoji kompetencií žiakov.
           </p>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 max-w-2xl mx-auto">
           {team.map((m) => (
             <div
               key={m.name + m.role}
