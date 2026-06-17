@@ -57,13 +57,14 @@ function KontaktPage() {
 function TeamSection() {
   const team = [
     {
-      name: "Meno Priezvisko",
-      role: "Riaditeľ programu",
-      bio: "Krátky popis zamestnanca – jeho rola, skúsenosti a zameranie v rámci programu INVOK.",
+      name: "Bc. Denisa Chatrnúchová",
+      role: "Koordinádor škôl",
+      bio: "Bc. Denisa Chatrnúchová sa dlhodobo venuje projektovému manažmentu, vzdelávacím a komunitným projektom. Má skúsenosti z verejného, súkromného aj neziskového sektora, kde sa podieľala na príprave a realizácií rozvojových programov, grantových projektov a budovaní partnerstiev. Vo svojej práci sa zameriava na projektové riadenie, komunikáciu a rozvoj komunít.",
+      img: denisaAsset.url,
     },
     {
       name: "Meno Priezvisko",
-      role: "Koordinátorka škôl",
+      role: "Riaditeľ programu",
       bio: "Krátky popis zamestnanca – jeho rola, skúsenosti a zameranie v rámci programu INVOK.",
     },
   ];
