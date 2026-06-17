@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import denisaAsset from "@/assets/denisa-chatrnuchova.png.asset.json";
 import { z } from "zod";
 import {
   Mail,
@@ -56,13 +57,14 @@ function KontaktPage() {
 function TeamSection() {
   const team = [
     {
-      name: "Meno Priezvisko",
-      role: "Riaditeľ programu",
-      bio: "Krátky popis zamestnanca – jeho rola, skúsenosti a zameranie v rámci programu INVOK.",
+      name: "Bc. Denisa Chatrnúchová",
+      role: "Koordinádor škôl",
+      bio: "Bc. Denisa Chatrnúchová sa dlhodobo venuje projektovému manažmentu, vzdelávacím a komunitným projektom. Má skúsenosti z verejného, súkromného aj neziskového sektora, kde sa podieľala na príprave a realizácií rozvojových programov, grantových projektov a budovaní partnerstiev. Vo svojej práci sa zameriava na projektové riadenie, komunikáciu a rozvoj komunít.",
+      img: denisaAsset.url,
     },
     {
       name: "Meno Priezvisko",
-      role: "Koordinátorka škôl",
+      role: "Riaditeľ programu",
       bio: "Krátky popis zamestnanca – jeho rola, skúsenosti a zameranie v rámci programu INVOK.",
     },
   ];
@@ -86,9 +88,19 @@ function TeamSection() {
               key={m.name + m.role}
               className="rounded-2xl border border-border bg-card p-5 shadow-soft hover:shadow-lg transition-shadow"
             >
-              <div className="aspect-square w-full rounded-xl bg-muted border border-border grid place-items-center text-muted-foreground text-sm overflow-hidden mb-4">
-                Foto
-              </div>
+              {m.img ? (
+                <div className="aspect-square w-full rounded-xl border border-border overflow-hidden mb-4">
+                  <img
+                    src={m.img}
+                    alt={m.name}
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+              ) : (
+                <div className="aspect-square w-full rounded-xl bg-muted border border-border grid place-items-center text-muted-foreground text-sm overflow-hidden mb-4">
+                  Foto
+                </div>
+              )}
               <h3 className="font-semibold text-foreground">{m.name}</h3>
               <p className="text-xs font-medium uppercase tracking-wider text-primary mt-1">
                 {m.role}
