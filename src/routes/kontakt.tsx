@@ -146,9 +146,9 @@ function ContactCards() {
     {
       I: Mail,
       label: "E-mail",
-      value: "info@invok.sk",
+      value: "invok@pscno.sk",
       hint: "Odpovedáme do 2 pracovných dní",
-      href: "mailto:info@invok.sk",
+      href: "mailto:invok@pscno.sk",
     },
     {
       I: Phone,
