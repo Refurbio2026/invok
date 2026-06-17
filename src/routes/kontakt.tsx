@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import denisaAsset from "@/assets/denisa-chatrnuchova.png.asset.json";
 import { z } from "zod";
 import {
   Mail,
