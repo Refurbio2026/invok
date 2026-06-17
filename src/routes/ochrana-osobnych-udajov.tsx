@@ -53,8 +53,8 @@ function Page() {
             <strong>PSC n.o.</strong>
             <br />
             E-mail:{" "}
-            <a className="text-primary hover:underline" href="mailto:info@pscno.sk">
-              info@pscno.sk
+            <a className="text-primary hover:underline" href="mailto:invok@pscno.sk">
+              invok@pscno.sk
             </a>
           </p>
           <p>Ďalšie identifikačné údaje budú doplnené podľa oficiálnych údajov organizácie.</p>
@@ -129,8 +129,8 @@ function Page() {
           <p>
             V prípade otázok týkajúcich sa ochrany osobných údajov nás môžete
             kontaktovať na adrese:{" "}
-            <a className="text-primary hover:underline" href="mailto:info@pscno.sk">
-              info@pscno.sk
+            <a className="text-primary hover:underline" href="mailto:invok@pscno.sk">
+              invok@pscno.sk
             </a>
           </p>
 
