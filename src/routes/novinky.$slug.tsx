@@ -103,16 +103,18 @@ function ArticleDetail() {
 
       <article className="pb-20">
         {article.cover_image_url && (
-          <div className="aspect-[21/9] w-full overflow-hidden bg-muted">
-            <img
-              src={article.cover_image_url}
-              alt={article.title}
-              className="w-full h-full object-cover"
-            />
+          <div className="w-full max-w-2xl mx-auto px-4 pt-8">
+            <div className="overflow-hidden rounded-2xl bg-muted">
+              <img
+                src={article.cover_image_url}
+                alt={article.title}
+                className="w-full h-auto object-contain"
+              />
+            </div>
           </div>
         )}
 
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 -mt-12 md:-mt-16 relative">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 relative">
           <div className="rounded-2xl bg-card border border-border shadow-soft p-6 md:p-10">
             <Button asChild variant="ghost" size="sm" className="mb-6 -ml-2">
               <Link to="/novinky">
