@@ -136,7 +136,7 @@ function ArticleDetail() {
               <span>{article.author}</span>
             </div>
 
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-6 text-balance">
               {article.title}
             </h1>
 
@@ -221,7 +221,7 @@ function RelatedCard({ article }: { article: BlogPost }) {
             {article.category.name}
           </div>
         )}
-        <h3 className="font-semibold leading-snug group-hover:text-primary transition-colors">
+        <h3 className="font-semibold leading-snug group-hover:text-primary transition-colors text-balance">
           {article.title}
         </h3>
         <p className="text-xs text-muted-foreground mt-2">{formatDate(dateStr)}</p>

@@ -167,7 +167,7 @@ function ArticleCard({ article }: { article: BlogPost }) {
         )}
       </Link>
       <div className="p-6">
-        <h3 className="text-lg font-semibold leading-snug text-center">
+        <h3 className="text-lg font-semibold leading-snug text-left text-balance">
           <Link
             to="/novinky/$slug"
             params={{ slug: article.slug }}
