@@ -80,6 +80,16 @@ const emptyForm: FormState = {
   seo_description: "",
 };
 
+function slugify(s: string) {
+  return s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "")
+    .slice(0, 80);
+}
+
 function BlogEditor() {
   const { id } = Route.useParams();
   const isNew = id === "novy";
@@ -102,6 +112,7 @@ function BlogEditor() {
   });
 
   const [form, setForm] = useState<FormState>(emptyForm);
+  const [slugTouched, setSlugTouched] = useState(false);
 
   useEffect(() => {
     if (post.data) {
@@ -117,6 +128,7 @@ function BlogEditor() {
         seo_title: post.data.seo_title || "",
         seo_description: post.data.seo_description || "",
       });
+      setSlugTouched(true);
     }
   }, [post.data]);
 
@@ -148,14 +160,20 @@ function BlogEditor() {
       if (isNew) {
         navigate({ to: "/admin/blog/$id", params: { id: row.id } });
       } else {
-        setForm((f) => ({ ...f, status: row.status }));
+        setForm((f) => ({ ...f, status: row.status, slug: row.slug }));
       }
     },
     onError: (e: any) => toast.error(e?.message || "Chyba pri ukladaní."),
   });
 
   const update = (k: keyof FormState, v: string) =>
-    setForm((f) => ({ ...f, [k]: v }));
+    setForm((f) => {
+      const next = { ...f, [k]: v };
+      if (k === "title" && !slugTouched) {
+        next.slug = slugify(v);
+      }
+      return next;
+    });
 
   if (!isNew && post.isLoading) {
     return (
@@ -210,7 +228,10 @@ function BlogEditor() {
               <Label>Slug URL</Label>
               <Input
                 value={form.slug}
-                onChange={(e) => update("slug", e.target.value)}
+                onChange={(e) => {
+                  setSlugTouched(true);
+                  update("slug", e.target.value);
+                }}
                 placeholder="auto-generovaný z názvu, ak prázdne"
               />
               <p className="text-xs text-muted-foreground mt-1">
