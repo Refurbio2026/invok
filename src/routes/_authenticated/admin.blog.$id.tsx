@@ -228,7 +228,10 @@ function BlogEditor() {
               <Label>Slug URL</Label>
               <Input
                 value={form.slug}
-                onChange={(e) => update("slug", e.target.value)}
+                onChange={(e) => {
+                  setSlugTouched(true);
+                  update("slug", e.target.value);
+                }}
                 placeholder="auto-generovaný z názvu, ak prázdne"
               />
               <p className="text-xs text-muted-foreground mt-1">
