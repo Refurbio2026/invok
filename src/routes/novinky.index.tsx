@@ -154,7 +154,6 @@ function NovinkyPage() {
 }
 
 function ArticleCard({ article }: { article: BlogPost }) {
-  const dateStr = article.published_at || article.created_at;
   return (
     <article className="group flex flex-col rounded-2xl overflow-hidden border border-border bg-card shadow-soft hover:shadow-lg transition-shadow">
       <Link
@@ -173,19 +172,8 @@ function ArticleCard({ article }: { article: BlogPost }) {
           <div className="w-full h-full bg-gradient-to-br from-primary/10 to-accent" />
         )}
       </Link>
-      <div className="p-6 flex-1 flex flex-col">
-        <div className="flex items-center gap-3 text-xs text-muted-foreground mb-3">
-          {article.category?.name && (
-            <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-semibold">
-              {article.category.name}
-            </span>
-          )}
-          <span className="inline-flex items-center gap-1">
-            <Calendar className="h-3 w-3" />
-            {formatDate(dateStr)}
-          </span>
-        </div>
-        <h3 className="text-lg font-semibold leading-snug mb-2">
+      <div className="p-6">
+        <h3 className="text-lg font-semibold leading-snug text-center">
           <Link
             to="/novinky/$slug"
             params={{ slug: article.slug }}
@@ -194,16 +182,6 @@ function ArticleCard({ article }: { article: BlogPost }) {
             {article.title}
           </Link>
         </h3>
-        {article.excerpt && (
-          <p className="text-sm text-muted-foreground line-clamp-3 flex-1">
-            {article.excerpt}
-          </p>
-        )}
-        <Button asChild variant="link" className="mt-4 px-0 self-start">
-          <Link to="/novinky/$slug" params={{ slug: article.slug }}>
-            Čítať viac <ArrowRight className="ml-1 h-4 w-4" />
-          </Link>
-        </Button>
       </div>
     </article>
   );
