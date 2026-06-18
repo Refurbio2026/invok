@@ -1,10 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Search, Calendar, ArrowRight, Loader2 } from "lucide-react";
+import { Search, Loader2 } from "lucide-react";
 import { Header } from "@/components/invok/Header";
 import { Footer } from "@/components/invok/Footer";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   fetchPublicPosts,
