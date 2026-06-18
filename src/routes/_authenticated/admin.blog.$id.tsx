@@ -112,6 +112,7 @@ function BlogEditor() {
   });
 
   const [form, setForm] = useState<FormState>(emptyForm);
+  const [slugTouched, setSlugTouched] = useState(false);
 
   useEffect(() => {
     if (post.data) {
@@ -127,6 +128,7 @@ function BlogEditor() {
         seo_title: post.data.seo_title || "",
         seo_description: post.data.seo_description || "",
       });
+      setSlugTouched(true);
     }
   }, [post.data]);
 
@@ -158,14 +160,20 @@ function BlogEditor() {
       if (isNew) {
         navigate({ to: "/admin/blog/$id", params: { id: row.id } });
       } else {
-        setForm((f) => ({ ...f, status: row.status }));
+        setForm((f) => ({ ...f, status: row.status, slug: row.slug }));
       }
     },
     onError: (e: any) => toast.error(e?.message || "Chyba pri ukladaní."),
   });
 
   const update = (k: keyof FormState, v: string) =>
-    setForm((f) => ({ ...f, [k]: v }));
+    setForm((f) => {
+      const next = { ...f, [k]: v };
+      if (k === "title" && !slugTouched) {
+        next.slug = slugify(v);
+      }
+      return next;
+    });
 
   if (!isNew && post.isLoading) {
     return (
