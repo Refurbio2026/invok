@@ -31,13 +31,8 @@ export const Route = createFileRoute("/novinky/")({
   component: NovinkyPage,
 });
 
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("sk-SK", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-}
+
+
 
 function NovinkyPage() {
   const [query, setQuery] = useState("");
