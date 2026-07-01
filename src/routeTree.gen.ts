@@ -44,6 +44,7 @@ import { Route as AuthenticatedAdminGaleriaRouteImport } from './routes/_authent
 import { Route as AuthenticatedAdminDashboardRouteImport } from './routes/_authenticated/admin.dashboard'
 import { Route as AuthenticatedAdminVideaIndexRouteImport } from './routes/_authenticated/admin.videa.index'
 import { Route as AuthenticatedAdminBlogIndexRouteImport } from './routes/_authenticated/admin.blog.index'
+import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as AuthenticatedAdminVideaIdRouteImport } from './routes/_authenticated/admin.videa.$id'
 import { Route as AuthenticatedAdminTestyIdRouteImport } from './routes/_authenticated/admin.testy.$id'
 import { Route as AuthenticatedAdminBlogIdRouteImport } from './routes/_authenticated/admin.blog.$id'
@@ -231,6 +232,12 @@ const AuthenticatedAdminBlogIndexRoute =
     path: '/admin/blog/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const LovableEmailQueueProcessRoute =
+  LovableEmailQueueProcessRouteImport.update({
+    id: '/lovable/email/queue/process',
+    path: '/lovable/email/queue/process',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AuthenticatedAdminVideaIdRoute =
   AuthenticatedAdminVideaIdRouteImport.update({
     id: '/admin/videa/$id',
@@ -286,6 +293,7 @@ export interface FileRoutesByFullPath {
   '/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
   '/admin/testy/$id': typeof AuthenticatedAdminTestyIdRoute
   '/admin/videa/$id': typeof AuthenticatedAdminVideaIdRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/admin/blog/': typeof AuthenticatedAdminBlogIndexRoute
   '/admin/videa/': typeof AuthenticatedAdminVideaIndexRoute
 }
@@ -325,6 +333,7 @@ export interface FileRoutesByTo {
   '/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
   '/admin/testy/$id': typeof AuthenticatedAdminTestyIdRoute
   '/admin/videa/$id': typeof AuthenticatedAdminVideaIdRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/admin/blog': typeof AuthenticatedAdminBlogIndexRoute
   '/admin/videa': typeof AuthenticatedAdminVideaIndexRoute
 }
@@ -366,6 +375,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
   '/_authenticated/admin/testy/$id': typeof AuthenticatedAdminTestyIdRoute
   '/_authenticated/admin/videa/$id': typeof AuthenticatedAdminVideaIdRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/_authenticated/admin/blog/': typeof AuthenticatedAdminBlogIndexRoute
   '/_authenticated/admin/videa/': typeof AuthenticatedAdminVideaIndexRoute
 }
@@ -407,6 +417,7 @@ export interface FileRouteTypes {
     | '/admin/blog/$id'
     | '/admin/testy/$id'
     | '/admin/videa/$id'
+    | '/lovable/email/queue/process'
     | '/admin/blog/'
     | '/admin/videa/'
   fileRoutesByTo: FileRoutesByTo
@@ -446,6 +457,7 @@ export interface FileRouteTypes {
     | '/admin/blog/$id'
     | '/admin/testy/$id'
     | '/admin/videa/$id'
+    | '/lovable/email/queue/process'
     | '/admin/blog'
     | '/admin/videa'
   id:
@@ -486,6 +498,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/blog/$id'
     | '/_authenticated/admin/testy/$id'
     | '/_authenticated/admin/videa/$id'
+    | '/lovable/email/queue/process'
     | '/_authenticated/admin/blog/'
     | '/_authenticated/admin/videa/'
   fileRoutesById: FileRoutesById
@@ -514,6 +527,7 @@ export interface RootRouteChildren {
   NovinkyIndexRoute: typeof NovinkyIndexRoute
   TestyIndexRoute: typeof TestyIndexRoute
   ZiakTestTestIdRoute: typeof ZiakTestTestIdRoute
+  LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -763,6 +777,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminBlogIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/lovable/email/queue/process': {
+      id: '/lovable/email/queue/process'
+      path: '/lovable/email/queue/process'
+      fullPath: '/lovable/email/queue/process'
+      preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/admin/videa/$id': {
       id: '/_authenticated/admin/videa/$id'
       path: '/admin/videa/$id'
@@ -862,6 +883,7 @@ const rootRouteChildren: RootRouteChildren = {
   NovinkyIndexRoute: NovinkyIndexRoute,
   TestyIndexRoute: TestyIndexRoute,
   ZiakTestTestIdRoute: ZiakTestTestIdRoute,
+  LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
