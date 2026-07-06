@@ -32,6 +32,7 @@ import { Route as NovinkySlugRouteImport } from './routes/novinky.$slug'
 import { Route as ModulUkazkaRouteImport } from './routes/modul.ukazka'
 import { Route as AdminPrihlasenieRouteImport } from './routes/admin.prihlasenie'
 import { Route as ZiakTestTestIdRouteImport } from './routes/ziak.test.$testId'
+import { Route as ApiPublicSchoolRequestRouteImport } from './routes/api/public/school-request'
 import { Route as AuthenticatedAdminZiadostiRouteImport } from './routes/_authenticated/admin.ziadosti'
 import { Route as AuthenticatedAdminZiaciRouteImport } from './routes/_authenticated/admin.ziaci'
 import { Route as AuthenticatedAdminVysledkyRouteImport } from './routes/_authenticated/admin.vysledky'
@@ -163,6 +164,11 @@ const ZiakTestTestIdRoute = ZiakTestTestIdRouteImport.update({
   path: '/ziak/test/$testId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicSchoolRequestRoute = ApiPublicSchoolRequestRouteImport.update({
+  id: '/api/public/school-request',
+  path: '/api/public/school-request',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedAdminZiadostiRoute =
   AuthenticatedAdminZiadostiRouteImport.update({
     id: '/admin/ziadosti',
@@ -289,6 +295,7 @@ export interface FileRoutesByFullPath {
   '/admin/vysledky': typeof AuthenticatedAdminVysledkyRoute
   '/admin/ziaci': typeof AuthenticatedAdminZiaciRoute
   '/admin/ziadosti': typeof AuthenticatedAdminZiadostiRoute
+  '/api/public/school-request': typeof ApiPublicSchoolRequestRoute
   '/ziak/test/$testId': typeof ZiakTestTestIdRoute
   '/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
   '/admin/testy/$id': typeof AuthenticatedAdminTestyIdRoute
@@ -329,6 +336,7 @@ export interface FileRoutesByTo {
   '/admin/vysledky': typeof AuthenticatedAdminVysledkyRoute
   '/admin/ziaci': typeof AuthenticatedAdminZiaciRoute
   '/admin/ziadosti': typeof AuthenticatedAdminZiadostiRoute
+  '/api/public/school-request': typeof ApiPublicSchoolRequestRoute
   '/ziak/test/$testId': typeof ZiakTestTestIdRoute
   '/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
   '/admin/testy/$id': typeof AuthenticatedAdminTestyIdRoute
@@ -371,6 +379,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/vysledky': typeof AuthenticatedAdminVysledkyRoute
   '/_authenticated/admin/ziaci': typeof AuthenticatedAdminZiaciRoute
   '/_authenticated/admin/ziadosti': typeof AuthenticatedAdminZiadostiRoute
+  '/api/public/school-request': typeof ApiPublicSchoolRequestRoute
   '/ziak/test/$testId': typeof ZiakTestTestIdRoute
   '/_authenticated/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
   '/_authenticated/admin/testy/$id': typeof AuthenticatedAdminTestyIdRoute
@@ -413,6 +422,7 @@ export interface FileRouteTypes {
     | '/admin/vysledky'
     | '/admin/ziaci'
     | '/admin/ziadosti'
+    | '/api/public/school-request'
     | '/ziak/test/$testId'
     | '/admin/blog/$id'
     | '/admin/testy/$id'
@@ -453,6 +463,7 @@ export interface FileRouteTypes {
     | '/admin/vysledky'
     | '/admin/ziaci'
     | '/admin/ziadosti'
+    | '/api/public/school-request'
     | '/ziak/test/$testId'
     | '/admin/blog/$id'
     | '/admin/testy/$id'
@@ -494,6 +505,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/vysledky'
     | '/_authenticated/admin/ziaci'
     | '/_authenticated/admin/ziadosti'
+    | '/api/public/school-request'
     | '/ziak/test/$testId'
     | '/_authenticated/admin/blog/$id'
     | '/_authenticated/admin/testy/$id'
@@ -526,6 +538,7 @@ export interface RootRouteChildren {
   ZiakPrihlasenieRoute: typeof ZiakPrihlasenieRoute
   NovinkyIndexRoute: typeof NovinkyIndexRoute
   TestyIndexRoute: typeof TestyIndexRoute
+  ApiPublicSchoolRequestRoute: typeof ApiPublicSchoolRequestRoute
   ZiakTestTestIdRoute: typeof ZiakTestTestIdRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
 }
@@ -691,6 +704,13 @@ declare module '@tanstack/react-router' {
       path: '/ziak/test/$testId'
       fullPath: '/ziak/test/$testId'
       preLoaderRoute: typeof ZiakTestTestIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/school-request': {
+      id: '/api/public/school-request'
+      path: '/api/public/school-request'
+      fullPath: '/api/public/school-request'
+      preLoaderRoute: typeof ApiPublicSchoolRequestRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin/ziadosti': {
@@ -882,19 +902,10 @@ const rootRouteChildren: RootRouteChildren = {
   ZiakPrihlasenieRoute: ZiakPrihlasenieRoute,
   NovinkyIndexRoute: NovinkyIndexRoute,
   TestyIndexRoute: TestyIndexRoute,
+  ApiPublicSchoolRequestRoute: ApiPublicSchoolRequestRoute,
   ZiakTestTestIdRoute: ZiakTestTestIdRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
