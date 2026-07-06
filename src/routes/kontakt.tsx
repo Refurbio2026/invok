@@ -201,6 +201,7 @@ const schoolSchema = z.object({
 
 function SchoolFormSection() {
   const [done, setDone] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [d, setD] = useState({
     skola: "",
@@ -215,7 +216,7 @@ function SchoolFormSection() {
   const set = (k: keyof typeof d) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setD({ ...d, [k]: e.target.value });
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     const result = schoolSchema.safeParse(d);
     if (!result.success) {
@@ -228,8 +229,21 @@ function SchoolFormSection() {
       return;
     }
     setErrors({});
-    setDone(true);
-    toast.success("Žiadosť odoslaná");
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/public/school-request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(d),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      setDone(true);
+      toast.success("Žiadosť odoslaná");
+    } catch {
+      toast.error("Odoslanie zlyhalo. Skúste to prosím znova.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -308,9 +322,10 @@ function SchoolFormSection() {
             <Button
               type="submit"
               size="lg"
+              disabled={submitting}
               className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 justify-self-start px-6"
             >
-              Odoslať žiadosť <ArrowRight className="ml-2 h-4 w-4" />
+              {submitting ? "Odosielam..." : (<>Odoslať žiadosť <ArrowRight className="ml-2 h-4 w-4" /></>)}
             </Button>
           </form>
         )}
