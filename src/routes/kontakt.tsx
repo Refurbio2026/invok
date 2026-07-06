@@ -322,9 +322,10 @@ function SchoolFormSection() {
             <Button
               type="submit"
               size="lg"
+              disabled={submitting}
               className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 justify-self-start px-6"
             >
-              Odoslať žiadosť <ArrowRight className="ml-2 h-4 w-4" />
+              {submitting ? "Odosielam..." : (<>Odoslať žiadosť <ArrowRight className="ml-2 h-4 w-4" /></>)}
             </Button>
           </form>
         )}
