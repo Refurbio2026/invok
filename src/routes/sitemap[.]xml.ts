@@ -33,7 +33,7 @@ export const Route = createFileRoute("/sitemap.xml")({
         for (const a of ARTICLES) {
           entries.push({ path: `/novinky/${a.slug}`, changefreq: "monthly", priority: "0.6" });
         }
-        for (const t of TESTS) {
+        for (const t of Object.values(TESTS)) {
           entries.push({ path: `/testy/${t.slug}`, changefreq: "monthly", priority: "0.6" });
         }
 
