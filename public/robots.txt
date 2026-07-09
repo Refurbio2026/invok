@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /_authenticated/
+Disallow: /api/
+Disallow: /lovable/
+
+Sitemap: https://invok.pscno.sk/sitemap.xml

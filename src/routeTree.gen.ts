@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RegistraciaSkolyRouteImport } from './routes/registracia-skoly'
 import { Route as PristupnostRouteImport } from './routes/pristupnost'
 import { Route as PrihlasenieRouteImport } from './routes/prihlasenie'
@@ -50,6 +51,11 @@ import { Route as AuthenticatedAdminVideaIdRouteImport } from './routes/_authent
 import { Route as AuthenticatedAdminTestyIdRouteImport } from './routes/_authenticated/admin.testy.$id'
 import { Route as AuthenticatedAdminBlogIdRouteImport } from './routes/_authenticated/admin.blog.$id'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RegistraciaSkolyRoute = RegistraciaSkolyRouteImport.update({
   id: '/registracia-skoly',
   path: '/registracia-skoly',
@@ -271,6 +277,7 @@ export interface FileRoutesByFullPath {
   '/prihlasenie': typeof PrihlasenieRoute
   '/pristupnost': typeof PristupnostRoute
   '/registracia-skoly': typeof RegistraciaSkolyRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/prihlasenie': typeof AdminPrihlasenieRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
   '/novinky/$slug': typeof NovinkySlugRoute
@@ -312,6 +319,7 @@ export interface FileRoutesByTo {
   '/prihlasenie': typeof PrihlasenieRoute
   '/pristupnost': typeof PristupnostRoute
   '/registracia-skoly': typeof RegistraciaSkolyRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/prihlasenie': typeof AdminPrihlasenieRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
   '/novinky/$slug': typeof NovinkySlugRoute
@@ -355,6 +363,7 @@ export interface FileRoutesById {
   '/prihlasenie': typeof PrihlasenieRoute
   '/pristupnost': typeof PristupnostRoute
   '/registracia-skoly': typeof RegistraciaSkolyRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/prihlasenie': typeof AdminPrihlasenieRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
   '/novinky/$slug': typeof NovinkySlugRoute
@@ -398,6 +407,7 @@ export interface FileRouteTypes {
     | '/prihlasenie'
     | '/pristupnost'
     | '/registracia-skoly'
+    | '/sitemap.xml'
     | '/admin/prihlasenie'
     | '/modul/ukazka'
     | '/novinky/$slug'
@@ -439,6 +449,7 @@ export interface FileRouteTypes {
     | '/prihlasenie'
     | '/pristupnost'
     | '/registracia-skoly'
+    | '/sitemap.xml'
     | '/admin/prihlasenie'
     | '/modul/ukazka'
     | '/novinky/$slug'
@@ -481,6 +492,7 @@ export interface FileRouteTypes {
     | '/prihlasenie'
     | '/pristupnost'
     | '/registracia-skoly'
+    | '/sitemap.xml'
     | '/admin/prihlasenie'
     | '/modul/ukazka'
     | '/novinky/$slug'
@@ -524,6 +536,7 @@ export interface RootRouteChildren {
   PrihlasenieRoute: typeof PrihlasenieRoute
   PristupnostRoute: typeof PristupnostRoute
   RegistraciaSkolyRoute: typeof RegistraciaSkolyRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   AdminPrihlasenieRoute: typeof AdminPrihlasenieRoute
   ModulUkazkaRoute: typeof ModulUkazkaRoute
   NovinkySlugRoute: typeof NovinkySlugRoute
@@ -545,6 +558,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/registracia-skoly': {
       id: '/registracia-skoly'
       path: '/registracia-skoly'
@@ -888,6 +908,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrihlasenieRoute: PrihlasenieRoute,
   PristupnostRoute: PristupnostRoute,
   RegistraciaSkolyRoute: RegistraciaSkolyRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   AdminPrihlasenieRoute: AdminPrihlasenieRoute,
   ModulUkazkaRoute: ModulUkazkaRoute,
   NovinkySlugRoute: NovinkySlugRoute,
@@ -909,13 +930,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
