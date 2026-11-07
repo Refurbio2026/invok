@@ -1093,6 +1093,7 @@ export type Database = {
           read_ct: number
         }[]
       }
+      teacher_owns_class: { Args: { _class_id: string }; Returns: boolean }
     }
     Enums: {
       app_role:

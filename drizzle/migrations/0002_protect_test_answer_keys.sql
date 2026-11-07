@@ -1,0 +1,1 @@
+ALTER POLICY "Otázky: prihlásený čít. otázky publikovaného testu" ON public.test_questions USING (public.has_role(auth.uid(), 'admin'::public.app_role) OR public.has_role(auth.uid(), 'koordinator'::public.app_role));

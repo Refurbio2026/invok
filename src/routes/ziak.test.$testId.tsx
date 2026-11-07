@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { Header } from "@/components/invok/Header";
 import { Footer } from "@/components/invok/Footer";
@@ -14,10 +14,10 @@ import {
   submitAttempt,
 } from "@/lib/public/student.functions";
 import { getStudentSession } from "@/lib/public/student-session";
-import { toast } from "sonner";
+import { toast, Toaster } from "sonner";
 
 export const Route = createFileRoute("/ziak/test/$testId")({
-  head: () => ({ meta: [{ title: "Test – INVOK" }] }),
+  head: () => ({ meta: [{ title: "Vyplnenie žiackeho testu – INVOK" }, { name: "description", content: "Vyplnenie prideleného testu v programe INVOK." }, { property: "og:title", content: "Vyplnenie žiackeho testu – INVOK" }, { property: "og:description", content: "Vyplnenie prideleného testu v programe INVOK." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: TestPage,
 });
 
@@ -53,11 +53,14 @@ function TestPage() {
   >({});
   const [current, setCurrent] = useState(0);
   const [submitting, setSubmitting] = useState(false);
-  const [result, setResult] = useState<{ score: number; max: number } | null>(null);
+  const [result, setResult] = useState<{ score: number | null; max: number | null } | null>(null);
 
-  const session = useMemo(() => getStudentSession(), []);
+  const [session, setSession] = useState<ReturnType<typeof getStudentSession>>(null);
+  const saveQueue = useRef<Promise<unknown>>(Promise.resolve());
 
   useEffect(() => {
+    const session = getStudentSession();
+    setSession(session);
     if (!session) {
       navigate({ to: "/ziak/prihlasenie" });
       return;
@@ -101,17 +104,16 @@ function TestPage() {
   }
 
   function setAnswer(q: Question, patch: Partial<{ keys: string[]; text: string }>) {
-    setAnswers((prev) => {
-      const next = { ...prev, [q.id]: { ...prev[q.id], ...patch } };
-      persist(q, next[q.id].keys, next[q.id].text);
-      return next;
-    });
+    const next = { ...(answers[q.id] ?? { keys: [], text: "" }), ...patch };
+    setAnswers((prev) => ({ ...prev, [q.id]: next }));
+    saveQueue.current = saveQueue.current.then(() => persist(q, next.keys, next.text));
   }
 
   async function onSubmit() {
     if (!session || !data) return;
     setSubmitting(true);
     try {
+      await saveQueue.current;
       const res = await submit({
         data: {
           code: session.code,
@@ -119,7 +121,7 @@ function TestPage() {
           attemptId: data.attemptId,
         },
       });
-      setResult({ score: Number(res.score ?? 0), max: Number(res.maxScore ?? 0) });
+      setResult({ score: res.score ?? null, max: res.maxScore ?? null });
       toast.success("Test bol odovzdaný.");
     } catch (err: any) {
       toast.error(err?.message ?? "Odovzdanie zlyhalo.");
@@ -150,10 +152,10 @@ function TestPage() {
             <p className="text-muted-foreground mb-6">
               Tvoje výsledky boli zaznamenané.
             </p>
-            <div className="text-5xl font-bold text-primary mb-1">
+            {result.score !== null && <><div className="text-5xl font-bold text-primary mb-1">
               {result.score} / {result.max}
             </div>
-            <p className="text-sm text-muted-foreground mb-6">bodov</p>
+            <p className="text-sm text-muted-foreground mb-6">bodov</p></>}
             <Button onClick={() => navigate({ to: "/ziak/dashboard" })}>
               Späť na dashboard
             </Button>
@@ -188,7 +190,7 @@ function TestPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+      <Header /><Toaster richColors />
       <main className="flex-1 px-4 py-8 max-w-3xl mx-auto w-full">
         <div className="mb-6">
           <h1 className="text-2xl font-bold">{data.test.title}</h1>
@@ -263,9 +265,10 @@ function TestPage() {
               ).map((o) => {
                 const selected = a.keys[0] === o.key;
                 return (
-                  <button
+                  <Button
                     key={o.key}
                     type="button"
+                    disabled={submitting}
                     onClick={() => setAnswer(q, { keys: [o.key] })}
                     className={`min-w-12 px-4 py-3 rounded-lg border transition-colors ${
                       selected
@@ -274,7 +277,7 @@ function TestPage() {
                     }`}
                   >
                     {o.label}
-                  </button>
+                  </Button>
                 );
               })}
             </div>

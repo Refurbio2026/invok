@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX IF NOT EXISTS one_open_attempt_per_student_test ON public.test_attempts(student_id,test_id) WHERE status = 'in_progress';

@@ -48,7 +48,7 @@ function StudentLoginPage() {
         </div>
         <div>
           <Label htmlFor="pin">PIN</Label>
-          <Input id="pin" value={pin} onChange={(e) => setPin(e.target.value)} required />
+          <Input id="pin" type="password" autoComplete="current-password" value={pin} onChange={(e) => setPin(e.target.value)} required />
         </div>
         <Button type="submit" className="w-full" disabled={loading}>
           {loading ? "Prihlasujem…" : "Prihlásiť sa"}

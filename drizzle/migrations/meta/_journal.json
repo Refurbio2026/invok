@@ -8,6 +8,27 @@
       "when": 1794086519466,
       "tag": "0000_school_dashboard_access",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794087067454,
+      "tag": "0001_teacher_class_permissions",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794087227601,
+      "tag": "0002_protect_test_answer_keys",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1794087315478,
+      "tag": "0003_prevent_duplicate_open_attempts",
+      "breakpoints": true
     }
   ]
 }

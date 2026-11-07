@@ -27,7 +27,6 @@ import { Route as TestyIndexRouteImport } from './routes/testy.index'
 import { Route as TestySlugRouteImport } from './routes/testy.$slug'
 import { Route as TestyVstupnyTestRouteImport } from './routes/testy.vstupny-test'
 import { Route as TestyVystupnyTestRouteImport } from './routes/testy.vystupny-test'
-import { Route as UcitelDashboardRouteImport } from './routes/ucitel.dashboard'
 import { Route as UcitelPrihlasenieRouteImport } from './routes/ucitel.prihlasenie'
 import { Route as ZiakDashboardRouteImport } from './routes/ziak.dashboard'
 import { Route as ZiakPrihlasenieRouteImport } from './routes/ziak.prihlasenie'
@@ -47,6 +46,12 @@ import { Route as AuthenticatedSkolaReportyRouteImport } from './routes/_authent
 import { Route as AuthenticatedSkolaTriedyRouteImport } from './routes/_authenticated/skola.triedy'
 import { Route as AuthenticatedSkolaUciteliaRouteImport } from './routes/_authenticated/skola.ucitelia'
 import { Route as AuthenticatedSkolaVysledkyRouteImport } from './routes/_authenticated/skola.vysledky'
+import { Route as AuthenticatedUcitelDashboardRouteImport } from './routes/_authenticated/ucitel.dashboard'
+import { Route as AuthenticatedUcitelModulyRouteImport } from './routes/_authenticated/ucitel.moduly'
+import { Route as AuthenticatedUcitelTestyRouteImport } from './routes/_authenticated/ucitel.testy'
+import { Route as AuthenticatedUcitelTriedyRouteImport } from './routes/_authenticated/ucitel.triedy'
+import { Route as AuthenticatedUcitelVysledkyRouteImport } from './routes/_authenticated/ucitel.vysledky'
+import { Route as AuthenticatedUcitelZiaciRouteImport } from './routes/_authenticated/ucitel.ziaci'
 import { Route as ApiPublicSchoolRequestRouteImport } from './routes/api/public/school-request'
 import { Route as ZiakTestTestIdRouteImport } from './routes/ziak.test.$testId'
 import { Route as AuthenticatedAdminBlogIndexRouteImport } from './routes/_authenticated/admin.blog.index'
@@ -143,11 +148,6 @@ const TestyVstupnyTestRoute = TestyVstupnyTestRouteImport.update({
 const TestyVystupnyTestRoute = TestyVystupnyTestRouteImport.update({
   id: '/testy/vystupny-test',
   path: '/testy/vystupny-test',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const UcitelDashboardRoute = UcitelDashboardRouteImport.update({
-  id: '/ucitel/dashboard',
-  path: '/ucitel/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const UcitelPrihlasenieRoute = UcitelPrihlasenieRouteImport.update({
@@ -258,6 +258,42 @@ const AuthenticatedSkolaVysledkyRoute =
     path: '/skola/vysledky',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedUcitelDashboardRoute =
+  AuthenticatedUcitelDashboardRouteImport.update({
+    id: '/ucitel/dashboard',
+    path: '/ucitel/dashboard',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedUcitelModulyRoute =
+  AuthenticatedUcitelModulyRouteImport.update({
+    id: '/ucitel/moduly',
+    path: '/ucitel/moduly',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedUcitelTestyRoute =
+  AuthenticatedUcitelTestyRouteImport.update({
+    id: '/ucitel/testy',
+    path: '/ucitel/testy',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedUcitelTriedyRoute =
+  AuthenticatedUcitelTriedyRouteImport.update({
+    id: '/ucitel/triedy',
+    path: '/ucitel/triedy',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedUcitelVysledkyRoute =
+  AuthenticatedUcitelVysledkyRouteImport.update({
+    id: '/ucitel/vysledky',
+    path: '/ucitel/vysledky',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedUcitelZiaciRoute =
+  AuthenticatedUcitelZiaciRouteImport.update({
+    id: '/ucitel/ziaci',
+    path: '/ucitel/ziaci',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const ApiPublicSchoolRequestRoute = ApiPublicSchoolRequestRouteImport.update({
   id: '/api/public/school-request',
   path: '/api/public/school-request',
@@ -321,7 +357,6 @@ export interface FileRoutesByFullPath {
   '/testy/$slug': typeof TestySlugRoute
   '/testy/vstupny-test': typeof TestyVstupnyTestRoute
   '/testy/vystupny-test': typeof TestyVystupnyTestRoute
-  '/ucitel/dashboard': typeof UcitelDashboardRoute
   '/ucitel/prihlasenie': typeof UcitelPrihlasenieRoute
   '/ziak/dashboard': typeof ZiakDashboardRoute
   '/ziak/prihlasenie': typeof ZiakPrihlasenieRoute
@@ -343,6 +378,12 @@ export interface FileRoutesByFullPath {
   '/skola/triedy': typeof AuthenticatedSkolaTriedyRoute
   '/skola/ucitelia': typeof AuthenticatedSkolaUciteliaRoute
   '/skola/vysledky': typeof AuthenticatedSkolaVysledkyRoute
+  '/ucitel/dashboard': typeof AuthenticatedUcitelDashboardRoute
+  '/ucitel/moduly': typeof AuthenticatedUcitelModulyRoute
+  '/ucitel/testy': typeof AuthenticatedUcitelTestyRoute
+  '/ucitel/triedy': typeof AuthenticatedUcitelTriedyRoute
+  '/ucitel/vysledky': typeof AuthenticatedUcitelVysledkyRoute
+  '/ucitel/ziaci': typeof AuthenticatedUcitelZiaciRoute
   '/api/public/school-request': typeof ApiPublicSchoolRequestRoute
   '/ziak/test/$testId': typeof ZiakTestTestIdRoute
   '/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
@@ -368,7 +409,6 @@ export interface FileRoutesByTo {
   '/testy/$slug': typeof TestySlugRoute
   '/testy/vstupny-test': typeof TestyVstupnyTestRoute
   '/testy/vystupny-test': typeof TestyVystupnyTestRoute
-  '/ucitel/dashboard': typeof UcitelDashboardRoute
   '/ucitel/prihlasenie': typeof UcitelPrihlasenieRoute
   '/ziak/dashboard': typeof ZiakDashboardRoute
   '/ziak/prihlasenie': typeof ZiakPrihlasenieRoute
@@ -390,6 +430,12 @@ export interface FileRoutesByTo {
   '/skola/triedy': typeof AuthenticatedSkolaTriedyRoute
   '/skola/ucitelia': typeof AuthenticatedSkolaUciteliaRoute
   '/skola/vysledky': typeof AuthenticatedSkolaVysledkyRoute
+  '/ucitel/dashboard': typeof AuthenticatedUcitelDashboardRoute
+  '/ucitel/moduly': typeof AuthenticatedUcitelModulyRoute
+  '/ucitel/testy': typeof AuthenticatedUcitelTestyRoute
+  '/ucitel/triedy': typeof AuthenticatedUcitelTriedyRoute
+  '/ucitel/vysledky': typeof AuthenticatedUcitelVysledkyRoute
+  '/ucitel/ziaci': typeof AuthenticatedUcitelZiaciRoute
   '/api/public/school-request': typeof ApiPublicSchoolRequestRoute
   '/ziak/test/$testId': typeof ZiakTestTestIdRoute
   '/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
@@ -417,7 +463,6 @@ export interface FileRoutesById {
   '/testy/$slug': typeof TestySlugRoute
   '/testy/vstupny-test': typeof TestyVstupnyTestRoute
   '/testy/vystupny-test': typeof TestyVystupnyTestRoute
-  '/ucitel/dashboard': typeof UcitelDashboardRoute
   '/ucitel/prihlasenie': typeof UcitelPrihlasenieRoute
   '/ziak/dashboard': typeof ZiakDashboardRoute
   '/ziak/prihlasenie': typeof ZiakPrihlasenieRoute
@@ -439,6 +484,12 @@ export interface FileRoutesById {
   '/_authenticated/skola/triedy': typeof AuthenticatedSkolaTriedyRoute
   '/_authenticated/skola/ucitelia': typeof AuthenticatedSkolaUciteliaRoute
   '/_authenticated/skola/vysledky': typeof AuthenticatedSkolaVysledkyRoute
+  '/_authenticated/ucitel/dashboard': typeof AuthenticatedUcitelDashboardRoute
+  '/_authenticated/ucitel/moduly': typeof AuthenticatedUcitelModulyRoute
+  '/_authenticated/ucitel/testy': typeof AuthenticatedUcitelTestyRoute
+  '/_authenticated/ucitel/triedy': typeof AuthenticatedUcitelTriedyRoute
+  '/_authenticated/ucitel/vysledky': typeof AuthenticatedUcitelVysledkyRoute
+  '/_authenticated/ucitel/ziaci': typeof AuthenticatedUcitelZiaciRoute
   '/api/public/school-request': typeof ApiPublicSchoolRequestRoute
   '/ziak/test/$testId': typeof ZiakTestTestIdRoute
   '/_authenticated/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
@@ -466,7 +517,6 @@ export interface FileRouteTypes {
     | '/testy/$slug'
     | '/testy/vstupny-test'
     | '/testy/vystupny-test'
-    | '/ucitel/dashboard'
     | '/ucitel/prihlasenie'
     | '/ziak/dashboard'
     | '/ziak/prihlasenie'
@@ -488,6 +538,12 @@ export interface FileRouteTypes {
     | '/skola/triedy'
     | '/skola/ucitelia'
     | '/skola/vysledky'
+    | '/ucitel/dashboard'
+    | '/ucitel/moduly'
+    | '/ucitel/testy'
+    | '/ucitel/triedy'
+    | '/ucitel/vysledky'
+    | '/ucitel/ziaci'
     | '/api/public/school-request'
     | '/ziak/test/$testId'
     | '/admin/blog/$id'
@@ -513,7 +569,6 @@ export interface FileRouteTypes {
     | '/testy/$slug'
     | '/testy/vstupny-test'
     | '/testy/vystupny-test'
-    | '/ucitel/dashboard'
     | '/ucitel/prihlasenie'
     | '/ziak/dashboard'
     | '/ziak/prihlasenie'
@@ -535,6 +590,12 @@ export interface FileRouteTypes {
     | '/skola/triedy'
     | '/skola/ucitelia'
     | '/skola/vysledky'
+    | '/ucitel/dashboard'
+    | '/ucitel/moduly'
+    | '/ucitel/testy'
+    | '/ucitel/triedy'
+    | '/ucitel/vysledky'
+    | '/ucitel/ziaci'
     | '/api/public/school-request'
     | '/ziak/test/$testId'
     | '/admin/blog/$id'
@@ -561,7 +622,6 @@ export interface FileRouteTypes {
     | '/testy/$slug'
     | '/testy/vstupny-test'
     | '/testy/vystupny-test'
-    | '/ucitel/dashboard'
     | '/ucitel/prihlasenie'
     | '/ziak/dashboard'
     | '/ziak/prihlasenie'
@@ -583,6 +643,12 @@ export interface FileRouteTypes {
     | '/_authenticated/skola/triedy'
     | '/_authenticated/skola/ucitelia'
     | '/_authenticated/skola/vysledky'
+    | '/_authenticated/ucitel/dashboard'
+    | '/_authenticated/ucitel/moduly'
+    | '/_authenticated/ucitel/testy'
+    | '/_authenticated/ucitel/triedy'
+    | '/_authenticated/ucitel/vysledky'
+    | '/_authenticated/ucitel/ziaci'
     | '/api/public/school-request'
     | '/ziak/test/$testId'
     | '/_authenticated/admin/blog/$id'
@@ -610,7 +676,6 @@ export interface RootRouteChildren {
   TestySlugRoute: typeof TestySlugRoute
   TestyVstupnyTestRoute: typeof TestyVstupnyTestRoute
   TestyVystupnyTestRoute: typeof TestyVystupnyTestRoute
-  UcitelDashboardRoute: typeof UcitelDashboardRoute
   UcitelPrihlasenieRoute: typeof UcitelPrihlasenieRoute
   ZiakDashboardRoute: typeof ZiakDashboardRoute
   ZiakPrihlasenieRoute: typeof ZiakPrihlasenieRoute
@@ -749,13 +814,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TestyVystupnyTestRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/ucitel/dashboard': {
-      id: '/ucitel/dashboard'
-      path: '/ucitel/dashboard'
-      fullPath: '/ucitel/dashboard'
-      preLoaderRoute: typeof UcitelDashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/ucitel/prihlasenie': {
       id: '/ucitel/prihlasenie'
       path: '/ucitel/prihlasenie'
@@ -889,6 +947,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSkolaVysledkyRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/ucitel/dashboard': {
+      id: '/_authenticated/ucitel/dashboard'
+      path: '/ucitel/dashboard'
+      fullPath: '/ucitel/dashboard'
+      preLoaderRoute: typeof AuthenticatedUcitelDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/ucitel/moduly': {
+      id: '/_authenticated/ucitel/moduly'
+      path: '/ucitel/moduly'
+      fullPath: '/ucitel/moduly'
+      preLoaderRoute: typeof AuthenticatedUcitelModulyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/ucitel/testy': {
+      id: '/_authenticated/ucitel/testy'
+      path: '/ucitel/testy'
+      fullPath: '/ucitel/testy'
+      preLoaderRoute: typeof AuthenticatedUcitelTestyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/ucitel/triedy': {
+      id: '/_authenticated/ucitel/triedy'
+      path: '/ucitel/triedy'
+      fullPath: '/ucitel/triedy'
+      preLoaderRoute: typeof AuthenticatedUcitelTriedyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/ucitel/vysledky': {
+      id: '/_authenticated/ucitel/vysledky'
+      path: '/ucitel/vysledky'
+      fullPath: '/ucitel/vysledky'
+      preLoaderRoute: typeof AuthenticatedUcitelVysledkyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/ucitel/ziaci': {
+      id: '/_authenticated/ucitel/ziaci'
+      path: '/ucitel/ziaci'
+      fullPath: '/ucitel/ziaci'
+      preLoaderRoute: typeof AuthenticatedUcitelZiaciRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/api/public/school-request': {
       id: '/api/public/school-request'
       path: '/api/public/school-request'
@@ -979,6 +1079,12 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSkolaTriedyRoute: typeof AuthenticatedSkolaTriedyRoute
   AuthenticatedSkolaUciteliaRoute: typeof AuthenticatedSkolaUciteliaRoute
   AuthenticatedSkolaVysledkyRoute: typeof AuthenticatedSkolaVysledkyRoute
+  AuthenticatedUcitelDashboardRoute: typeof AuthenticatedUcitelDashboardRoute
+  AuthenticatedUcitelModulyRoute: typeof AuthenticatedUcitelModulyRoute
+  AuthenticatedUcitelTestyRoute: typeof AuthenticatedUcitelTestyRoute
+  AuthenticatedUcitelTriedyRoute: typeof AuthenticatedUcitelTriedyRoute
+  AuthenticatedUcitelVysledkyRoute: typeof AuthenticatedUcitelVysledkyRoute
+  AuthenticatedUcitelZiaciRoute: typeof AuthenticatedUcitelZiaciRoute
   AuthenticatedAdminBlogIdRoute: typeof AuthenticatedAdminBlogIdRoute
   AuthenticatedAdminVideaIdRoute: typeof AuthenticatedAdminVideaIdRoute
   AuthenticatedAdminBlogIndexRoute: typeof AuthenticatedAdminBlogIndexRoute
@@ -1002,6 +1108,12 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSkolaTriedyRoute: AuthenticatedSkolaTriedyRoute,
   AuthenticatedSkolaUciteliaRoute: AuthenticatedSkolaUciteliaRoute,
   AuthenticatedSkolaVysledkyRoute: AuthenticatedSkolaVysledkyRoute,
+  AuthenticatedUcitelDashboardRoute: AuthenticatedUcitelDashboardRoute,
+  AuthenticatedUcitelModulyRoute: AuthenticatedUcitelModulyRoute,
+  AuthenticatedUcitelTestyRoute: AuthenticatedUcitelTestyRoute,
+  AuthenticatedUcitelTriedyRoute: AuthenticatedUcitelTriedyRoute,
+  AuthenticatedUcitelVysledkyRoute: AuthenticatedUcitelVysledkyRoute,
+  AuthenticatedUcitelZiaciRoute: AuthenticatedUcitelZiaciRoute,
   AuthenticatedAdminBlogIdRoute: AuthenticatedAdminBlogIdRoute,
   AuthenticatedAdminVideaIdRoute: AuthenticatedAdminVideaIdRoute,
   AuthenticatedAdminBlogIndexRoute: AuthenticatedAdminBlogIndexRoute,
@@ -1028,7 +1140,6 @@ const rootRouteChildren: RootRouteChildren = {
   TestySlugRoute: TestySlugRoute,
   TestyVstupnyTestRoute: TestyVstupnyTestRoute,
   TestyVystupnyTestRoute: TestyVystupnyTestRoute,
-  UcitelDashboardRoute: UcitelDashboardRoute,
   UcitelPrihlasenieRoute: UcitelPrihlasenieRoute,
   ZiakDashboardRoute: ZiakDashboardRoute,
   ZiakPrihlasenieRoute: ZiakPrihlasenieRoute,
