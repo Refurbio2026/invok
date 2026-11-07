@@ -9,76 +9,55 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as RegistraciaSkolyRouteImport } from './routes/registracia-skoly'
-import { Route as PristupnostRouteImport } from './routes/pristupnost'
-import { Route as PrihlasenieRouteImport } from './routes/prihlasenie'
-import { Route as PodmienkyPouzivaniaRouteImport } from './routes/podmienky-pouzivania'
-import { Route as OchranaOsobnychUdajovRouteImport } from './routes/ochrana-osobnych-udajov'
-import { Route as KontaktRouteImport } from './routes/kontakt'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as TestyIndexRouteImport } from './routes/testy.index'
-import { Route as NovinkyIndexRouteImport } from './routes/novinky.index'
-import { Route as ZiakPrihlasenieRouteImport } from './routes/ziak.prihlasenie'
-import { Route as ZiakDashboardRouteImport } from './routes/ziak.dashboard'
-import { Route as UcitelPrihlasenieRouteImport } from './routes/ucitel.prihlasenie'
-import { Route as UcitelDashboardRouteImport } from './routes/ucitel.dashboard'
-import { Route as TestyVystupnyTestRouteImport } from './routes/testy.vystupny-test'
-import { Route as TestyVstupnyTestRouteImport } from './routes/testy.vstupny-test'
-import { Route as TestySlugRouteImport } from './routes/testy.$slug'
-import { Route as SkolaPrihlasenieRouteImport } from './routes/skola.prihlasenie'
-import { Route as SkolaDashboardRouteImport } from './routes/skola.dashboard'
-import { Route as NovinkySlugRouteImport } from './routes/novinky.$slug'
-import { Route as ModulUkazkaRouteImport } from './routes/modul.ukazka'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as KontaktRouteImport } from './routes/kontakt'
+import { Route as OchranaOsobnychUdajovRouteImport } from './routes/ochrana-osobnych-udajov'
+import { Route as PodmienkyPouzivaniaRouteImport } from './routes/podmienky-pouzivania'
+import { Route as PrihlasenieRouteImport } from './routes/prihlasenie'
+import { Route as PristupnostRouteImport } from './routes/pristupnost'
+import { Route as RegistraciaSkolyRouteImport } from './routes/registracia-skoly'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AdminPrihlasenieRouteImport } from './routes/admin.prihlasenie'
-import { Route as ZiakTestTestIdRouteImport } from './routes/ziak.test.$testId'
-import { Route as ApiPublicSchoolRequestRouteImport } from './routes/api/public/school-request'
-import { Route as AuthenticatedAdminZiadostiRouteImport } from './routes/_authenticated/admin.ziadosti'
-import { Route as AuthenticatedAdminZiaciRouteImport } from './routes/_authenticated/admin.ziaci'
-import { Route as AuthenticatedAdminVysledkyRouteImport } from './routes/_authenticated/admin.vysledky'
-import { Route as AuthenticatedAdminTriedyRouteImport } from './routes/_authenticated/admin.triedy'
-import { Route as AuthenticatedAdminTestyRouteImport } from './routes/_authenticated/admin.testy'
-import { Route as AuthenticatedAdminSkolyRouteImport } from './routes/_authenticated/admin.skoly'
-import { Route as AuthenticatedAdminReportyRouteImport } from './routes/_authenticated/admin.reporty'
-import { Route as AuthenticatedAdminPouzivateliaRouteImport } from './routes/_authenticated/admin.pouzivatelia'
-import { Route as AuthenticatedAdminGaleriaRouteImport } from './routes/_authenticated/admin.galeria'
+import { Route as ModulUkazkaRouteImport } from './routes/modul.ukazka'
+import { Route as NovinkyIndexRouteImport } from './routes/novinky.index'
+import { Route as NovinkySlugRouteImport } from './routes/novinky.$slug'
+import { Route as SkolaDashboardRouteImport } from './routes/skola.dashboard'
+import { Route as SkolaPrihlasenieRouteImport } from './routes/skola.prihlasenie'
+import { Route as TestyIndexRouteImport } from './routes/testy.index'
+import { Route as TestySlugRouteImport } from './routes/testy.$slug'
+import { Route as TestyVstupnyTestRouteImport } from './routes/testy.vstupny-test'
+import { Route as TestyVystupnyTestRouteImport } from './routes/testy.vystupny-test'
+import { Route as UcitelDashboardRouteImport } from './routes/ucitel.dashboard'
+import { Route as UcitelPrihlasenieRouteImport } from './routes/ucitel.prihlasenie'
+import { Route as ZiakDashboardRouteImport } from './routes/ziak.dashboard'
+import { Route as ZiakPrihlasenieRouteImport } from './routes/ziak.prihlasenie'
 import { Route as AuthenticatedAdminDashboardRouteImport } from './routes/_authenticated/admin.dashboard'
-import { Route as AuthenticatedAdminVideaIndexRouteImport } from './routes/_authenticated/admin.videa.index'
+import { Route as AuthenticatedAdminGaleriaRouteImport } from './routes/_authenticated/admin.galeria'
+import { Route as AuthenticatedAdminPouzivateliaRouteImport } from './routes/_authenticated/admin.pouzivatelia'
+import { Route as AuthenticatedAdminReportyRouteImport } from './routes/_authenticated/admin.reporty'
+import { Route as AuthenticatedAdminSkolyRouteImport } from './routes/_authenticated/admin.skoly'
+import { Route as AuthenticatedAdminTestyRouteImport } from './routes/_authenticated/admin.testy'
+import { Route as AuthenticatedAdminTriedyRouteImport } from './routes/_authenticated/admin.triedy'
+import { Route as AuthenticatedAdminVysledkyRouteImport } from './routes/_authenticated/admin.vysledky'
+import { Route as AuthenticatedAdminZiaciRouteImport } from './routes/_authenticated/admin.ziaci'
+import { Route as AuthenticatedAdminZiadostiRouteImport } from './routes/_authenticated/admin.ziadosti'
+import { Route as ApiPublicSchoolRequestRouteImport } from './routes/api/public/school-request'
+import { Route as ZiakTestTestIdRouteImport } from './routes/ziak.test.$testId'
 import { Route as AuthenticatedAdminBlogIndexRouteImport } from './routes/_authenticated/admin.blog.index'
-import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
-import { Route as AuthenticatedAdminVideaIdRouteImport } from './routes/_authenticated/admin.videa.$id'
-import { Route as AuthenticatedAdminTestyIdRouteImport } from './routes/_authenticated/admin.testy.$id'
 import { Route as AuthenticatedAdminBlogIdRouteImport } from './routes/_authenticated/admin.blog.$id'
+import { Route as AuthenticatedAdminTestyIdRouteImport } from './routes/_authenticated/admin.testy.$id'
+import { Route as AuthenticatedAdminVideaIndexRouteImport } from './routes/_authenticated/admin.videa.index'
+import { Route as AuthenticatedAdminVideaIdRouteImport } from './routes/_authenticated/admin.videa.$id'
+import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RegistraciaSkolyRoute = RegistraciaSkolyRouteImport.update({
-  id: '/registracia-skoly',
-  path: '/registracia-skoly',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PristupnostRoute = PristupnostRouteImport.update({
-  id: '/pristupnost',
-  path: '/pristupnost',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrihlasenieRoute = PrihlasenieRouteImport.update({
-  id: '/prihlasenie',
-  path: '/prihlasenie',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PodmienkyPouzivaniaRoute = PodmienkyPouzivaniaRouteImport.update({
-  id: '/podmienky-pouzivania',
-  path: '/podmienky-pouzivania',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OchranaOsobnychUdajovRoute = OchranaOsobnychUdajovRouteImport.update({
-  id: '/ochrana-osobnych-udajov',
-  path: '/ochrana-osobnych-udajov',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KontaktRoute = KontaktRouteImport.update({
@@ -86,78 +65,34 @@ const KontaktRoute = KontaktRouteImport.update({
   path: '/kontakt',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
+const OchranaOsobnychUdajovRoute = OchranaOsobnychUdajovRouteImport.update({
+  id: '/ochrana-osobnych-udajov',
+  path: '/ochrana-osobnych-udajov',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const PodmienkyPouzivaniaRoute = PodmienkyPouzivaniaRouteImport.update({
+  id: '/podmienky-pouzivania',
+  path: '/podmienky-pouzivania',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TestyIndexRoute = TestyIndexRouteImport.update({
-  id: '/testy/',
-  path: '/testy/',
+const PrihlasenieRoute = PrihlasenieRouteImport.update({
+  id: '/prihlasenie',
+  path: '/prihlasenie',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NovinkyIndexRoute = NovinkyIndexRouteImport.update({
-  id: '/novinky/',
-  path: '/novinky/',
+const PristupnostRoute = PristupnostRouteImport.update({
+  id: '/pristupnost',
+  path: '/pristupnost',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ZiakPrihlasenieRoute = ZiakPrihlasenieRouteImport.update({
-  id: '/ziak/prihlasenie',
-  path: '/ziak/prihlasenie',
+const RegistraciaSkolyRoute = RegistraciaSkolyRouteImport.update({
+  id: '/registracia-skoly',
+  path: '/registracia-skoly',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ZiakDashboardRoute = ZiakDashboardRouteImport.update({
-  id: '/ziak/dashboard',
-  path: '/ziak/dashboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const UcitelPrihlasenieRoute = UcitelPrihlasenieRouteImport.update({
-  id: '/ucitel/prihlasenie',
-  path: '/ucitel/prihlasenie',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const UcitelDashboardRoute = UcitelDashboardRouteImport.update({
-  id: '/ucitel/dashboard',
-  path: '/ucitel/dashboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TestyVystupnyTestRoute = TestyVystupnyTestRouteImport.update({
-  id: '/testy/vystupny-test',
-  path: '/testy/vystupny-test',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TestyVstupnyTestRoute = TestyVstupnyTestRouteImport.update({
-  id: '/testy/vstupny-test',
-  path: '/testy/vstupny-test',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TestySlugRoute = TestySlugRouteImport.update({
-  id: '/testy/$slug',
-  path: '/testy/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SkolaPrihlasenieRoute = SkolaPrihlasenieRouteImport.update({
-  id: '/skola/prihlasenie',
-  path: '/skola/prihlasenie',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SkolaDashboardRoute = SkolaDashboardRouteImport.update({
-  id: '/skola/dashboard',
-  path: '/skola/dashboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const NovinkySlugRoute = NovinkySlugRouteImport.update({
-  id: '/novinky/$slug',
-  path: '/novinky/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ModulUkazkaRoute = ModulUkazkaRouteImport.update({
-  id: '/modul/ukazka',
-  path: '/modul/ukazka',
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminPrihlasenieRoute = AdminPrihlasenieRouteImport.update({
@@ -165,59 +100,75 @@ const AdminPrihlasenieRoute = AdminPrihlasenieRouteImport.update({
   path: '/admin/prihlasenie',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ZiakTestTestIdRoute = ZiakTestTestIdRouteImport.update({
-  id: '/ziak/test/$testId',
-  path: '/ziak/test/$testId',
+const ModulUkazkaRoute = ModulUkazkaRouteImport.update({
+  id: '/modul/ukazka',
+  path: '/modul/ukazka',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicSchoolRequestRoute = ApiPublicSchoolRequestRouteImport.update({
-  id: '/api/public/school-request',
-  path: '/api/public/school-request',
+const NovinkyIndexRoute = NovinkyIndexRouteImport.update({
+  id: '/novinky/',
+  path: '/novinky/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedAdminZiadostiRoute =
-  AuthenticatedAdminZiadostiRouteImport.update({
-    id: '/admin/ziadosti',
-    path: '/admin/ziadosti',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedAdminZiaciRoute = AuthenticatedAdminZiaciRouteImport.update({
-  id: '/admin/ziaci',
-  path: '/admin/ziaci',
-  getParentRoute: () => AuthenticatedRouteRoute,
+const NovinkySlugRoute = NovinkySlugRouteImport.update({
+  id: '/novinky/$slug',
+  path: '/novinky/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedAdminVysledkyRoute =
-  AuthenticatedAdminVysledkyRouteImport.update({
-    id: '/admin/vysledky',
-    path: '/admin/vysledky',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedAdminTriedyRoute =
-  AuthenticatedAdminTriedyRouteImport.update({
-    id: '/admin/triedy',
-    path: '/admin/triedy',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedAdminTestyRoute = AuthenticatedAdminTestyRouteImport.update({
-  id: '/admin/testy',
-  path: '/admin/testy',
-  getParentRoute: () => AuthenticatedRouteRoute,
+const SkolaDashboardRoute = SkolaDashboardRouteImport.update({
+  id: '/skola/dashboard',
+  path: '/skola/dashboard',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedAdminSkolyRoute = AuthenticatedAdminSkolyRouteImport.update({
-  id: '/admin/skoly',
-  path: '/admin/skoly',
-  getParentRoute: () => AuthenticatedRouteRoute,
+const SkolaPrihlasenieRoute = SkolaPrihlasenieRouteImport.update({
+  id: '/skola/prihlasenie',
+  path: '/skola/prihlasenie',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedAdminReportyRoute =
-  AuthenticatedAdminReportyRouteImport.update({
-    id: '/admin/reporty',
-    path: '/admin/reporty',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedAdminPouzivateliaRoute =
-  AuthenticatedAdminPouzivateliaRouteImport.update({
-    id: '/admin/pouzivatelia',
-    path: '/admin/pouzivatelia',
+const TestyIndexRoute = TestyIndexRouteImport.update({
+  id: '/testy/',
+  path: '/testy/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TestySlugRoute = TestySlugRouteImport.update({
+  id: '/testy/$slug',
+  path: '/testy/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TestyVstupnyTestRoute = TestyVstupnyTestRouteImport.update({
+  id: '/testy/vstupny-test',
+  path: '/testy/vstupny-test',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TestyVystupnyTestRoute = TestyVystupnyTestRouteImport.update({
+  id: '/testy/vystupny-test',
+  path: '/testy/vystupny-test',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UcitelDashboardRoute = UcitelDashboardRouteImport.update({
+  id: '/ucitel/dashboard',
+  path: '/ucitel/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UcitelPrihlasenieRoute = UcitelPrihlasenieRouteImport.update({
+  id: '/ucitel/prihlasenie',
+  path: '/ucitel/prihlasenie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ZiakDashboardRoute = ZiakDashboardRouteImport.update({
+  id: '/ziak/dashboard',
+  path: '/ziak/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ZiakPrihlasenieRoute = ZiakPrihlasenieRouteImport.update({
+  id: '/ziak/prihlasenie',
+  path: '/ziak/prihlasenie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminDashboardRoute =
+  AuthenticatedAdminDashboardRouteImport.update({
+    id: '/admin/dashboard',
+    path: '/admin/dashboard',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedAdminGaleriaRoute =
@@ -226,34 +177,71 @@ const AuthenticatedAdminGaleriaRoute =
     path: '/admin/galeria',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedAdminDashboardRoute =
-  AuthenticatedAdminDashboardRouteImport.update({
-    id: '/admin/dashboard',
-    path: '/admin/dashboard',
+const AuthenticatedAdminPouzivateliaRoute =
+  AuthenticatedAdminPouzivateliaRouteImport.update({
+    id: '/admin/pouzivatelia',
+    path: '/admin/pouzivatelia',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedAdminVideaIndexRoute =
-  AuthenticatedAdminVideaIndexRouteImport.update({
-    id: '/admin/videa/',
-    path: '/admin/videa/',
+const AuthenticatedAdminReportyRoute =
+  AuthenticatedAdminReportyRouteImport.update({
+    id: '/admin/reporty',
+    path: '/admin/reporty',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAdminSkolyRoute = AuthenticatedAdminSkolyRouteImport.update({
+  id: '/admin/skoly',
+  path: '/admin/skoly',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminTestyRoute = AuthenticatedAdminTestyRouteImport.update({
+  id: '/admin/testy',
+  path: '/admin/testy',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminTriedyRoute =
+  AuthenticatedAdminTriedyRouteImport.update({
+    id: '/admin/triedy',
+    path: '/admin/triedy',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminVysledkyRoute =
+  AuthenticatedAdminVysledkyRouteImport.update({
+    id: '/admin/vysledky',
+    path: '/admin/vysledky',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminZiaciRoute = AuthenticatedAdminZiaciRouteImport.update({
+  id: '/admin/ziaci',
+  path: '/admin/ziaci',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminZiadostiRoute =
+  AuthenticatedAdminZiadostiRouteImport.update({
+    id: '/admin/ziadosti',
+    path: '/admin/ziadosti',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const ApiPublicSchoolRequestRoute = ApiPublicSchoolRequestRouteImport.update({
+  id: '/api/public/school-request',
+  path: '/api/public/school-request',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ZiakTestTestIdRoute = ZiakTestTestIdRouteImport.update({
+  id: '/ziak/test/$testId',
+  path: '/ziak/test/$testId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedAdminBlogIndexRoute =
   AuthenticatedAdminBlogIndexRouteImport.update({
     id: '/admin/blog/',
     path: '/admin/blog/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const LovableEmailQueueProcessRoute =
-  LovableEmailQueueProcessRouteImport.update({
-    id: '/lovable/email/queue/process',
-    path: '/lovable/email/queue/process',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const AuthenticatedAdminVideaIdRoute =
-  AuthenticatedAdminVideaIdRouteImport.update({
-    id: '/admin/videa/$id',
-    path: '/admin/videa/$id',
+const AuthenticatedAdminBlogIdRoute =
+  AuthenticatedAdminBlogIdRouteImport.update({
+    id: '/admin/blog/$id',
+    path: '/admin/blog/$id',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedAdminTestyIdRoute =
@@ -262,11 +250,23 @@ const AuthenticatedAdminTestyIdRoute =
     path: '/$id',
     getParentRoute: () => AuthenticatedAdminTestyRoute,
   } as any)
-const AuthenticatedAdminBlogIdRoute =
-  AuthenticatedAdminBlogIdRouteImport.update({
-    id: '/admin/blog/$id',
-    path: '/admin/blog/$id',
+const AuthenticatedAdminVideaIndexRoute =
+  AuthenticatedAdminVideaIndexRouteImport.update({
+    id: '/admin/videa/',
+    path: '/admin/videa/',
     getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminVideaIdRoute =
+  AuthenticatedAdminVideaIdRouteImport.update({
+    id: '/admin/videa/$id',
+    path: '/admin/videa/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const LovableEmailQueueProcessRoute =
+  LovableEmailQueueProcessRouteImport.update({
+    id: '/lovable/email/queue/process',
+    path: '/lovable/email/queue/process',
+    getParentRoute: () => rootRouteImport,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -558,53 +558,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/registracia-skoly': {
-      id: '/registracia-skoly'
-      path: '/registracia-skoly'
-      fullPath: '/registracia-skoly'
-      preLoaderRoute: typeof RegistraciaSkolyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pristupnost': {
-      id: '/pristupnost'
-      path: '/pristupnost'
-      fullPath: '/pristupnost'
-      preLoaderRoute: typeof PristupnostRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/prihlasenie': {
-      id: '/prihlasenie'
-      path: '/prihlasenie'
-      fullPath: '/prihlasenie'
-      preLoaderRoute: typeof PrihlasenieRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/podmienky-pouzivania': {
-      id: '/podmienky-pouzivania'
-      path: '/podmienky-pouzivania'
-      fullPath: '/podmienky-pouzivania'
-      preLoaderRoute: typeof PodmienkyPouzivaniaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ochrana-osobnych-udajov': {
-      id: '/ochrana-osobnych-udajov'
-      path: '/ochrana-osobnych-udajov'
-      fullPath: '/ochrana-osobnych-udajov'
-      preLoaderRoute: typeof OchranaOsobnychUdajovRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/kontakt': {
-      id: '/kontakt'
-      path: '/kontakt'
-      fullPath: '/kontakt'
-      preLoaderRoute: typeof KontaktRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -614,102 +572,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/kontakt': {
+      id: '/kontakt'
+      path: '/kontakt'
+      fullPath: '/kontakt'
+      preLoaderRoute: typeof KontaktRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/testy/': {
-      id: '/testy/'
-      path: '/testy'
-      fullPath: '/testy/'
-      preLoaderRoute: typeof TestyIndexRouteImport
+    '/ochrana-osobnych-udajov': {
+      id: '/ochrana-osobnych-udajov'
+      path: '/ochrana-osobnych-udajov'
+      fullPath: '/ochrana-osobnych-udajov'
+      preLoaderRoute: typeof OchranaOsobnychUdajovRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/novinky/': {
-      id: '/novinky/'
-      path: '/novinky'
-      fullPath: '/novinky/'
-      preLoaderRoute: typeof NovinkyIndexRouteImport
+    '/podmienky-pouzivania': {
+      id: '/podmienky-pouzivania'
+      path: '/podmienky-pouzivania'
+      fullPath: '/podmienky-pouzivania'
+      preLoaderRoute: typeof PodmienkyPouzivaniaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/ziak/prihlasenie': {
-      id: '/ziak/prihlasenie'
-      path: '/ziak/prihlasenie'
-      fullPath: '/ziak/prihlasenie'
-      preLoaderRoute: typeof ZiakPrihlasenieRouteImport
+    '/prihlasenie': {
+      id: '/prihlasenie'
+      path: '/prihlasenie'
+      fullPath: '/prihlasenie'
+      preLoaderRoute: typeof PrihlasenieRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/ziak/dashboard': {
-      id: '/ziak/dashboard'
-      path: '/ziak/dashboard'
-      fullPath: '/ziak/dashboard'
-      preLoaderRoute: typeof ZiakDashboardRouteImport
+    '/pristupnost': {
+      id: '/pristupnost'
+      path: '/pristupnost'
+      fullPath: '/pristupnost'
+      preLoaderRoute: typeof PristupnostRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/ucitel/prihlasenie': {
-      id: '/ucitel/prihlasenie'
-      path: '/ucitel/prihlasenie'
-      fullPath: '/ucitel/prihlasenie'
-      preLoaderRoute: typeof UcitelPrihlasenieRouteImport
+    '/registracia-skoly': {
+      id: '/registracia-skoly'
+      path: '/registracia-skoly'
+      fullPath: '/registracia-skoly'
+      preLoaderRoute: typeof RegistraciaSkolyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/ucitel/dashboard': {
-      id: '/ucitel/dashboard'
-      path: '/ucitel/dashboard'
-      fullPath: '/ucitel/dashboard'
-      preLoaderRoute: typeof UcitelDashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/testy/vystupny-test': {
-      id: '/testy/vystupny-test'
-      path: '/testy/vystupny-test'
-      fullPath: '/testy/vystupny-test'
-      preLoaderRoute: typeof TestyVystupnyTestRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/testy/vstupny-test': {
-      id: '/testy/vstupny-test'
-      path: '/testy/vstupny-test'
-      fullPath: '/testy/vstupny-test'
-      preLoaderRoute: typeof TestyVstupnyTestRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/testy/$slug': {
-      id: '/testy/$slug'
-      path: '/testy/$slug'
-      fullPath: '/testy/$slug'
-      preLoaderRoute: typeof TestySlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/skola/prihlasenie': {
-      id: '/skola/prihlasenie'
-      path: '/skola/prihlasenie'
-      fullPath: '/skola/prihlasenie'
-      preLoaderRoute: typeof SkolaPrihlasenieRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/skola/dashboard': {
-      id: '/skola/dashboard'
-      path: '/skola/dashboard'
-      fullPath: '/skola/dashboard'
-      preLoaderRoute: typeof SkolaDashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/novinky/$slug': {
-      id: '/novinky/$slug'
-      path: '/novinky/$slug'
-      fullPath: '/novinky/$slug'
-      preLoaderRoute: typeof NovinkySlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/modul/ukazka': {
-      id: '/modul/ukazka'
-      path: '/modul/ukazka'
-      fullPath: '/modul/ukazka'
-      preLoaderRoute: typeof ModulUkazkaRouteImport
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/prihlasenie': {
@@ -719,74 +628,102 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPrihlasenieRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/ziak/test/$testId': {
-      id: '/ziak/test/$testId'
-      path: '/ziak/test/$testId'
-      fullPath: '/ziak/test/$testId'
-      preLoaderRoute: typeof ZiakTestTestIdRouteImport
+    '/modul/ukazka': {
+      id: '/modul/ukazka'
+      path: '/modul/ukazka'
+      fullPath: '/modul/ukazka'
+      preLoaderRoute: typeof ModulUkazkaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/school-request': {
-      id: '/api/public/school-request'
-      path: '/api/public/school-request'
-      fullPath: '/api/public/school-request'
-      preLoaderRoute: typeof ApiPublicSchoolRequestRouteImport
+    '/novinky/': {
+      id: '/novinky/'
+      path: '/novinky'
+      fullPath: '/novinky/'
+      preLoaderRoute: typeof NovinkyIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/admin/ziadosti': {
-      id: '/_authenticated/admin/ziadosti'
-      path: '/admin/ziadosti'
-      fullPath: '/admin/ziadosti'
-      preLoaderRoute: typeof AuthenticatedAdminZiadostiRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/novinky/$slug': {
+      id: '/novinky/$slug'
+      path: '/novinky/$slug'
+      fullPath: '/novinky/$slug'
+      preLoaderRoute: typeof NovinkySlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/admin/ziaci': {
-      id: '/_authenticated/admin/ziaci'
-      path: '/admin/ziaci'
-      fullPath: '/admin/ziaci'
-      preLoaderRoute: typeof AuthenticatedAdminZiaciRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/skola/dashboard': {
+      id: '/skola/dashboard'
+      path: '/skola/dashboard'
+      fullPath: '/skola/dashboard'
+      preLoaderRoute: typeof SkolaDashboardRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/admin/vysledky': {
-      id: '/_authenticated/admin/vysledky'
-      path: '/admin/vysledky'
-      fullPath: '/admin/vysledky'
-      preLoaderRoute: typeof AuthenticatedAdminVysledkyRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/skola/prihlasenie': {
+      id: '/skola/prihlasenie'
+      path: '/skola/prihlasenie'
+      fullPath: '/skola/prihlasenie'
+      preLoaderRoute: typeof SkolaPrihlasenieRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/admin/triedy': {
-      id: '/_authenticated/admin/triedy'
-      path: '/admin/triedy'
-      fullPath: '/admin/triedy'
-      preLoaderRoute: typeof AuthenticatedAdminTriedyRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/testy/': {
+      id: '/testy/'
+      path: '/testy'
+      fullPath: '/testy/'
+      preLoaderRoute: typeof TestyIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/admin/testy': {
-      id: '/_authenticated/admin/testy'
-      path: '/admin/testy'
-      fullPath: '/admin/testy'
-      preLoaderRoute: typeof AuthenticatedAdminTestyRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/testy/$slug': {
+      id: '/testy/$slug'
+      path: '/testy/$slug'
+      fullPath: '/testy/$slug'
+      preLoaderRoute: typeof TestySlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/admin/skoly': {
-      id: '/_authenticated/admin/skoly'
-      path: '/admin/skoly'
-      fullPath: '/admin/skoly'
-      preLoaderRoute: typeof AuthenticatedAdminSkolyRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/testy/vstupny-test': {
+      id: '/testy/vstupny-test'
+      path: '/testy/vstupny-test'
+      fullPath: '/testy/vstupny-test'
+      preLoaderRoute: typeof TestyVstupnyTestRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/admin/reporty': {
-      id: '/_authenticated/admin/reporty'
-      path: '/admin/reporty'
-      fullPath: '/admin/reporty'
-      preLoaderRoute: typeof AuthenticatedAdminReportyRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/testy/vystupny-test': {
+      id: '/testy/vystupny-test'
+      path: '/testy/vystupny-test'
+      fullPath: '/testy/vystupny-test'
+      preLoaderRoute: typeof TestyVystupnyTestRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/admin/pouzivatelia': {
-      id: '/_authenticated/admin/pouzivatelia'
-      path: '/admin/pouzivatelia'
-      fullPath: '/admin/pouzivatelia'
-      preLoaderRoute: typeof AuthenticatedAdminPouzivateliaRouteImport
+    '/ucitel/dashboard': {
+      id: '/ucitel/dashboard'
+      path: '/ucitel/dashboard'
+      fullPath: '/ucitel/dashboard'
+      preLoaderRoute: typeof UcitelDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ucitel/prihlasenie': {
+      id: '/ucitel/prihlasenie'
+      path: '/ucitel/prihlasenie'
+      fullPath: '/ucitel/prihlasenie'
+      preLoaderRoute: typeof UcitelPrihlasenieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ziak/dashboard': {
+      id: '/ziak/dashboard'
+      path: '/ziak/dashboard'
+      fullPath: '/ziak/dashboard'
+      preLoaderRoute: typeof ZiakDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ziak/prihlasenie': {
+      id: '/ziak/prihlasenie'
+      path: '/ziak/prihlasenie'
+      fullPath: '/ziak/prihlasenie'
+      preLoaderRoute: typeof ZiakPrihlasenieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin/dashboard': {
+      id: '/_authenticated/admin/dashboard'
+      path: '/admin/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AuthenticatedAdminDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/admin/galeria': {
@@ -796,19 +733,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminGaleriaRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/admin/dashboard': {
-      id: '/_authenticated/admin/dashboard'
-      path: '/admin/dashboard'
-      fullPath: '/admin/dashboard'
-      preLoaderRoute: typeof AuthenticatedAdminDashboardRouteImport
+    '/_authenticated/admin/pouzivatelia': {
+      id: '/_authenticated/admin/pouzivatelia'
+      path: '/admin/pouzivatelia'
+      fullPath: '/admin/pouzivatelia'
+      preLoaderRoute: typeof AuthenticatedAdminPouzivateliaRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/admin/videa/': {
-      id: '/_authenticated/admin/videa/'
-      path: '/admin/videa'
-      fullPath: '/admin/videa/'
-      preLoaderRoute: typeof AuthenticatedAdminVideaIndexRouteImport
+    '/_authenticated/admin/reporty': {
+      id: '/_authenticated/admin/reporty'
+      path: '/admin/reporty'
+      fullPath: '/admin/reporty'
+      preLoaderRoute: typeof AuthenticatedAdminReportyRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/skoly': {
+      id: '/_authenticated/admin/skoly'
+      path: '/admin/skoly'
+      fullPath: '/admin/skoly'
+      preLoaderRoute: typeof AuthenticatedAdminSkolyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/testy': {
+      id: '/_authenticated/admin/testy'
+      path: '/admin/testy'
+      fullPath: '/admin/testy'
+      preLoaderRoute: typeof AuthenticatedAdminTestyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/triedy': {
+      id: '/_authenticated/admin/triedy'
+      path: '/admin/triedy'
+      fullPath: '/admin/triedy'
+      preLoaderRoute: typeof AuthenticatedAdminTriedyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/vysledky': {
+      id: '/_authenticated/admin/vysledky'
+      path: '/admin/vysledky'
+      fullPath: '/admin/vysledky'
+      preLoaderRoute: typeof AuthenticatedAdminVysledkyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/ziaci': {
+      id: '/_authenticated/admin/ziaci'
+      path: '/admin/ziaci'
+      fullPath: '/admin/ziaci'
+      preLoaderRoute: typeof AuthenticatedAdminZiaciRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/ziadosti': {
+      id: '/_authenticated/admin/ziadosti'
+      path: '/admin/ziadosti'
+      fullPath: '/admin/ziadosti'
+      preLoaderRoute: typeof AuthenticatedAdminZiadostiRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/api/public/school-request': {
+      id: '/api/public/school-request'
+      path: '/api/public/school-request'
+      fullPath: '/api/public/school-request'
+      preLoaderRoute: typeof ApiPublicSchoolRequestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ziak/test/$testId': {
+      id: '/ziak/test/$testId'
+      path: '/ziak/test/$testId'
+      fullPath: '/ziak/test/$testId'
+      preLoaderRoute: typeof ZiakTestTestIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin/blog/': {
       id: '/_authenticated/admin/blog/'
@@ -817,18 +810,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminBlogIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/lovable/email/queue/process': {
-      id: '/lovable/email/queue/process'
-      path: '/lovable/email/queue/process'
-      fullPath: '/lovable/email/queue/process'
-      preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/admin/videa/$id': {
-      id: '/_authenticated/admin/videa/$id'
-      path: '/admin/videa/$id'
-      fullPath: '/admin/videa/$id'
-      preLoaderRoute: typeof AuthenticatedAdminVideaIdRouteImport
+    '/_authenticated/admin/blog/$id': {
+      id: '/_authenticated/admin/blog/$id'
+      path: '/admin/blog/$id'
+      fullPath: '/admin/blog/$id'
+      preLoaderRoute: typeof AuthenticatedAdminBlogIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/admin/testy/$id': {
@@ -838,12 +824,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminTestyIdRouteImport
       parentRoute: typeof AuthenticatedAdminTestyRoute
     }
-    '/_authenticated/admin/blog/$id': {
-      id: '/_authenticated/admin/blog/$id'
-      path: '/admin/blog/$id'
-      fullPath: '/admin/blog/$id'
-      preLoaderRoute: typeof AuthenticatedAdminBlogIdRouteImport
+    '/_authenticated/admin/videa/': {
+      id: '/_authenticated/admin/videa/'
+      path: '/admin/videa'
+      fullPath: '/admin/videa/'
+      preLoaderRoute: typeof AuthenticatedAdminVideaIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/videa/$id': {
+      id: '/_authenticated/admin/videa/$id'
+      path: '/admin/videa/$id'
+      fullPath: '/admin/videa/$id'
+      preLoaderRoute: typeof AuthenticatedAdminVideaIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/lovable/email/queue/process': {
+      id: '/lovable/email/queue/process'
+      path: '/lovable/email/queue/process'
+      fullPath: '/lovable/email/queue/process'
+      preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -930,3 +930,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
