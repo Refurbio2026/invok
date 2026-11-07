@@ -83,7 +83,12 @@ export function Header() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         <Link to="/" aria-label="INVOK – PSC n.o." className="flex shrink-0 items-center gap-3">
           <img src={pscMark.url} alt="PSC n.o." width={44} height={44} className="h-11 w-11 shrink-0 object-contain" />
-          <span className="font-extrabold text-2xl text-foreground">INVOK</span>
+          <span
+            className="font-semibold text-2xl tracking-wide text-foreground"
+            style={{ fontFamily: "'Poppins', sans-serif" }}
+          >
+            INVOK
+          </span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
