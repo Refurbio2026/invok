@@ -4,6 +4,7 @@ import { Link } from "@tanstack/react-router";
 import { Logo } from "./Logo";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import pscMark from "@/assets/psc-mark.png.asset.json";
 
 type NavLink = { href: string; label: string };
 
@@ -81,8 +82,9 @@ export function Header() {
       )}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        <Link to="/" aria-label="INVOK">
+        <Link to="/" aria-label="INVOK – PSC n.o." className="flex shrink-0 items-center gap-3">
           <Logo />
+          <img src={pscMark.url} alt="PSC n.o." width={44} height={44} className="h-11 w-11 shrink-0 object-contain" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
