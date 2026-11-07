@@ -22,7 +22,6 @@ import { Route as AdminPrihlasenieRouteImport } from './routes/admin.prihlasenie
 import { Route as ModulUkazkaRouteImport } from './routes/modul.ukazka'
 import { Route as NovinkyIndexRouteImport } from './routes/novinky.index'
 import { Route as NovinkySlugRouteImport } from './routes/novinky.$slug'
-import { Route as SkolaDashboardRouteImport } from './routes/skola.dashboard'
 import { Route as SkolaPrihlasenieRouteImport } from './routes/skola.prihlasenie'
 import { Route as TestyIndexRouteImport } from './routes/testy.index'
 import { Route as TestySlugRouteImport } from './routes/testy.$slug'
@@ -42,6 +41,12 @@ import { Route as AuthenticatedAdminTriedyRouteImport } from './routes/_authenti
 import { Route as AuthenticatedAdminVysledkyRouteImport } from './routes/_authenticated/admin.vysledky'
 import { Route as AuthenticatedAdminZiaciRouteImport } from './routes/_authenticated/admin.ziaci'
 import { Route as AuthenticatedAdminZiadostiRouteImport } from './routes/_authenticated/admin.ziadosti'
+import { Route as AuthenticatedSkolaDashboardRouteImport } from './routes/_authenticated/skola.dashboard'
+import { Route as AuthenticatedSkolaProfilRouteImport } from './routes/_authenticated/skola.profil'
+import { Route as AuthenticatedSkolaReportyRouteImport } from './routes/_authenticated/skola.reporty'
+import { Route as AuthenticatedSkolaTriedyRouteImport } from './routes/_authenticated/skola.triedy'
+import { Route as AuthenticatedSkolaUciteliaRouteImport } from './routes/_authenticated/skola.ucitelia'
+import { Route as AuthenticatedSkolaVysledkyRouteImport } from './routes/_authenticated/skola.vysledky'
 import { Route as ApiPublicSchoolRequestRouteImport } from './routes/api/public/school-request'
 import { Route as ZiakTestTestIdRouteImport } from './routes/ziak.test.$testId'
 import { Route as AuthenticatedAdminBlogIndexRouteImport } from './routes/_authenticated/admin.blog.index'
@@ -113,11 +118,6 @@ const NovinkyIndexRoute = NovinkyIndexRouteImport.update({
 const NovinkySlugRoute = NovinkySlugRouteImport.update({
   id: '/novinky/$slug',
   path: '/novinky/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SkolaDashboardRoute = SkolaDashboardRouteImport.update({
-  id: '/skola/dashboard',
-  path: '/skola/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SkolaPrihlasenieRoute = SkolaPrihlasenieRouteImport.update({
@@ -222,6 +222,42 @@ const AuthenticatedAdminZiadostiRoute =
     path: '/admin/ziadosti',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedSkolaDashboardRoute =
+  AuthenticatedSkolaDashboardRouteImport.update({
+    id: '/skola/dashboard',
+    path: '/skola/dashboard',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSkolaProfilRoute =
+  AuthenticatedSkolaProfilRouteImport.update({
+    id: '/skola/profil',
+    path: '/skola/profil',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSkolaReportyRoute =
+  AuthenticatedSkolaReportyRouteImport.update({
+    id: '/skola/reporty',
+    path: '/skola/reporty',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSkolaTriedyRoute =
+  AuthenticatedSkolaTriedyRouteImport.update({
+    id: '/skola/triedy',
+    path: '/skola/triedy',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSkolaUciteliaRoute =
+  AuthenticatedSkolaUciteliaRouteImport.update({
+    id: '/skola/ucitelia',
+    path: '/skola/ucitelia',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSkolaVysledkyRoute =
+  AuthenticatedSkolaVysledkyRouteImport.update({
+    id: '/skola/vysledky',
+    path: '/skola/vysledky',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const ApiPublicSchoolRequestRoute = ApiPublicSchoolRequestRouteImport.update({
   id: '/api/public/school-request',
   path: '/api/public/school-request',
@@ -281,7 +317,6 @@ export interface FileRoutesByFullPath {
   '/admin/prihlasenie': typeof AdminPrihlasenieRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
   '/novinky/$slug': typeof NovinkySlugRoute
-  '/skola/dashboard': typeof SkolaDashboardRoute
   '/skola/prihlasenie': typeof SkolaPrihlasenieRoute
   '/testy/$slug': typeof TestySlugRoute
   '/testy/vstupny-test': typeof TestyVstupnyTestRoute
@@ -302,6 +337,12 @@ export interface FileRoutesByFullPath {
   '/admin/vysledky': typeof AuthenticatedAdminVysledkyRoute
   '/admin/ziaci': typeof AuthenticatedAdminZiaciRoute
   '/admin/ziadosti': typeof AuthenticatedAdminZiadostiRoute
+  '/skola/dashboard': typeof AuthenticatedSkolaDashboardRoute
+  '/skola/profil': typeof AuthenticatedSkolaProfilRoute
+  '/skola/reporty': typeof AuthenticatedSkolaReportyRoute
+  '/skola/triedy': typeof AuthenticatedSkolaTriedyRoute
+  '/skola/ucitelia': typeof AuthenticatedSkolaUciteliaRoute
+  '/skola/vysledky': typeof AuthenticatedSkolaVysledkyRoute
   '/api/public/school-request': typeof ApiPublicSchoolRequestRoute
   '/ziak/test/$testId': typeof ZiakTestTestIdRoute
   '/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
@@ -323,7 +364,6 @@ export interface FileRoutesByTo {
   '/admin/prihlasenie': typeof AdminPrihlasenieRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
   '/novinky/$slug': typeof NovinkySlugRoute
-  '/skola/dashboard': typeof SkolaDashboardRoute
   '/skola/prihlasenie': typeof SkolaPrihlasenieRoute
   '/testy/$slug': typeof TestySlugRoute
   '/testy/vstupny-test': typeof TestyVstupnyTestRoute
@@ -344,6 +384,12 @@ export interface FileRoutesByTo {
   '/admin/vysledky': typeof AuthenticatedAdminVysledkyRoute
   '/admin/ziaci': typeof AuthenticatedAdminZiaciRoute
   '/admin/ziadosti': typeof AuthenticatedAdminZiadostiRoute
+  '/skola/dashboard': typeof AuthenticatedSkolaDashboardRoute
+  '/skola/profil': typeof AuthenticatedSkolaProfilRoute
+  '/skola/reporty': typeof AuthenticatedSkolaReportyRoute
+  '/skola/triedy': typeof AuthenticatedSkolaTriedyRoute
+  '/skola/ucitelia': typeof AuthenticatedSkolaUciteliaRoute
+  '/skola/vysledky': typeof AuthenticatedSkolaVysledkyRoute
   '/api/public/school-request': typeof ApiPublicSchoolRequestRoute
   '/ziak/test/$testId': typeof ZiakTestTestIdRoute
   '/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
@@ -367,7 +413,6 @@ export interface FileRoutesById {
   '/admin/prihlasenie': typeof AdminPrihlasenieRoute
   '/modul/ukazka': typeof ModulUkazkaRoute
   '/novinky/$slug': typeof NovinkySlugRoute
-  '/skola/dashboard': typeof SkolaDashboardRoute
   '/skola/prihlasenie': typeof SkolaPrihlasenieRoute
   '/testy/$slug': typeof TestySlugRoute
   '/testy/vstupny-test': typeof TestyVstupnyTestRoute
@@ -388,6 +433,12 @@ export interface FileRoutesById {
   '/_authenticated/admin/vysledky': typeof AuthenticatedAdminVysledkyRoute
   '/_authenticated/admin/ziaci': typeof AuthenticatedAdminZiaciRoute
   '/_authenticated/admin/ziadosti': typeof AuthenticatedAdminZiadostiRoute
+  '/_authenticated/skola/dashboard': typeof AuthenticatedSkolaDashboardRoute
+  '/_authenticated/skola/profil': typeof AuthenticatedSkolaProfilRoute
+  '/_authenticated/skola/reporty': typeof AuthenticatedSkolaReportyRoute
+  '/_authenticated/skola/triedy': typeof AuthenticatedSkolaTriedyRoute
+  '/_authenticated/skola/ucitelia': typeof AuthenticatedSkolaUciteliaRoute
+  '/_authenticated/skola/vysledky': typeof AuthenticatedSkolaVysledkyRoute
   '/api/public/school-request': typeof ApiPublicSchoolRequestRoute
   '/ziak/test/$testId': typeof ZiakTestTestIdRoute
   '/_authenticated/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
@@ -411,7 +462,6 @@ export interface FileRouteTypes {
     | '/admin/prihlasenie'
     | '/modul/ukazka'
     | '/novinky/$slug'
-    | '/skola/dashboard'
     | '/skola/prihlasenie'
     | '/testy/$slug'
     | '/testy/vstupny-test'
@@ -432,6 +482,12 @@ export interface FileRouteTypes {
     | '/admin/vysledky'
     | '/admin/ziaci'
     | '/admin/ziadosti'
+    | '/skola/dashboard'
+    | '/skola/profil'
+    | '/skola/reporty'
+    | '/skola/triedy'
+    | '/skola/ucitelia'
+    | '/skola/vysledky'
     | '/api/public/school-request'
     | '/ziak/test/$testId'
     | '/admin/blog/$id'
@@ -453,7 +509,6 @@ export interface FileRouteTypes {
     | '/admin/prihlasenie'
     | '/modul/ukazka'
     | '/novinky/$slug'
-    | '/skola/dashboard'
     | '/skola/prihlasenie'
     | '/testy/$slug'
     | '/testy/vstupny-test'
@@ -474,6 +529,12 @@ export interface FileRouteTypes {
     | '/admin/vysledky'
     | '/admin/ziaci'
     | '/admin/ziadosti'
+    | '/skola/dashboard'
+    | '/skola/profil'
+    | '/skola/reporty'
+    | '/skola/triedy'
+    | '/skola/ucitelia'
+    | '/skola/vysledky'
     | '/api/public/school-request'
     | '/ziak/test/$testId'
     | '/admin/blog/$id'
@@ -496,7 +557,6 @@ export interface FileRouteTypes {
     | '/admin/prihlasenie'
     | '/modul/ukazka'
     | '/novinky/$slug'
-    | '/skola/dashboard'
     | '/skola/prihlasenie'
     | '/testy/$slug'
     | '/testy/vstupny-test'
@@ -517,6 +577,12 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/vysledky'
     | '/_authenticated/admin/ziaci'
     | '/_authenticated/admin/ziadosti'
+    | '/_authenticated/skola/dashboard'
+    | '/_authenticated/skola/profil'
+    | '/_authenticated/skola/reporty'
+    | '/_authenticated/skola/triedy'
+    | '/_authenticated/skola/ucitelia'
+    | '/_authenticated/skola/vysledky'
     | '/api/public/school-request'
     | '/ziak/test/$testId'
     | '/_authenticated/admin/blog/$id'
@@ -540,7 +606,6 @@ export interface RootRouteChildren {
   AdminPrihlasenieRoute: typeof AdminPrihlasenieRoute
   ModulUkazkaRoute: typeof ModulUkazkaRoute
   NovinkySlugRoute: typeof NovinkySlugRoute
-  SkolaDashboardRoute: typeof SkolaDashboardRoute
   SkolaPrihlasenieRoute: typeof SkolaPrihlasenieRoute
   TestySlugRoute: typeof TestySlugRoute
   TestyVstupnyTestRoute: typeof TestyVstupnyTestRoute
@@ -647,13 +712,6 @@ declare module '@tanstack/react-router' {
       path: '/novinky/$slug'
       fullPath: '/novinky/$slug'
       preLoaderRoute: typeof NovinkySlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/skola/dashboard': {
-      id: '/skola/dashboard'
-      path: '/skola/dashboard'
-      fullPath: '/skola/dashboard'
-      preLoaderRoute: typeof SkolaDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/skola/prihlasenie': {
@@ -789,6 +847,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminZiadostiRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/skola/dashboard': {
+      id: '/_authenticated/skola/dashboard'
+      path: '/skola/dashboard'
+      fullPath: '/skola/dashboard'
+      preLoaderRoute: typeof AuthenticatedSkolaDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/skola/profil': {
+      id: '/_authenticated/skola/profil'
+      path: '/skola/profil'
+      fullPath: '/skola/profil'
+      preLoaderRoute: typeof AuthenticatedSkolaProfilRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/skola/reporty': {
+      id: '/_authenticated/skola/reporty'
+      path: '/skola/reporty'
+      fullPath: '/skola/reporty'
+      preLoaderRoute: typeof AuthenticatedSkolaReportyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/skola/triedy': {
+      id: '/_authenticated/skola/triedy'
+      path: '/skola/triedy'
+      fullPath: '/skola/triedy'
+      preLoaderRoute: typeof AuthenticatedSkolaTriedyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/skola/ucitelia': {
+      id: '/_authenticated/skola/ucitelia'
+      path: '/skola/ucitelia'
+      fullPath: '/skola/ucitelia'
+      preLoaderRoute: typeof AuthenticatedSkolaUciteliaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/skola/vysledky': {
+      id: '/_authenticated/skola/vysledky'
+      path: '/skola/vysledky'
+      fullPath: '/skola/vysledky'
+      preLoaderRoute: typeof AuthenticatedSkolaVysledkyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/api/public/school-request': {
       id: '/api/public/school-request'
       path: '/api/public/school-request'
@@ -873,6 +973,12 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminVysledkyRoute: typeof AuthenticatedAdminVysledkyRoute
   AuthenticatedAdminZiaciRoute: typeof AuthenticatedAdminZiaciRoute
   AuthenticatedAdminZiadostiRoute: typeof AuthenticatedAdminZiadostiRoute
+  AuthenticatedSkolaDashboardRoute: typeof AuthenticatedSkolaDashboardRoute
+  AuthenticatedSkolaProfilRoute: typeof AuthenticatedSkolaProfilRoute
+  AuthenticatedSkolaReportyRoute: typeof AuthenticatedSkolaReportyRoute
+  AuthenticatedSkolaTriedyRoute: typeof AuthenticatedSkolaTriedyRoute
+  AuthenticatedSkolaUciteliaRoute: typeof AuthenticatedSkolaUciteliaRoute
+  AuthenticatedSkolaVysledkyRoute: typeof AuthenticatedSkolaVysledkyRoute
   AuthenticatedAdminBlogIdRoute: typeof AuthenticatedAdminBlogIdRoute
   AuthenticatedAdminVideaIdRoute: typeof AuthenticatedAdminVideaIdRoute
   AuthenticatedAdminBlogIndexRoute: typeof AuthenticatedAdminBlogIndexRoute
@@ -890,6 +996,12 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminVysledkyRoute: AuthenticatedAdminVysledkyRoute,
   AuthenticatedAdminZiaciRoute: AuthenticatedAdminZiaciRoute,
   AuthenticatedAdminZiadostiRoute: AuthenticatedAdminZiadostiRoute,
+  AuthenticatedSkolaDashboardRoute: AuthenticatedSkolaDashboardRoute,
+  AuthenticatedSkolaProfilRoute: AuthenticatedSkolaProfilRoute,
+  AuthenticatedSkolaReportyRoute: AuthenticatedSkolaReportyRoute,
+  AuthenticatedSkolaTriedyRoute: AuthenticatedSkolaTriedyRoute,
+  AuthenticatedSkolaUciteliaRoute: AuthenticatedSkolaUciteliaRoute,
+  AuthenticatedSkolaVysledkyRoute: AuthenticatedSkolaVysledkyRoute,
   AuthenticatedAdminBlogIdRoute: AuthenticatedAdminBlogIdRoute,
   AuthenticatedAdminVideaIdRoute: AuthenticatedAdminVideaIdRoute,
   AuthenticatedAdminBlogIndexRoute: AuthenticatedAdminBlogIndexRoute,
@@ -912,7 +1024,6 @@ const rootRouteChildren: RootRouteChildren = {
   AdminPrihlasenieRoute: AdminPrihlasenieRoute,
   ModulUkazkaRoute: ModulUkazkaRoute,
   NovinkySlugRoute: NovinkySlugRoute,
-  SkolaDashboardRoute: SkolaDashboardRoute,
   SkolaPrihlasenieRoute: SkolaPrihlasenieRoute,
   TestySlugRoute: TestySlugRoute,
   TestyVstupnyTestRoute: TestyVstupnyTestRoute,

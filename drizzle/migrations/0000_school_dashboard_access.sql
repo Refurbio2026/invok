@@ -1,0 +1,3 @@
+CREATE POLICY "School coordinators read school profiles" ON public.profiles FOR SELECT TO authenticated USING (school_id = public.current_user_school_id() AND public.has_role(auth.uid(), 'skola'::public.app_role));
+CREATE POLICY "School coordinators read school roles" ON public.user_roles FOR SELECT TO authenticated USING (school_id = public.current_user_school_id() AND public.has_role(auth.uid(), 'skola'::public.app_role));
+CREATE POLICY "School coordinators update own school" ON public.schools FOR UPDATE TO authenticated USING (id = public.current_user_school_id() AND public.has_role(auth.uid(), 'skola'::public.app_role)) WITH CHECK (id = public.current_user_school_id() AND public.has_role(auth.uid(), 'skola'::public.app_role));
