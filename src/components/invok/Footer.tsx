@@ -43,7 +43,7 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-white/10 grid gap-4 md:grid-cols-2 text-sm text-white/60">
           <span className="inline-flex items-center gap-2"><Mail className="h-4 w-4" />{"invok@pscno.sk"}</span>
-          <span className="inline-flex items-center gap-2"><Phone className="h-4 w-4" />{"+421 944 239 514"}</span>
+          <a href="tel:+421944539950" className="inline-flex items-center gap-2 hover:text-white transition-colors"><Phone className="h-4 w-4" />{"+421 944 539 950"}</a>
         </div>
 
         <div className="mt-8 flex flex-col sm:flex-row justify-between gap-2 text-xs text-white/50">

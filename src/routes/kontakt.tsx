@@ -153,9 +153,9 @@ function ContactCards() {
     {
       I: Phone,
       label: "Telefón",
-      value: "+421 944 239 514",
+      value: "+421 944 539 950",
       hint: "Po – Pi · 9:00 – 17:00",
-      href: "tel:+421944239514",
+      href: "tel:+421944539950",
     },
   ];
   return (
