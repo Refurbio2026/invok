@@ -12,7 +12,9 @@ export const readLang = createIsomorphicFn()
   .client((): Lang => (/(?:^|;\s*)invok_lang=hu/.test(document.cookie) ? "hu" : "sk"));
 
 export function setLangCookie(lang: Lang) {
-  document.cookie = `${LANG_COOKIE}=${lang}; path=/; max-age=31536000; samesite=lax`;
+  // In an embedded preview (iframe) a lax cookie is dropped, so use a partitioned cross-site cookie on https.
+  const attrs = location.protocol === "https:" ? "; samesite=none; secure; partitioned" : "; samesite=lax";
+  document.cookie = `${LANG_COOKIE}=${lang}; path=/; max-age=31536000${attrs}`;
 }
 
 /** Translate a Slovak source string. Falls back to Slovak when no Hungarian entry exists. */
