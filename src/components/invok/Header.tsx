@@ -3,6 +3,8 @@ import { Menu, X, ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { LanguageSwitcher } from "./LanguageSwitcher";
+import { useT } from "@/lib/i18n";
 import pscMark from "@/assets/psc-mark.png.asset.json";
 
 type NavLink = { href: string; label: string };
@@ -25,6 +27,7 @@ function NavItem({
   mobile?: boolean;
   onClick?: () => void;
 }) {
+  const t = useT();
   const base = mobile
     ? "px-3 py-2.5 rounded-lg text-sm font-medium text-foreground hover:bg-muted block"
     : "text-sm font-medium text-foreground/80 hover:text-primary transition-colors";
@@ -57,12 +60,13 @@ function NavItem({
 
   return (
     <a href={link.href} className={base} onClick={handleClick}>
-      {link.label}
+      {t(link.label)}
     </a>
   );
 }
 
 export function Header() {
+  const t = useT();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -98,17 +102,19 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3 shrink-0">
+          <LanguageSwitcher />
           <a
             href="/prihlasenie"
             className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
           >
-            Prihlásenie
+            {t("Prihlásenie")}
           </a>
           <Button asChild size="sm">
-            <Link to="/registracia-skoly">Registrovať školu</Link>
+            <Link to="/registracia-skoly">{t("Registrovať školu")}</Link>
           </Button>
         </div>
 
+        <LanguageSwitcher className="lg:hidden ml-auto mr-2" />
         <button
           className="lg:hidden p-2 rounded-lg hover:bg-muted"
           onClick={() => setOpen((v) => !v)}
@@ -132,12 +138,12 @@ export function Header() {
             <div className="flex gap-2 mt-3 pt-3 border-t border-border">
               <Button asChild variant="ghost" size="sm" className="flex-1">
                 <a href="/prihlasenie" onClick={() => setOpen(false)}>
-                  Prihlásenie
+                  {t("Prihlásenie")}
                 </a>
               </Button>
               <Button asChild size="sm" className="flex-1">
                 <Link to="/registracia-skoly" onClick={() => setOpen(false)}>
-                  Registrovať školu
+                  {t("Registrovať školu")}
                 </Link>
               </Button>
             </div>

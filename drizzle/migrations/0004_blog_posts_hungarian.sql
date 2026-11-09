@@ -1,0 +1,1 @@
+ALTER TABLE public.blog_posts ADD COLUMN IF NOT EXISTS title_hu text, ADD COLUMN IF NOT EXISTS excerpt_hu text, ADD COLUMN IF NOT EXISTS content_hu text;

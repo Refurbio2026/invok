@@ -73,10 +73,12 @@ export type Database = {
           author: string
           category_id: string | null
           content: string
+          content_hu: string | null
           cover_image_url: string | null
           created_at: string
           created_by: string | null
           excerpt: string | null
+          excerpt_hu: string | null
           id: string
           published_at: string | null
           seo_description: string | null
@@ -84,16 +86,19 @@ export type Database = {
           slug: string
           status: string
           title: string
+          title_hu: string | null
           updated_at: string
         }
         Insert: {
           author?: string
           category_id?: string | null
           content?: string
+          content_hu?: string | null
           cover_image_url?: string | null
           created_at?: string
           created_by?: string | null
           excerpt?: string | null
+          excerpt_hu?: string | null
           id?: string
           published_at?: string | null
           seo_description?: string | null
@@ -101,16 +106,19 @@ export type Database = {
           slug: string
           status?: string
           title: string
+          title_hu?: string | null
           updated_at?: string
         }
         Update: {
           author?: string
           category_id?: string | null
           content?: string
+          content_hu?: string | null
           cover_image_url?: string | null
           created_at?: string
           created_by?: string | null
           excerpt?: string | null
+          excerpt_hu?: string | null
           id?: string
           published_at?: string | null
           seo_description?: string | null
@@ -118,6 +126,7 @@ export type Database = {
           slug?: string
           status?: string
           title?: string
+          title_hu?: string | null
           updated_at?: string
         }
         Relationships: [

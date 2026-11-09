@@ -59,6 +59,9 @@ type FormState = {
   slug: string;
   excerpt: string;
   content: string;
+  title_hu: string;
+  excerpt_hu: string;
+  content_hu: string;
   cover_image_url: string;
   category_id: string;
   author: string;
@@ -72,6 +75,9 @@ const emptyForm: FormState = {
   slug: "",
   excerpt: "",
   content: "",
+  title_hu: "",
+  excerpt_hu: "",
+  content_hu: "",
   cover_image_url: "",
   category_id: "",
   author: "Tím INVOK",
@@ -121,6 +127,9 @@ function BlogEditor() {
         slug: post.data.slug || "",
         excerpt: post.data.excerpt || "",
         content: post.data.content || "",
+        title_hu: post.data.title_hu || "",
+        excerpt_hu: post.data.excerpt_hu || "",
+        content_hu: post.data.content_hu || "",
         cover_image_url: post.data.cover_image_url || "",
         category_id: post.data.category_id || "",
         author: post.data.author || "Tím INVOK",
@@ -141,6 +150,9 @@ function BlogEditor() {
           slug: form.slug || undefined,
           excerpt: form.excerpt || null,
           content: form.content,
+          title_hu: form.title_hu || null,
+          excerpt_hu: form.excerpt_hu || null,
+          content_hu: form.content_hu || null,
           cover_image_url: form.cover_image_url || null,
           category_id: form.category_id || null,
           author: form.author,
@@ -274,6 +286,23 @@ function BlogEditor() {
                 />
               </TabsContent>
             </Tabs>
+
+            <div className="rounded-xl border border-border bg-card p-4 space-y-4">
+              <h3 className="font-semibold text-sm">Maďarská verzia (HU)</h3>
+              <p className="text-xs text-muted-foreground">Ak polia necháte prázdne, maďarskí návštevníci uvidia slovenský text.</p>
+              <div>
+                <Label>Názov (HU)</Label>
+                <Input value={form.title_hu} onChange={(e) => update("title_hu", e.target.value)} maxLength={300} />
+              </div>
+              <div>
+                <Label>Perex (HU)</Label>
+                <Textarea value={form.excerpt_hu} onChange={(e) => update("excerpt_hu", e.target.value)} rows={3} maxLength={1000} />
+              </div>
+              <div>
+                <Label>Obsah článku (HU)</Label>
+                <RichEditor value={form.content_hu} onChange={(v) => update("content_hu", v)} />
+              </div>
+            </div>
           </div>
 
           {/* Sidebar */}

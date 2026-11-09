@@ -18,6 +18,9 @@ export type BlogPost = {
   slug: string;
   excerpt: string | null;
   content: string;
+  title_hu?: string | null;
+  excerpt_hu?: string | null;
+  content_hu?: string | null;
   cover_image_url: string | null;
   category_id: string | null;
   category?: BlogCategory | null;
@@ -158,6 +161,9 @@ const postSchema = z.object({
   slug: z.string().max(120).optional(),
   excerpt: z.string().max(1000).nullable().optional(),
   content: z.string().default(""),
+  title_hu: z.string().max(300).nullable().optional(),
+  excerpt_hu: z.string().max(1000).nullable().optional(),
+  content_hu: z.string().nullable().optional(),
   cover_image_url: z.string().url().nullable().optional().or(z.literal("")),
   category_id: z.string().uuid().nullable().optional(),
   author: z.string().min(1).max(120).default("Tím INVOK"),
@@ -192,6 +198,9 @@ export const saveBlogPost = createServerFn({ method: "POST" })
       slug,
       excerpt: data.excerpt || null,
       content: data.content ?? "",
+      title_hu: data.title_hu || null,
+      excerpt_hu: data.excerpt_hu || null,
+      content_hu: data.content_hu || null,
       cover_image_url: data.cover_image_url || null,
       category_id: data.category_id || null,
       author: data.author || "Tím INVOK",

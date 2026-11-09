@@ -10,6 +10,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
+import { LangProvider, readLang, type Lang } from "@/lib/i18n";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
@@ -74,6 +75,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  beforeLoad: () => ({ lang: readLang() as Lang }),
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -112,9 +114,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  const { lang } = Route.useRouteContext();
   return (
-    <html lang="en">
+    <html lang={lang} suppressHydrationWarning>
       <head>
+        {lang === "hu" && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html:
+                "document.documentElement.classList.add('i18n-pending');setTimeout(function(){document.documentElement.classList.remove('i18n-pending')},2500);",
+            }}
+          />
+        )}
         <HeadContent />
       </head>
       <body>
@@ -129,9 +140,11 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
+    <LangProvider lang={Route.useRouteContext().lang}>
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>
+    </LangProvider>
   );
 }

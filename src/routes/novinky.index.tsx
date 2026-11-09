@@ -1,3 +1,4 @@
+import { useLang, localizePost } from "@/lib/i18n";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -35,12 +36,14 @@ export const Route = createFileRoute("/novinky/")({
 
 
 function NovinkyPage() {
+  const lang = useLang();
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<string>("Všetky");
 
   const posts = useQuery({
     queryKey: ["public-blog", "list"],
     queryFn: () => fetchPublicPosts(),
+    select: (d) => d.map((x) => localizePost(lang, x)),
   });
   const categories = useQuery({
     queryKey: ["public-blog", "categories"],

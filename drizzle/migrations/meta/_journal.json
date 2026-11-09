@@ -29,6 +29,13 @@
       "when": 1794087315478,
       "tag": "0003_prevent_duplicate_open_attempts",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1794265974883,
+      "tag": "0004_blog_posts_hungarian",
+      "breakpoints": true
     }
   ]
 }

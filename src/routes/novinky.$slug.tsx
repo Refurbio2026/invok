@@ -1,3 +1,4 @@
+import { useLang, localizePost } from "@/lib/i18n";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft, Calendar, Share2, Link as LinkIcon, Loader2 } from "lucide-react";
@@ -24,15 +25,18 @@ function formatDate(iso: string) {
 }
 
 function ArticleDetail() {
+  const lang = useLang();
   const { slug } = Route.useParams();
 
   const post = useQuery({
     queryKey: ["public-blog", "post", slug],
     queryFn: () => fetchPublicPostBySlug(slug),
+    select: (d) => (d ? localizePost(lang, d) : d),
   });
   const all = useQuery({
     queryKey: ["public-blog", "list"],
     queryFn: () => fetchPublicPosts(),
+    select: (d) => d.map((x) => localizePost(lang, x)),
   });
 
   if (post.isLoading) {
