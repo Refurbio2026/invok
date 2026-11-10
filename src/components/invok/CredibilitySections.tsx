@@ -46,7 +46,7 @@ export function StudentGainsSection() {
     { I: Users, t: "Tímová spolupráca", d: "Pracovať v skupine, niesť zodpovednosť a dosahovať spoločné ciele." },
     { I: ShieldCheck, t: "Mediálna gramotnosť", d: "Orientovať sa v digitálnych obsahoch a rozpoznať manipuláciu." },
     { I: Rocket, t: "Podnikavosť a iniciatíva", d: "Premieňať nápady na konkrétne projekty s reálnym výstupom." },
-    { I: Sparkles, t: "Príprava na budúcnosť", d: "Zručnosti, ktoré ostávajú dlho po skončení základnej školy." },
+    { I: Sparkles, t: "Príprava na budúcnosť", d: "Zručnosti, ktoré ostávajú dlho po skončení základnej aj strednej školy." },
   ];
   return (
     <Section alt eyebrow="Pre žiaka" title="Čo si žiaci odnesú z programu INVOK?">
@@ -214,7 +214,7 @@ export function TeamSection() {
     { n: "Meno Priezvisko", r: "Koordinátor škôl" },
   ];
   const values = [
-    { t: "Predstavenie projektu", d: "INVOK je národná vzdelávacia iniciatíva pre základné školy na Slovensku, ktorá systematicky rozvíja kompetencie žiakov pre 21. storočie." },
+    { t: "Predstavenie projektu", d: "INVOK je národná vzdelávacia iniciatíva pre základné a stredné školy na Slovensku vrátane škôl so znevýhodnenými žiakmi, ktorá systematicky rozvíja kompetencie žiakov pre 21. storočie." },
     { t: "Vízia", d: "Slovenské školy, v ktorých žiaci vychádzajú so sebavedomím, schopnosťou kriticky myslieť a tvoriť hodnoty pre svoje okolie." },
     { t: "Hodnoty", d: "Odbornosť, transparentnosť, partnerstvo so školami a dlhodobý dopad – nie jednorazové aktivity." },
   ];

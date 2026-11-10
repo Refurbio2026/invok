@@ -17,9 +17,11 @@ export const Route = createFileRoute("/testy/")({
   head: () => ({
     meta: [
       { title: "Kompetenčné testy INVOK – meranie pokroku žiakov" },
-      { name: "description", content: "Vstupné a výstupné kompetenčné testovanie programu INVOK pre žiakov 8. a 9. ročníka ZŠ. Automatické vyhodnotenie šiestich kľúčových kompetencií." },
+      { name: "description", content: "Vstupné a výstupné kompetenčné testovanie programu INVOK pre žiakov 8. a 9. ročníka ZŠ a žiakov SŠ vrátane znevýhodnených žiakov a škôl so znevýhodnenými žiakmi. Automatické vyhodnotenie šiestich kľúčových kompetencií." },
       { property: "og:title", content: "Kompetenčné testy INVOK" },
       { property: "og:description", content: "Meranie kompetencií, ktoré ukazuje skutočný pokrok žiakov v programe INVOK." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/testy" }],
   }),

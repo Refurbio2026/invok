@@ -32,11 +32,12 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "INVOK – Pomáhame školám pripraviť žiakov na život po škole" },
-      { name: "description", content: "Bezplatný trojročný program INVOK rozvíja kritické myslenie, finančnú gramotnosť, komunikáciu a tímovú spoluprácu u žiakov 8. a 9. ročníka základných škôl na Slovensku." },
+      { name: "description", content: "Bezplatný trojročný program INVOK rozvíja kritické myslenie, finančnú gramotnosť, komunikáciu a tímovú spoluprácu u žiakov 8. a 9. ročníka základných škôl a žiakov stredných škôl na Slovensku vrátane znevýhodnených žiakov a škôl so znevýhodnenými žiakmi." },
       { property: "og:title", content: "INVOK – Kompetencie pre budúcnosť" },
-      { property: "og:description", content: "Národný vzdelávací program pre základné školy na Slovensku." },
+      { property: "og:description", content: "Národný vzdelávací program pre základné a stredné školy na Slovensku vrátane škôl so znevýhodnenými žiakmi." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),
@@ -93,13 +94,13 @@ function Hero() {
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
           <div className="animate-fade-up">
             <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent text-teal text-xs font-semibold uppercase tracking-wider">
-              <Sparkles className="h-3.5 w-3.5" /> INVOK – program pre základné školy
+              <Sparkles className="h-3.5 w-3.5" /> INVOK – program pre základné a stredné školy vrátane škôl so znevýhodnenými žiakmi
             </span>
             <h1 className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-foreground">
               Pomáhame školám pripraviť žiakov na <span className="text-gradient">život po škole</span>
             </h1>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-              Trojročný program pre žiakov 8. a 9. ročníka rozvíja kritické myslenie, finančnú gramotnosť, komunikáciu, tímovú spoluprácu a ďalšie kompetencie potrebné pre 21. storočie.
+              Trojročný program pre žiakov 8. a 9. ročníka základných škôl a žiakov stredných škôl vrátane znevýhodnených žiakov rozvíja kritické myslenie, finančnú gramotnosť, komunikáciu, tímovú spoluprácu a ďalšie kompetencie potrebné pre 21. storočie.
             </p>
             <p className="mt-4 text-base font-bold text-primary tracking-tight">
               Praktické. Zmysluplné. Spolu.
@@ -136,7 +137,7 @@ function Hero() {
         <div className="mt-16 grid gap-4 sm:grid-cols-3">
           {[
             { t: "3 roky programu", d: "Systematický rozvoj kompetencií", I: BookOpen },
-            { t: "Žiaci 8. a 9. ročníka", d: "ZŠ na celom Slovensku", I: GraduationCap },
+            { t: "Žiaci 8. a 9. ročníka ZŠ a žiaci SŠ", d: "Základné a stredné školy vrátane škôl so znevýhodnenými žiakmi na celom Slovensku", I: GraduationCap },
             { t: "Kompetencie pre 21. storočie", d: "Praktické zručnosti do života", I: Sparkles },
           ].map(({ t, d, I }) => (
             <div key={t} className="rounded-2xl bg-card border border-border p-5 shadow-soft flex items-start gap-4">
@@ -166,7 +167,7 @@ function WhySchools() {
     <Section id="o-programe" eyebrow="O programe" title="Prečo sa školy zapájajú do programu INVOK?">
       <div className="max-w-3xl mb-10 sm:mb-14">
         <p className="text-lg text-muted-foreground leading-relaxed">
-          INVOK je vzdelávací program zameraný na rozvoj kľúčových kompetencií žiakov základných škôl. Prostredníctvom interaktívnych modulov, praktických aktivít a merania kompetencií pomáha mladým ľuďom rozvíjať kritické myslenie, podnikavosť, tímovú spoluprácu, digitálne zručnosti a schopnosť orientovať sa v súčasnom svete.
+          INVOK je vzdelávací program zameraný na rozvoj kľúčových kompetencií žiakov základných a stredných škôl vrátane znevýhodnených žiakov. Je určený aj pre školy so znevýhodnenými žiakmi. Prostredníctvom interaktívnych modulov, praktických aktivít a merania kompetencií pomáha mladým ľuďom rozvíjať kritické myslenie, podnikavosť, tímovú spoluprácu, digitálne zručnosti a schopnosť orientovať sa v súčasnom svete.
         </p>
         <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
           Projekt realizuje PSC n.o., nezisková organizácia zameraná na podporu vzdelávania, rozvoja mladých ľudí a budovania kompetencií potrebných pre život a budúce uplatnenie.
@@ -563,7 +564,7 @@ function FaqSection() {
   const faqs = [
     { q: "Je program INVOK bezplatný?", a: "Áno, program je pre zapojené školy úplne bezplatný. Financovanie je zabezpečené z verejných zdrojov a v rámci projektov Programu Slovensko a Európskej únie." },
     { q: "Koľko času program zaberie?", a: "Program je rozvrhnutý na tri školské roky. Týždenne ide o pár hodín v rámci bežnej výučby, plus workshopy podľa harmonogramu." },
-    { q: "Kto sa môže do programu zapojiť?", a: "Akákoľvek základná škola na Slovensku, ktorá má záujem rozvíjať kompetencie žiakov 8. a 9. ročníka." },
+    { q: "Kto sa môže do programu zapojiť?", a: "Základné a stredné školy na Slovensku vrátane škôl so znevýhodnenými žiakmi, ktoré majú záujem rozvíjať kompetencie žiakov 8. a 9. ročníka ZŠ a žiakov SŠ." },
     { q: "Ako sa meria dopad programu?", a: "Prostredníctvom vstupnej a výstupnej diagnostiky, priebežných výsledkov v platforme a spätnej väzby od učiteľov a žiakov." },
     { q: "Čo musí škola zabezpečiť?", a: "Záujem vedenia, jedného koordinátora programu na škole a základné digitálne vybavenie pre žiakov." },
   ];

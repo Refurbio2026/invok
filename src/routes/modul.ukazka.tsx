@@ -10,7 +10,9 @@ export const Route = createFileRoute("/modul/ukazka")({
       { title: "Ukážkový modul – Inovátor školy | INVOK" },
       { name: "description", content: "Pozrite si ukážku vzdelávacieho modulu INVOK: video lekcia, zadanie, hlasovanie, projektová karta a prezentácia riešenia." },
       { property: "og:title", content: "Ukážkový modul INVOK – Inovátor školy" },
-      { property: "og:description", content: "Štruktúra modulu programu INVOK pre žiakov 8. a 9. ročníka ZŠ." },
+      { property: "og:description", content: "Štruktúra modulu programu INVOK pre žiakov 8. a 9. ročníka ZŠ a žiakov SŠ vrátane znevýhodnených žiakov a škôl so znevýhodnenými žiakmi." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: SampleModulePage,
@@ -41,7 +43,7 @@ function SampleModulePage() {
             </div>
             <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground">Inovátor školy</h1>
             <p className="mt-4 text-lg text-muted-foreground max-w-3xl">
-              Praktický modul, v ktorom žiaci 8. a 9. ročníka hľadajú konkrétne príležitosti na zlepšenie vlastnej školy a realizujú vlastný mini-projekt s merateľným výstupom.
+              Praktický modul, v ktorom žiaci 8. a 9. ročníka základných škôl a žiaci stredných škôl vrátane znevýhodnených žiakov hľadajú konkrétne príležitosti na zlepšenie vlastnej školy a realizujú vlastný mini-projekt s merateľným výstupom.
             </p>
           </div>
         </section>

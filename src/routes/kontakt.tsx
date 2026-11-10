@@ -32,6 +32,8 @@ export const Route = createFileRoute("/kontakt")({
         content:
           "Máte záujem o predstavenie programu INVOK alebo spoluprácu? Napíšte nám.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: KontaktPage,
@@ -395,7 +397,7 @@ function FaqSection() {
     },
     {
       q: "Pre ktoré ročníky je určený?",
-      a: "Program je určený pre žiakov 8 a 9 ročníka ZŠ.",
+      a: "Program je určený pre žiakov 8. a 9. ročníka základných škôl a žiakov stredných škôl vrátane znevýhodnených žiakov. Zapojiť sa môžu základné a stredné školy aj školy so znevýhodnenými žiakmi.",
     },
     {
       q: "Ako funguje testovanie kompetencií?",

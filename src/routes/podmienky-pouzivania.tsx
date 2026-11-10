@@ -16,6 +16,8 @@ export const Route = createFileRoute("/podmienky-pouzivania")({
         property: "og:description",
         content: "Pravidlá používania portálu INVOK pre školy a používateľov.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Page,
@@ -41,7 +43,7 @@ function Page() {
           <p className="text-muted-foreground">
             Portál INVOK prevádzkuje PSC n.o. za účelom poskytovania
             vzdelávacích aktivít, informačných služieb a podpory rozvoja
-            kompetencií žiakov základných škôl.
+            kompetencií žiakov základných a stredných škôl vrátane znevýhodnených žiakov a podpory škôl so znevýhodnenými žiakmi.
           </p>
           <p className="mt-4 text-muted-foreground">
             Používaním webového sídla používateľ vyjadruje súhlas s týmito

@@ -33,7 +33,7 @@ export function Footer() {
               <Logo variant="light" />
             </Link>
             <p className="mt-5 text-sm text-white/70 leading-relaxed">
-              Inovatívny program rozvoja kompetencií žiakov pre 21. storočie. Národná vzdelávacia iniciatíva pre základné školy na Slovensku.
+              Inovatívny program rozvoja kompetencií žiakov pre 21. storočie. Národná vzdelávacia iniciatíva pre základné a stredné školy na Slovensku vrátane škôl so znevýhodnenými žiakmi.
             </p>
           </div>
           <FooterCol title="O projekte" items={aboutItems} />
