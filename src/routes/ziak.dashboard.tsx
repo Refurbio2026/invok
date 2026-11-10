@@ -6,12 +6,13 @@ import { Footer } from "@/components/invok/Footer";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { studentLogin } from "@/lib/public/student.functions";
+import { getStudentLmsLink } from "@/lib/lms/lms.functions";
 import {
   clearStudentSession,
   getStudentSession,
 } from "@/lib/public/student-session";
 import { toast, Toaster } from "sonner";
-import { CheckCircle2, Clock, PlayCircle } from "lucide-react";
+import { CheckCircle2, Clock, GraduationCap, PlayCircle } from "lucide-react";
 
 export const Route = createFileRoute("/ziak/dashboard")({
   head: () => ({ meta: [{ title: "Moje učenie – INVOK" }, { name: "description", content: "Osobné testy, vzdelávacie moduly a výsledky žiaka v programe INVOK." }, { property: "og:title", content: "Moje učenie – INVOK" }, { property: "og:description", content: "Osobné testy, vzdelávacie moduly a výsledky žiaka v programe INVOK." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }, { name: "robots", content: "noindex, nofollow" }] }),
@@ -25,6 +26,8 @@ function ZiakDashboard() {
   const login = useServerFn(studentLogin);
   const [state, setState] = useState<State>(null);
   const [loading, setLoading] = useState(true);
+  const lmsLink = useServerFn(getStudentLmsLink);
+  const [openingLms, setOpeningLms] = useState(false);
 
   useEffect(() => {
     const s = getStudentSession();
@@ -41,6 +44,19 @@ function ZiakDashboard() {
       })
       .finally(() => setLoading(false));
   }, []);
+
+  async function openLms() {
+    const s = getStudentSession();
+    if (!s) return navigate({ to: "/ziak/prihlasenie" });
+    setOpeningLms(true);
+    try {
+      const { url } = await lmsLink({ data: { code: s.code, pin: s.pin } });
+      window.location.assign(url);
+    } catch (err) {
+      toast.error((err as Error)?.message ?? "Do LMS sa nepodarilo vstúpiť.");
+      setOpeningLms(false);
+    }
+  }
 
   function logout() {
     clearStudentSession();
@@ -84,7 +100,10 @@ function ZiakDashboard() {
               {student.grade ? ` · ${student.grade}. ročník` : ""}
             </p>
           </div>
-          <Button variant="outline" onClick={logout}>Odhlásiť sa</Button>
+          <div className="flex flex-wrap gap-2">
+            <Button onClick={openLms} disabled={openingLms}><GraduationCap />{openingLms ? "Otváram LMS…" : "Vstúpiť do LMS"}</Button>
+            <Button variant="outline" onClick={logout}>Odhlásiť sa</Button>
+          </div>
         </div>
 
         <div className="mb-8 grid grid-cols-3 gap-3">{[{ label: "Dostupné testy", count: state.tests.length }, { label: "Rozpracované", count: state.attempts.filter((a) => a.status === "in_progress").length }, { label: "Odovzdané", count: state.attempts.filter((a) => a.status === "submitted").length }].map((item) => <div key={item.label} className="rounded-lg border border-border p-4"><p className="text-xs text-muted-foreground">{item.label}</p><p className="mt-2 text-2xl font-semibold text-primary">{item.count}</p></div>)}</div>

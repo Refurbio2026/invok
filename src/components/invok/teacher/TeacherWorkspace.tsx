@@ -13,6 +13,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { teacherDashboardOptions } from "@/lib/teacher/queries";
 import { assignTeacherTest, changeTeacherAssignment, createTeacherStudent } from "@/lib/teacher/teacher.functions";
+import { getTeacherLmsLink } from "@/lib/lms/lms.functions";
 import { averageScore } from "@/lib/school/rules";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -28,7 +29,7 @@ const nav = [
 export function TeacherWorkspace({ view }: { view: TeacherView }) {
   const { data } = useSuspenseQuery(teacherDashboardOptions);
   const queryClient = useQueryClient(); const navigate = useNavigate();
-  const assign = useServerFn(assignTeacherTest); const change = useServerFn(changeTeacherAssignment); const create = useServerFn(createTeacherStudent);
+  const assign = useServerFn(assignTeacherTest); const change = useServerFn(changeTeacherAssignment); const create = useServerFn(createTeacherStudent); const lmsLink = useServerFn(getTeacherLmsLink); const [openingLms, setOpeningLms] = useState(false);
   const [classId, setClassId] = useState("all"); const [busy, setBusy] = useState(false);
   const [newStudent, setNewStudent] = useState(false);
   const [credentials, setCredentials] = useState<{ code: string; pin: string | null } | null>(null);
@@ -42,7 +43,7 @@ export function TeacherWorkspace({ view }: { view: TeacherView }) {
   };
   return <div className="min-h-screen bg-background"><Header /><Toaster richColors />
     <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <div className="mb-6 flex flex-wrap items-start justify-between gap-4"><div><p className="text-sm text-primary">Učiteľské rozhranie</p><h1 className="mt-2 text-3xl font-bold">Moja výučba</h1><p className="mt-2 text-muted-foreground">{data.name ?? "Učiteľ"}</p></div><Button variant="outline" onClick={async () => { await supabase.auth.signOut(); queryClient.removeQueries({ queryKey: teacherDashboardOptions.queryKey }); await navigate({ to: "/ucitel/prihlasenie" }); }}><LogOut />Odhlásiť sa</Button></div>
+      <div className="mb-6 flex flex-wrap items-start justify-between gap-4"><div><p className="text-sm text-primary">Učiteľské rozhranie</p><h1 className="mt-2 text-3xl font-bold">Moja výučba</h1><p className="mt-2 text-muted-foreground">{data.name ?? "Učiteľ"}</p></div><div className="flex flex-wrap gap-2"><Button disabled={openingLms} onClick={async () => { setOpeningLms(true); try { const { url } = await lmsLink(); window.location.assign(url); } catch (error) { toast.error((error as Error)?.message ?? "Do LMS sa nepodarilo vstúpiť."); setOpeningLms(false); } }}><GraduationCap />{openingLms ? "Otváram LMS…" : "Vstúpiť do LMS"}</Button><Button variant="outline" onClick={async () => { await supabase.auth.signOut(); queryClient.removeQueries({ queryKey: teacherDashboardOptions.queryKey }); await navigate({ to: "/ucitel/prihlasenie" }); }}><LogOut />Odhlásiť sa</Button></div></div>
       <nav aria-label="Učiteľské rozhranie" className="mb-8 flex flex-wrap gap-2 border-b border-border pb-4">{nav.map((item) => <Button key={item.view} variant={view === item.view ? "default" : "ghost"} asChild><Link to={item.to}><item.icon className="size-4" />{item.label}</Link></Button>)}</nav>
       <h2 className="mb-6 text-2xl font-semibold">{view === "overview" ? "Prehľad výučby" : nav.find((n) => n.view === view)?.label}</h2>
       {view === "overview" && <><div className="grid grid-cols-2 gap-4 lg:grid-cols-4">{[{ label: "Moje triedy", value: data.classes.length, to: "/ucitel/triedy" }, { label: "Žiaci", value: data.students.length, to: "/ucitel/ziaci" }, { label: "Aktívne zadania", value: data.assignments.filter((a) => a.status === "active").length, to: "/ucitel/testy" }, { label: "Odovzdané testy", value: data.attempts.filter((a) => a.status === "submitted").length, to: "/ucitel/vysledky" }].map((stat) => <Link key={stat.label} to={stat.to} className="rounded-lg border border-border bg-card p-5 hover:bg-accent"><p className="text-sm text-muted-foreground">{stat.label}</p><p className="mt-2 text-3xl font-semibold text-primary">{stat.value}</p></Link>)}</div><h3 className="mb-4 mt-8 text-lg font-semibold">Moje triedy</h3></>}
