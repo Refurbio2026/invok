@@ -120,7 +120,7 @@ echo "== 4/5 Moodle wwwroot a databáza"
 sed -i "s#^\(\$CFG->wwwroot *= *'\)https://$OLD'#\1https://$NEW'#" "$MOODLE/config.php"
 grep -q "wwwroot *= *'https://$NEW'" "$MOODLE/config.php" || { echo "wwwroot sa nepodarilo zmeniť."; exit 1; }
 cd /tmp
-sudo -u www-data php "$MOODLE/admin/tool/replace/cli/replace.php" \
+sudo -u www-data php "$MOODLE/public/admin/tool/replace/cli/replace.php" \
   --search="https://$OLD" --replace="https://$NEW" --non-interactive
 sudo -u www-data env OLD="$OLD" NEW="$NEW" php <<'PHP'
 <?php
