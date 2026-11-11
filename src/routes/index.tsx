@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import heroImg from "@/assets/hero-students.jpg";
+import heroImg from "@/assets/hero-invok.svg";
 import euLogo from "@/assets/eu-logo.png.asset.json";
 import programSlovenskoLogo from "@/assets/program-slovensko-logo.png.asset.json";
 import mpsvrLogo from "@/assets/mpsvr-logo.png.asset.json";
@@ -122,7 +122,7 @@ function Hero() {
 
           <div className="relative animate-fade-up">
             <div className="relative rounded-3xl overflow-hidden shadow-glow border border-border">
-              <img src={heroImg} alt="Žiaci základnej školy spolupracujú na projekte" width={1280} height={1024} className="w-full h-auto object-cover aspect-[5/4]" />
+              <img src={heroImg} alt="Ilustrácia: žiaci a učiteľ spolupracujú na projekte INVOK" width={1280} height={1024} className="w-full h-auto object-cover aspect-[5/4]" />
             </div>
             <div className="absolute -bottom-6 -left-4 bg-card border border-border rounded-2xl p-4 shadow-card flex items-center gap-3">
               <div className="h-10 w-10 rounded-xl bg-teal/15 grid place-items-center"><Award className="h-5 w-5 text-teal" /></div>
