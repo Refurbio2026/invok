@@ -5,13 +5,17 @@
 // Spustenie na serveri:
 //   cd /tmp && sudo -u www-data php < lms/set_moodle_login_logos.php
 //
-// Logá sa načítavajú z webu (invok.pscno.sk/logos/…, priečinok public/logos v repozitári).
+// Logá sú súčasťou pluginu auth_invok (lms/moodle/auth/invok/pix/logos) a Moodle ich servíruje sám
+// z lms.invok.pscno.sk/auth/invok/pix/logos/… – najprv spustite sudo bash lms/install_lms_sso.sh.
 // Zapisuje sa do Správa stránky → Vzhľad → Doplnkové HTML → „Pred zatvorením BODY“,
 // medzi značky INVOK-LOGA; ostatný obsah tohto poľa zostane. Opakované spustenie je bezpečné.
 define('CLI_SCRIPT', true);
 require('/var/www/moodle/config.php');
 
-$base = 'https://invok.pscno.sk/logos/';
+$base = $CFG->wwwroot . '/auth/invok/pix/logos/';
+if (!file_exists($CFG->dirroot . '/auth/invok/pix/logos/eu-logo.png')) {
+    cli_error('Logá nie sú v Moodle. Najprv spustite: sudo bash lms/install_lms_sso.sh');
+}
 $block = <<<HTML
 <!-- INVOK-LOGA start -->
 <div id="invok-funding" class="invok-funding" hidden>
