@@ -53,7 +53,6 @@ import { Route as AuthenticatedUcitelTriedyRouteImport } from './routes/_authent
 import { Route as AuthenticatedUcitelVysledkyRouteImport } from './routes/_authenticated/ucitel.vysledky'
 import { Route as AuthenticatedUcitelZiaciRouteImport } from './routes/_authenticated/ucitel.ziaci'
 import { Route as ApiPublicSchoolRequestRouteImport } from './routes/api/public/school-request'
-import { Route as ZiakTestTestIdRouteImport } from './routes/ziak.test.$testId'
 import { Route as AuthenticatedAdminBlogIndexRouteImport } from './routes/_authenticated/admin.blog.index'
 import { Route as AuthenticatedAdminBlogIdRouteImport } from './routes/_authenticated/admin.blog.$id'
 import { Route as AuthenticatedAdminTestyIdRouteImport } from './routes/_authenticated/admin.testy.$id'
@@ -299,11 +298,6 @@ const ApiPublicSchoolRequestRoute = ApiPublicSchoolRequestRouteImport.update({
   path: '/api/public/school-request',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ZiakTestTestIdRoute = ZiakTestTestIdRouteImport.update({
-  id: '/ziak/test/$testId',
-  path: '/ziak/test/$testId',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AuthenticatedAdminBlogIndexRoute =
   AuthenticatedAdminBlogIndexRouteImport.update({
     id: '/admin/blog/',
@@ -385,7 +379,6 @@ export interface FileRoutesByFullPath {
   '/ucitel/vysledky': typeof AuthenticatedUcitelVysledkyRoute
   '/ucitel/ziaci': typeof AuthenticatedUcitelZiaciRoute
   '/api/public/school-request': typeof ApiPublicSchoolRequestRoute
-  '/ziak/test/$testId': typeof ZiakTestTestIdRoute
   '/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
   '/admin/testy/$id': typeof AuthenticatedAdminTestyIdRoute
   '/admin/videa/$id': typeof AuthenticatedAdminVideaIdRoute
@@ -437,7 +430,6 @@ export interface FileRoutesByTo {
   '/ucitel/vysledky': typeof AuthenticatedUcitelVysledkyRoute
   '/ucitel/ziaci': typeof AuthenticatedUcitelZiaciRoute
   '/api/public/school-request': typeof ApiPublicSchoolRequestRoute
-  '/ziak/test/$testId': typeof ZiakTestTestIdRoute
   '/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
   '/admin/testy/$id': typeof AuthenticatedAdminTestyIdRoute
   '/admin/videa/$id': typeof AuthenticatedAdminVideaIdRoute
@@ -491,7 +483,6 @@ export interface FileRoutesById {
   '/_authenticated/ucitel/vysledky': typeof AuthenticatedUcitelVysledkyRoute
   '/_authenticated/ucitel/ziaci': typeof AuthenticatedUcitelZiaciRoute
   '/api/public/school-request': typeof ApiPublicSchoolRequestRoute
-  '/ziak/test/$testId': typeof ZiakTestTestIdRoute
   '/_authenticated/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
   '/_authenticated/admin/testy/$id': typeof AuthenticatedAdminTestyIdRoute
   '/_authenticated/admin/videa/$id': typeof AuthenticatedAdminVideaIdRoute
@@ -545,7 +536,6 @@ export interface FileRouteTypes {
     | '/ucitel/vysledky'
     | '/ucitel/ziaci'
     | '/api/public/school-request'
-    | '/ziak/test/$testId'
     | '/admin/blog/$id'
     | '/admin/testy/$id'
     | '/admin/videa/$id'
@@ -597,7 +587,6 @@ export interface FileRouteTypes {
     | '/ucitel/vysledky'
     | '/ucitel/ziaci'
     | '/api/public/school-request'
-    | '/ziak/test/$testId'
     | '/admin/blog/$id'
     | '/admin/testy/$id'
     | '/admin/videa/$id'
@@ -650,7 +639,6 @@ export interface FileRouteTypes {
     | '/_authenticated/ucitel/vysledky'
     | '/_authenticated/ucitel/ziaci'
     | '/api/public/school-request'
-    | '/ziak/test/$testId'
     | '/_authenticated/admin/blog/$id'
     | '/_authenticated/admin/testy/$id'
     | '/_authenticated/admin/videa/$id'
@@ -682,7 +670,6 @@ export interface RootRouteChildren {
   NovinkyIndexRoute: typeof NovinkyIndexRoute
   TestyIndexRoute: typeof TestyIndexRoute
   ApiPublicSchoolRequestRoute: typeof ApiPublicSchoolRequestRoute
-  ZiakTestTestIdRoute: typeof ZiakTestTestIdRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
 }
 
@@ -996,13 +983,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicSchoolRequestRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/ziak/test/$testId': {
-      id: '/ziak/test/$testId'
-      path: '/ziak/test/$testId'
-      fullPath: '/ziak/test/$testId'
-      preLoaderRoute: typeof ZiakTestTestIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_authenticated/admin/blog/': {
       id: '/_authenticated/admin/blog/'
       path: '/admin/blog'
@@ -1146,7 +1126,6 @@ const rootRouteChildren: RootRouteChildren = {
   NovinkyIndexRoute: NovinkyIndexRoute,
   TestyIndexRoute: TestyIndexRoute,
   ApiPublicSchoolRequestRoute: ApiPublicSchoolRequestRoute,
-  ZiakTestTestIdRoute: ZiakTestTestIdRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
 }
 export const routeTree = rootRouteImport
