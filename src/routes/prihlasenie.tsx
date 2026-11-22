@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { Shield, Building2, GraduationCap, User, ArrowRight } from "lucide-react";
 import { Header } from "@/components/invok/Header";
 import { Footer } from "@/components/invok/Footer";
@@ -19,29 +19,27 @@ export const Route = createFileRoute("/prihlasenie")({
   component: PrihlasenieRozcestnik,
 });
 
+const LMS_LOGIN_URL = "https://lms.pscno.sk/login/index.php";
+
 const roles = [
   {
     title: "Administrátor",
     description: "Správa škôl, používateľov, testov, výsledkov a obsahu.",
-    href: "/admin/prihlasenie",
     icon: Shield,
   },
   {
     title: "Škola",
     description: "Profil školy, triedy, učitelia, výsledky a reporty.",
-    href: "/skola/prihlasenie",
     icon: Building2,
   },
   {
     title: "Učiteľ",
     description: "Triedy, žiaci, priebeh modulov a výsledky testov.",
-    href: "/ucitel/prihlasenie",
     icon: GraduationCap,
   },
   {
     title: "Žiak",
     description: "Moduly, testy, výsledky, odznaky a portfólio.",
-    href: "/ziak/prihlasenie",
     icon: User,
   },
 ];
@@ -65,7 +63,7 @@ function PrihlasenieRozcestnik() {
             const Icon = r.icon;
             return (
               <div
-                key={r.href}
+                key={r.title}
                 className="bg-card border border-border rounded-2xl p-6 flex flex-col shadow-soft hover:shadow-lg transition-shadow"
               >
                 <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4">
@@ -81,9 +79,9 @@ function PrihlasenieRozcestnik() {
                   asChild
                   className="mt-5 rounded-full bg-primary text-primary-foreground"
                 >
-                  <Link to={r.href}>
+                  <a href={LMS_LOGIN_URL}>
                     Prihlásiť sa <ArrowRight className="h-4 w-4 ml-1" />
-                  </Link>
+                  </a>
                 </Button>
               </div>
             );
