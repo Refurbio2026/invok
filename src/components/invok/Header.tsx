@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useT } from "@/lib/i18n";
 import pscMark from "@/assets/psc-mark.png.asset.json";
+import { FundingLogoStrip } from "./FundingLogoStrip";
 
 type NavLink = { href: string; label: string };
 
@@ -78,6 +79,8 @@ export function Header() {
   }, []);
 
   return (
+    <>
+    <FundingLogoStrip />
     <header
       className={cn(
         "sticky top-0 z-50 transition-all bg-background",
@@ -151,5 +154,6 @@ export function Header() {
         </div>
       )}
     </header>
+    </>
   );
 }

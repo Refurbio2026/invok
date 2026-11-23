@@ -7,8 +7,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/invok/Section";
-import euLogo from "@/assets/eu-logo.png.asset.json";
-import programSlovenskoLogo from "@/assets/program-slovensko-logo.png.asset.json";
+import euCofundedLogo from "@/assets/spolufinancovany-eu.png";
+import programSlovenskoLogo from "@/assets/program-slovensko.png";
 import mpsvrLogo from "@/assets/mpsvr-logo.png.asset.json";
 
 /* 1. Čo získava škola */
@@ -325,11 +325,11 @@ export function FundingSection() {
 
       <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 items-center justify-items-center">
         <div className="flex flex-col items-center gap-2">
-          <img src={euLogo.url} alt="Európska únia" className="h-16 w-auto object-contain" />
-          <span className="text-xs text-muted-foreground font-medium">Európska únia</span>
+          <img src={euCofundedLogo} alt="Spolufinancovaný Európskou úniou" className="h-16 w-auto object-contain" />
+          <span className="text-xs text-muted-foreground font-medium">Spolufinancovaný Európskou úniou</span>
         </div>
         <div className="flex flex-col items-center gap-2">
-          <img src={programSlovenskoLogo.url} alt="Program Slovensko" className="h-16 w-auto object-contain" />
+          <img src={programSlovenskoLogo} alt="Program Slovensko" className="h-12 w-auto object-contain" />
           <span className="text-xs text-muted-foreground font-medium">Program Slovensko</span>
         </div>
         <div className="flex flex-col items-center gap-2">

@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import heroImg from "@/assets/hero-students.jpg";
-import euLogo from "@/assets/eu-logo.png.asset.json";
-import programSlovenskoLogo from "@/assets/program-slovensko-logo.png.asset.json";
+import euCofundedLogo from "@/assets/spolufinancovany-eu.png";
+import programSlovenskoLogo from "@/assets/program-slovensko.png";
 import mpsvrLogo from "@/assets/mpsvr-logo.png.asset.json";
 import { Header } from "@/components/invok/Header";
 import { Footer } from "@/components/invok/Footer";
@@ -190,8 +190,8 @@ function WhySchools() {
 
 function FinancovanieBlock() {
   const logos = [
-    { src: euLogo.url, alt: "Európska únia" },
-    { src: programSlovenskoLogo.url, alt: "Program Slovensko" },
+    { src: euCofundedLogo, alt: "Spolufinancovaný Európskou úniou" },
+    { src: programSlovenskoLogo, alt: "Program Slovensko" },
     { src: mpsvrLogo.url, alt: "Ministerstvo práce, sociálnych vecí a rodiny SR" },
   ];
   return (
