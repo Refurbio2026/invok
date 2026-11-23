@@ -1,6 +1,6 @@
 <?php
 // INVOK – pod prihlasovací formulár Moodle (lms.invok.pscno.sk) pridá logá
-// Európska únia, Program Slovensko a MPSVR SR.
+// Spolufinancovaný Európskou úniou (formát 2021 – 2027), Program Slovensko a MPSVR SR.
 //
 // Spustenie na serveri:
 //   cd /tmp && sudo -u www-data php < lms/set_moodle_login_logos.php
@@ -13,13 +13,13 @@ define('CLI_SCRIPT', true);
 require('/var/www/moodle/config.php');
 
 $base = $CFG->wwwroot . '/auth/invok/pix/logos/';
-if (!file_exists($CFG->dirroot . '/auth/invok/pix/logos/eu-logo.png')) {
+if (!file_exists($CFG->dirroot . '/auth/invok/pix/logos/spolufinancovany-eu.png')) {
     cli_error('Logá nie sú v Moodle. Najprv spustite: sudo bash lms/install_lms_sso.sh');
 }
 $block = <<<HTML
 <!-- INVOK-LOGA start -->
 <div id="invok-funding" class="invok-funding" hidden>
-  <img src="{$base}eu-logo.png" alt="Európska únia" class="invok-funding-eu">
+  <img src="{$base}spolufinancovany-eu.png" alt="Spolufinancovaný Európskou úniou" class="invok-funding-eu">
   <img src="{$base}program-slovensko-logo.png" alt="Program Slovensko">
   <img src="{$base}mpsvr-logo.png" alt="Ministerstvo práce, sociálnych vecí a rodiny SR">
 </div>
